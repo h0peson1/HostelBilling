@@ -1,0 +1,46 @@
+# =============================================================================
+# FreeRADIUS 3.x - SQL Module Configuration for Supabase PostgreSQL
+# Location: /etc/freeradius/3.0/mods-available/sql
+# =============================================================================
+
+sql {
+    # Database driver to use
+    dialect = "postgresql"
+    driver = "rlm_sql_postgresql"
+
+    # Connection parameters (Supabase PostgreSQL)
+    server = "aws-0-eu-central-1.pooler.supabase.com"
+    port = 6543
+    login = "postgres.lnzewzygpwwoqtgnbzta"
+    password = "H0peson@20041"
+    radius_db = "postgres"
+
+    # TLS / SSL connection requirement (Mandatory for Supabase cloud)
+    tls {
+        require_cert = false
+    }
+
+    # Connection Pool Settings
+    pool {
+        start = 5
+        min = 4
+        max = 30
+        spare = 3
+        uses = 0
+        retry_delay = 30
+        lifetime = 3600
+        idle_timeout = 60
+    }
+
+    # Table Names (Matches Supabase migration schema)
+    acct_table1 = "radacct"
+    acct_table2 = "radacct"
+    authcheck_table = "radcheck"
+    authreply_table = "radreply"
+
+    # Read clients from SQL (optional, default to clients.conf)
+    read_clients = no
+
+    # Path to SQL query definitions
+    $INCLUDE ${modconfdir}/${.:name}/main/${dialect}/queries.conf
+}

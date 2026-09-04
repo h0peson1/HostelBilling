@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>CampusPulse Wi-Fi - Captive Portal</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#e3dfff",
+            "surface-container-high": "#e2e7ff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#c3c0ff",
+            "surface-tint": "#5148d7",
+            "tertiary-container": "#005a6a",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#4edea3",
+            "secondary-fixed": "#6ffbbe",
+            "surface-dim": "#d2d9f4",
+            "on-primary": "#ffffff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#464554",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed-variant": "#005236",
+            "surface-container": "#eaedff",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#372abf",
+            "on-primary-fixed": "#100069",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#6cf8bb",
+            "outline": "#777586",
+            "on-background": "#131b2e",
+            "on-secondary-fixed": "#002113",
+            "primary-fixed-dim": "#c3c0ff",
+            "surface-variant": "#dae2fd",
+            "on-primary-container": "#c1beff",
+            "outline-variant": "#c7c4d7",
+            "on-tertiary-container": "#4ad5f4",
+            "surface-bright": "#faf8ff",
+            "tertiary-fixed": "#acedff",
+            "primary": "#2a14b4",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-error": "#ffffff",
+            "background": "#faf8ff",
+            "surface": "#faf8ff",
+            "secondary": "#006c49",
+            "tertiary": "#00414d",
+            "primary-container": "#4338ca",
+            "on-tertiary-fixed": "#001f26",
+            "surface-container-highest": "#dae2fd",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#283044"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "md": "0.75rem",
+            "sm": "0.25rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.75rem",
+            "space-xl": "2rem",
+            "margin-desktop": "2rem",
+            "margin-mobile": "1rem",
+            "space-3xl": "4rem",
+            "space-xxs": "0.25rem",
+            "gutter-desktop": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Space Grotesk", "sans-serif"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "label-md": ["Space Grotesk", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"],
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Space Grotesk", "sans-serif"],
+            "display-lg": ["Space Grotesk", "sans-serif"],
+            "label-lg": ["Space Grotesk", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .wave-bg {
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(67, 56, 202, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(195, 192, 255, 0.15) 0px, transparent 70%);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-full flex flex-col justify-between selection:bg-primary-container selection:text-on-primary relative overflow-x-hidden pb-16">
+
+  <!-- Subtle SVG Background Wave Pattern -->
+  <div class="fixed inset-0 pointer-events-none opacity-40 z-0 wave-bg">
+    <svg class="w-full h-full" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern height="48" id="network-grid" patternunits="userSpaceOnUse" width="48">
+          <circle cx="2" cy="2" fill="#4338ca" fill-opacity="0.12" r="1.5"></circle>
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#4338ca" stroke-opacity="0.05" stroke-width="0.5"></path>
+        </pattern>
+      </defs>
+      <rect fill="url(#network-grid)" height="100%" width="100%"></rect>
+    </svg>
+  </div>
+
+  <!-- Shared TopNavBar Component -->
+  <header class="bg-surface-container-lowest border-b border-outline-variant/30 shadow-sm sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop h-16 max-w-7xl mx-auto">
+      <!-- Brand & Product Name -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
+          <span class="material-symbols-outlined text-2xl" data-icon="wifi">wifi</span>
+        </div>
+        <div>
+          <span class="text-headline-sm font-headline-sm font-bold text-primary tracking-tight">CampusPulse Wi-Fi</span>
+          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-bold">HOSTEL-NET</span>
+        </div>
+      </div>
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-primary font-label-md text-label-md font-bold border-b-2 border-primary pb-1 transition-colors" href="index.html">Connect</a>
+        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors" href="student-dashboard.html#plans">Plans</a>
+        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors" href="admin-dashboard.html">NetOps Admin</a>
+      </nav>
+      <!-- Right Telemetry & Status Badge -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 px-3 py-1.5 rounded-full shadow-sm">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-fixed-dim opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+          </span>
+          <span class="text-label-md font-label-md text-secondary font-bold tracking-tight">Network Online • 150 Mbps Fiber</span>
+        </div>
+        <button onclick="showToast('Campus Gateway Nominal. Signal: 98% (Block B AP-04)', 'info')" class="hidden sm:flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant" title="Network Help">
+          <span class="material-symbols-outlined" data-icon="help">help</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Canvas -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
+    <div class="w-full max-w-lg mx-auto">
+      
+      <!-- Signal Badge & Hostel Header Capsule -->
+      <div class="flex items-center justify-between mb-4 px-1">
+        <div class="inline-flex items-center gap-1.5 text-label-md font-label-md text-on-surface-variant">
+          <span class="material-symbols-outlined text-secondary text-lg" data-icon="network_check">network_check</span>
+          <span>Hostel Access Point: <strong>B-Block 3F AP-04</strong></span>
+        </div>
+        <div class="flex items-center gap-1 text-label-md font-label-md text-secondary font-bold">
+          <span class="material-symbols-outlined text-base" data-icon="signal_wifi_4_bar">signal_wifi_4_bar</span>
+          <span>98% Excellent</span>
+        </div>
+      </div>
+
+      <!-- High Contrast Centered Card (Tiers 2/3 Surface) -->
+      <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-xl overflow-hidden transition-all duration-200">
+        <!-- Card Top Accents & Sub-header -->
+        <div class="p-6 sm:p-8 pb-4">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="space-y-1">
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label-sm font-label-sm">
+                <span class="material-symbols-outlined text-sm" data-icon="wifi_tethering">wifi_tethering</span>
+                CampusPulse Wi-Fi - Premier Hostel High-Speed Network
+              </div>
+              <h1 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface tracking-tight mt-2">
+                Welcome to Hostel Net
+              </h1>
+            </div>
+          </div>
+          <p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+            Sign in with your room credentials or enter an active voucher code to connect.
+          </p>
+        </div>
+
+        <!-- Mode Toggle Tabs (Room Account vs. Voucher Code) -->
+        <div class="px-6 sm:px-8 border-b border-surface-container">
+          <div class="flex space-x-6" id="portal-tab-group" role="tablist">
+            <button class="pb-3 text-label-lg font-label-lg font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2" id="tab-btn-student" onclick="switchAuthMode('student')">
+              <span class="material-symbols-outlined text-lg" data-icon="badge">badge</span>
+              Student ID / Room Login
+            </button>
+            <button class="pb-3 text-label-lg font-label-lg font-semibold text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-all flex items-center gap-2" id="tab-btn-voucher" onclick="switchAuthMode('voucher')">
+              <span class="material-symbols-outlined text-lg" data-icon="confirmation_number">confirmation_number</span>
+              Prepaid Voucher
+            </button>
+          </div>
+        </div>
+
+        <!-- Forms Container -->
+        <div class="p-6 sm:p-8 pt-6">
+          <!-- Mode 1: Student Account Login Form -->
+          <form class="space-y-5" id="form-student" onsubmit="handleConnect(event)">
+            <div>
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="student-id">
+                Roll Number or Room ID
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+                  <span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+                </div>
+                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-id" placeholder="e.g. CS2024-402 or B3-204" value="CS2024-402" required="" type="text"/>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-label-md font-label-md text-on-surface" for="student-pass">
+                  Network Password
+                </label>
+                <a class="text-label-md font-label-md text-primary hover:underline cursor-pointer" onclick="showToast('Password reset PIN sent to Kwame Mensah via Campus Portal SMS.', 'info')">Forgot password?</a>
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+                  <span class="material-symbols-outlined text-xl" data-icon="lock">lock</span>
+                </div>
+                <input class="w-full pl-11 pr-11 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-pass" placeholder="••••••••••••" value="student2025" required="" type="password"/>
+                <button class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-outline hover:text-on-surface transition-colors" onclick="togglePasswordVisibility('student-pass', 'pass-eye-icon')" type="button">
+                  <span class="material-symbols-outlined text-xl" data-icon="visibility" id="pass-eye-icon">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Options: Remember Device & Session Duration -->
+            <div class="flex items-center justify-between pt-1">
+              <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                <input checked="" class="w-4 h-4 rounded text-primary-container border-outline-variant focus:ring-primary-container focus:ring-offset-0" type="checkbox"/>
+                <span class="text-label-md font-label-md text-on-surface-variant">Remember this device (MAC Binding)</span>
+              </label>
+            </div>
+
+            <!-- Primary CTA Button -->
+            <button class="w-full h-12 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4" id="submit-btn" type="submit">
+              <span class="material-symbols-outlined text-xl" data-icon="bolt">bolt</span>
+              <span>Connect to Internet</span>
+            </button>
+          </form>
+
+          <!-- Mode 2: Voucher Code Form (Initially Hidden) -->
+          <form class="space-y-5 hidden" id="form-voucher" onsubmit="handleConnect(event)">
+            <div>
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="voucher-code">
+                Prepaid Voucher Code / PIN
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+                  <span class="material-symbols-outlined text-xl" data-icon="receipt">receipt</span>
+                </div>
+                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all uppercase tracking-wider font-mono outline-none" id="voucher-code" placeholder="e.g. HOSTEL-9942-TX" value="HOSTEL-9942-TX" type="text"/>
+              </div>
+              <p class="text-body-sm font-body-sm text-outline mt-1.5">12-digit scratch card or digital receipt PIN.</p>
+            </div>
+            <div>
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="guest-room">
+                Room Number (Optional)
+              </label>
+              <input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="guest-room" placeholder="Block &amp; Room Number" value="Block B Room 204" type="text"/>
+            </div>
+            <!-- Primary CTA Button for Voucher -->
+            <button class="w-full h-12 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4" type="submit">
+              <span class="material-symbols-outlined text-xl" data-icon="wifi_protected_setup">wifi_protected_setup</span>
+              <span>Redeem &amp; Connect</span>
+            </button>
+          </form>
+
+          <!-- Secondary Link Below -->
+          <div class="pt-6 mt-6 border-t border-surface-container text-center">
+            <p class="text-body-md font-body-md text-on-surface-variant">
+              Don't have an active plan? 
+              <a class="font-bold text-primary hover:text-primary-container underline decoration-primary/40 underline-offset-4 ml-1 inline-flex items-center gap-1 transition-colors" href="student-dashboard.html#plans">
+                Buy one here
+                <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Telemetry & Policy Info Strip -->
+        <div class="bg-surface-container-low px-6 py-4 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-3 text-body-sm font-body-sm text-on-surface-variant">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-base text-outline" data-icon="devices">devices</span>
+            <span>Device limit: <strong>3 active devices / account</strong></span>
+          </div>
+          <div class="flex items-center gap-1.5 text-secondary font-medium">
+            <span class="material-symbols-outlined text-base" data-icon="lock_open_right">lock_open_right</span>
+            <span>WPA3 Enterprise Gateway</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ & Helpful Badges Pill Cluster -->
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
+        <button onclick="showToast('Vouchers can be purchased at the Porter Desk or online via Mobile Money.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-base text-primary" data-icon="help_outline">help_outline</span>
+          <span>How to find your voucher</span>
+        </button>
+        <button onclick="showToast('CampusPulse guarantees 50 Mbps minimum per student session.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-base text-secondary" data-icon="speed">speed</span>
+          <span>Hostel Speed Guarantee</span>
+        </button>
+        <button onclick="showToast('Fair usage policy: P2P bit-torrenting throttled between 8am-6pm.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-base text-outline" data-icon="policy">policy</span>
+          <span>Fair Usage Policy</span>
+        </button>
+      </div>
+
+      <!-- Hostel Support Hotline Card -->
+      <div class="mt-8 text-center space-y-1">
+        <p class="text-body-sm font-body-sm text-on-surface-variant">
+          Facing authentication issues or MAC binding errors?
+        </p>
+        <div class="inline-flex items-center gap-2 font-headline-sm font-headline-sm text-on-surface text-base">
+          <span class="material-symbols-outlined text-primary text-xl" data-icon="support_agent">support_agent</span>
+          <span>Hostel NetOps Desk: <strong class="text-primary font-bold">Ext. 4080</strong> or <a class="hover:underline font-bold text-primary" href="tel:+18005550199">+1 (800) 555-0199</a></span>
+        </div>
+        <p class="text-body-sm font-body-sm text-outline">
+          Warden IT Office, Block B, Ground Floor • Mon-Sun, 24/7 Service
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Minimal Footer Bar -->
+  <footer class="relative z-10 py-6 border-t border-outline-variant/20 bg-surface-container-lowest/80 backdrop-blur-xs text-center text-body-sm font-body-sm text-outline">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>© 2025 CampusPulse Wi-Fi Networks. All rights reserved.</div>
+      <div class="flex items-center gap-4 text-label-md font-label-md">
+        <a class="hover:text-on-surface transition-colors" href="#">Privacy Notice</a>
+        <span>•</span>
+        <a class="hover:text-on-surface transition-colors" href="#">Acceptable Use</a>
+        <span>•</span>
+        <a class="hover:text-on-surface transition-colors" href="#">DNS Settings</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core App Logic -->
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      injectDemoNavbar("login");
+    });
+  </script>
+</body>
+</html>
