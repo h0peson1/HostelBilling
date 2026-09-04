@@ -1,0 +1,47 @@
+{
+  "projectId": "9400132624252122147",
+  "name": "projects/9400132624252122147",
+  "title": "Hostel Wi-Fi Management Portal",
+  "visibility": "PUBLIC",
+  "createTime": "2026-09-03T20:25:44.543322Z",
+  "updateTime": "2026-09-03T21:55:20.184468Z",
+  "projectType": "TEXT_TO_UI_PRO",
+  "origin": "STITCH",
+  "screens": [
+    {
+      "id": "4fb405b5a245494ea5d2d7a725c954ba",
+      "name": "projects/9400132624252122147/screens/4fb405b5a245494ea5d2d7a725c954ba",
+      "title": "View 1: Captive Portal (Login Screen)",
+      "deviceType": "DESKTOP",
+      "resolution": "2560x2362",
+      "localFile": "stitch_export/view1_login_desktop.html",
+      "screenshot": "stitch_export/screenshots/view1_login.png"
+    },
+    {
+      "id": "9e886b7939c74d3f8bf9016805624e92",
+      "name": "projects/9400132624252122147/screens/9e886b7939c74d3f8bf9016805624e92",
+      "title": "View 1: Captive Portal (Mobile Variant)",
+      "deviceType": "MOBILE",
+      "resolution": "390x884",
+      "localFile": "stitch_export/view1_login_mobile.html"
+    },
+    {
+      "id": "0f70a5e2278f489aba2d0d48d60f5f52",
+      "name": "projects/9400132624252122147/screens/0f70a5e2278f489aba2d0d48d60f5f52",
+      "title": "View 2: Student Dashboard & Checkout",
+      "deviceType": "DESKTOP",
+      "resolution": "2560x2872",
+      "localFile": "stitch_export/view2_student_dashboard.html",
+      "screenshot": "stitch_export/screenshots/view2_student_dashboard.png"
+    },
+    {
+      "id": "5abd6a6b7c8448beb46583b41a3c1154",
+      "name": "projects/9400132624252122147/screens/5abd6a6b7c8448beb46583b41a3c1154",
+      "title": "View 3: Admin Dashboard (Desktop Optimized)",
+      "deviceType": "DESKTOP",
+      "resolution": "2560x2048",
+      "localFile": "stitch_export/view3_admin_dashboard.html",
+      "screenshot": "stitch_export/screenshots/view3_admin_dashboard.png"
+    }
+  ]
+}

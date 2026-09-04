@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hostel NetOps - Admin Dashboard</title>
+<!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#e3dfff",
+            "surface-container-high": "#e2e7ff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#c3c0ff",
+            "surface-tint": "#5148d7",
+            "tertiary-container": "#005a6a",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#4edea3",
+            "secondary-fixed": "#6ffbbe",
+            "surface-dim": "#d2d9f4",
+            "on-primary": "#ffffff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#464554",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed-variant": "#005236",
+            "surface-container": "#eaedff",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#372abf",
+            "on-primary-fixed": "#100069",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#6cf8bb",
+            "outline": "#777586",
+            "on-background": "#131b2e",
+            "on-secondary-fixed": "#002113",
+            "primary-fixed-dim": "#c3c0ff",
+            "surface-variant": "#dae2fd",
+            "on-primary-container": "#c1beff",
+            "outline-variant": "#c7c4d7",
+            "on-tertiary-container": "#4ad5f4",
+            "surface-bright": "#faf8ff",
+            "tertiary-fixed": "#acedff",
+            "primary": "#2a14b4",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-error": "#ffffff",
+            "background": "#faf8ff",
+            "surface": "#faf8ff",
+            "secondary": "#006c49",
+            "tertiary": "#00414d",
+            "primary-container": "#4338ca",
+            "on-tertiary-fixed": "#001f26",
+            "surface-container-highest": "#dae2fd",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#283044"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-mobile": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xxs": "0.25rem",
+            "space-sm": "0.75rem",
+            "space-3xl": "4rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "space-xl": "2rem",
+            "margin-desktop": "2rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "label-md": ["Space Grotesk", "sans-serif"],
+            "headline-sm": ["Space Grotesk", "sans-serif"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"],
+            "display-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Space Grotesk", "sans-serif"],
+            "display-lg": ["Space Grotesk", "sans-serif"],
+            "label-lg": ["Space Grotesk", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #c7c4d7;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-x-hidden antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ================= SIDE NAVIGATION BAR (SHARED COMPONENT) ================= -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col justify-between bg-surface-container-lowest border-r border-outline-variant/30 shadow-sm z-40 p-4 shrink-0">
+<div class="flex flex-col gap-6">
+<!-- NetOps Header & Avatar -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="relative w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-headline-sm font-bold shadow-sm ring-2 ring-primary/20">
+<span class="material-symbols-outlined text-surface-container-lowest" data-icon="router">router</span>
+<span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-secondary-fixed-dim border-2 border-surface-container-lowest rounded-full ring-2 ring-secondary/20"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<h1 class="text-title-md font-title-md font-bold text-on-surface truncate">Hostel NetOps</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant truncate">Network Admin Console</p>
+</div>
+</div>
+<!-- Quick Action CTA Button from JSON -->
+<button class="w-full h-11 bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-150" onclick="openModal()">
+<span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+<span>Add User</span>
+</button>
+<!-- Primary Navigation Tabs -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-1.5">
+<!-- Dashboard (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container text-primary font-label-lg text-label-lg rounded-lg shadow-xs transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Users -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Users</span>
+</a>
+<!-- Plans -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="wifi_tethering">wifi_tethering</span>
+<span>Plans</span>
+</a>
+<!-- Payments -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Payments</span>
+</a>
+</nav>
+</div>
+<!-- Secondary / Footer Navigation -->
+<div class="border-t border-outline-variant/30 pt-4 flex flex-col gap-1.5">
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+<!-- Current Admin Footnote -->
+<div class="mt-2 p-2.5 rounded-lg bg-surface-container-low flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" data-alt="Close-up professional portrait of a Ghanaian university systems technician in a clean navy branded tech polo against an ambient high-tech server rack lighting with vibrant indigo soft glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH9D9WfUUEz1u3nB-BDdRvvi_GdQtg-r96fYCcI1GUSVmrKW0qLWqfyRexttY74W29QQk-S3rgD2wZMNA0Ni8dNtdicup_zRHE2CNk8L3oiRFpCW6yZ-8MfE9Tf7Zob-YfpWQYzgZdOUgE6dsQPYbLZMhb9Hmj_ogLV2RjKQUIwMP__7DuX5kzfUkvJJZDCPbsiuozCq69g8hHFE7VqUVNLSSrsRGjEXmrH0-jd4gnXBScpt2sqrq-"/>
+<div class="min-w-0 flex-1">
+<p class="text-label-md font-label-md text-on-surface truncate">Admin Kwame O.</p>
+<p class="text-body-sm font-body-sm text-outline truncate">Super-Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- ================= MAIN WORKSPACE CANVAS ================= -->
+<main class="ml-64 flex-1 flex flex-col min-w-0 bg-background">
+<!-- TOP HEADER -->
+<header class="sticky top-0 z-30 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 px-margin-desktop flex items-center justify-between gap-4">
+<!-- Left: Search & Location Filter -->
+<div class="flex items-center gap-4 flex-1 max-w-2xl">
+<!-- Global Search Bar -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-9 pr-4 py-2 bg-surface-container-low border border-outline-variant/50 rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Search student name, room no, MAC or IP..." type="text"/>
+</div>
+<!-- Hostel Zone Selector -->
+<div class="relative inline-flex items-center">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container rounded-lg border border-outline-variant/30 text-on-surface cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="apartment">apartment</span>
+<span class="text-label-md font-label-md font-semibold">Main Hall - North Wing</span>
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Right: Health Indicator & Primary Action -->
+<div class="flex items-center gap-4">
+<!-- Network Health Alert Indicator -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-container/40 border border-secondary/20">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<span class="text-label-sm font-label-sm text-on-secondary-container tracking-wider uppercase font-bold">Network Nominal</span>
+</div>
+<!-- Notification Bell -->
+<button aria-label="System Alerts" class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Prominent Primary Action Button -->
+<button class="h-10 px-4 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm flex items-center gap-2 active:scale-[0.98] transition-all" onclick="openModal()">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span>+ Add New User</span>
+</button>
+</div>
+</header>
+<!-- CONTENT WRAPPER -->
+<div class="p-space-xl flex flex-col gap-6 max-w-7xl w-full mx-auto">
+<!-- SUB-HEADER / WELCOME TILE -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">Hostel Operations Dashboard</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Live telemetry, authentication gateway, and automated billing metrics for North Wing cluster.</p>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant bg-surface-container-lowest px-3 py-1.5 rounded-lg border border-outline-variant/30 shadow-xs">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="update">update</span>
+<span>Syncing automatically (every 10s)</span>
+</div>
+</div>
+<!-- ================= 3 KEY PERFORMANCE INDICATOR CARDS ================= -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- CARD 1: ACTIVE USERS -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary-container/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant tracking-wider uppercase font-semibold">Active Users Right Now</p>
+<h3 class="text-headline-lg font-headline-lg font-bold text-on-surface mt-1">342 <span class="text-headline-sm font-headline-sm font-normal text-on-surface-variant">online</span></h3>
+</div>
+<span class="p-2.5 bg-primary-fixed text-primary rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                +12% from yesterday
+              </span>
+<span class="text-outline">Peak: 380 concurrent</span>
+</div>
+<!-- Meter -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500" style="width: 78%;"></div>
+</div>
+</div>
+</div>
+<!-- CARD 2: TOTAL REVENUE -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary-container/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant tracking-wider uppercase font-semibold">Total Revenue (This Month)</p>
+<h3 class="text-headline-lg font-headline-lg font-bold text-on-surface mt-1">GH₵ 24,850</h3>
+</div>
+<span class="p-2.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm">
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/40 text-on-secondary-container font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span>
+                18.4%
+              </span>
+<span class="text-on-surface-variant">vs last month</span>
+</div>
+<span class="text-body-sm font-body-sm font-medium text-outline">Approx. ~$2,300 USD</span>
+</div>
+</div>
+<!-- CARD 3: NETWORK STATUS -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary-container/40 transition-all">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant tracking-wider uppercase font-semibold">Network Status</p>
+<div class="flex items-center gap-2 mt-1">
+<h3 class="text-headline-sm font-headline-sm font-bold text-secondary">Healthy</h3>
+<span class="text-label-sm font-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-bold">99.8% Uptime</span>
+</div>
+</div>
+<span class="p-2.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Aggregate Throughput</span>
+<span class="font-semibold text-on-surface">1.2 Gbps / 2.0 Gbps</span>
+</div>
+<!-- Bandwidth load bar -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= RECENT ACTIVITY SECTION ================= -->
+<section class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Table Toolbar -->
+<div class="px-space-lg py-space-md border-b border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+<div>
+<h3 class="text-title-md font-title-md font-bold text-on-surface">Recent Voucher &amp; Plan Activity</h3>
+<p class="text-body-sm font-body-sm text-outline">Real-time captive transaction logs and authentication feeds.</p>
+</div>
+</div>
+<!-- Table Filters -->
+<div class="flex items-center gap-2">
+<div class="inline-flex rounded-lg border border-outline-variant/40 p-0.5 bg-surface-container-low text-label-md font-label-md">
+<button class="px-3 py-1 rounded-md bg-surface-container-lowest text-primary font-bold shadow-xs">All Activity</button>
+<button class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors">MoMo</button>
+<button class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors">Cards</button>
+</div>
+<button class="p-2 border border-outline-variant/40 rounded-lg hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Export CSV">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<!-- Structured Data Table -->
+<div class="overflow-x-auto custom-scroll">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/60 border-b border-outline-variant/30 text-label-md font-label-md text-on-surface-variant">
+<th class="py-3.5 px-space-lg">User / Resident</th>
+<th class="py-3.5 px-space-md">Plan Purchased</th>
+<th class="py-3.5 px-space-md">Amount Paid</th>
+<th class="py-3.5 px-space-md">Payment Method</th>
+<th class="py-3.5 px-space-md">Date &amp; Timestamp</th>
+<th class="py-3.5 px-space-lg text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 text-body-sm font-body-sm">
+<!-- ROW 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-lg">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-outline-variant/50" data-alt="Portrait photo of a young West African male student with short clean fade haircut wearing a mustard yellow hoodie in a sunlit university dormitory study room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAzEpKoUoKSdd_AulcitwrRZ42tViRxawiCuo6z8rZd7icHvLTZD-qyhKBdS_8y2Npa_Tdh-j1VUwmYvmHH_GRMZMj-T6MosW8j7-H8_koyQbXfbUPBMYikySj3tcClqT8PnjkM89sd9DjvJU6UZWn9xRfhckSYwCF7-ePiUTWOi91rB3qyDAYAAAI93_EI0Xn4g6vHR3OOCPH8BL1lhSyeL5CeSPCedTuhq73gQkGhHBCYR51DO01"/>
+<div>
+<p class="font-semibold text-on-surface">Kwame Mensah</p>
+<p class="text-outline text-body-sm">Room 402 • Mac: 44:38:39:B1:0E</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="school">school</span>
+<span class="font-medium text-on-surface">Semester Scholar 50GB</span>
+</div>
+</td>
+<td class="py-3 px-space-md font-semibold text-on-surface">
+                  GH₵ 80.00
+                </td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FEF3C7] text-[#92400E] font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="phone_iphone">phone_iphone</span>
+                    MTN MoMo
+                  </span>
+</td>
+<td class="py-3 px-space-md text-on-surface-variant">
+                  Nov 23, 2025 • 14:32
+                </td>
+<td class="py-3 px-space-lg text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-md text-label-md font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Active
+                  </span>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-lg">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-outline-variant/50" data-alt="Authentic headshot of an African female university student wearing modern round spectacles and a dark green cotton sweater against a bright campus library backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiUtM1br3xCZJ3wd_1PF9IQY08x29wqz2b6tpIDA8y1VVRiF2mdexFsEU4AjsvS_AzD2lXwFrnMYGmUA1nSQOceOMS6IizPv4sJyBT9uxsbQiRte4hmirawgiqcl5GIX3Tuo789aY-lAoib-ZxV-y83qJ95OJx6c96cYvOkXuT9rHEwMicD1_56AxiHz8DpjRTUbM7zoj0o17SR_A9d_xt_hq26OuVxzc0CGqeEYyNBK9nk9i1pcrH"/>
+<div>
+<p class="font-semibold text-on-surface">Ama Serwaa</p>
+<p class="text-outline text-body-sm">Room 118 • Mac: A8:20:66:91:D2</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[18px]" data-icon="bolt">bolt</span>
+<span class="font-medium text-on-surface">Daily Sprint 5GB</span>
+</div>
+</td>
+<td class="py-3 px-space-md font-semibold text-on-surface">
+                  GH₵ 10.00
+                </td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FEE2E2] text-[#991B1B] font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="phone_iphone">phone_iphone</span>
+                    Telecel Cash
+                  </span>
+</td>
+<td class="py-3 px-space-md text-on-surface-variant">
+                  Nov 23, 2025 • 14:15
+                </td>
+<td class="py-3 px-space-lg text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-md text-label-md font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Completed
+                  </span>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-lg">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-outline-variant/50" data-alt="Close studio style portrait of a Ghanaian tech student with braided hair smiling brightly in bright natural indoor light, wearing a neutral grey crewneck sweatshirt." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXC4krVXrQ8b-0XsU64nreDMPvcByEqYi2npKEWKrRbv1UxlGdPBI2W5HVSrOhuzWN_FP5eoIMSNxUKDwWCT96XuoEOw-9SmXa7CRt8GuV2p5TsDa6tLoHKlaLH-fOrQbbvSBrYvfRi3774FUt5nZsrpohJ3IrNwwqNHjmFaBgmREA659h_01GJOkciTw3gS201ApPjFSTM3HhmsrC6Cre4HR8104GNe33qSmLJAu-0pDtcp2KuYfD"/>
+<div>
+<p class="font-semibold text-on-surface">Kofi Boateng</p>
+<p class="text-outline text-body-sm">Room 205 • Mac: E2:11:4F:08:9A</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="all_inclusive">all_inclusive</span>
+<span class="font-medium text-on-surface">Ultra Unlimited</span>
+</div>
+</td>
+<td class="py-3 px-space-md font-semibold text-on-surface">
+                  GH₵ 140.00
+                </td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-high text-primary font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="credit_card">credit_card</span>
+                    Visa / Card
+                  </span>
+</td>
+<td class="py-3 px-space-md text-on-surface-variant">
+                  Nov 23, 2025 • 13:58
+                </td>
+<td class="py-3 px-space-lg text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-md text-label-md font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Active
+                  </span>
+</td>
+</tr>
+<!-- ROW 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-3 px-space-lg">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-outline-variant/50" data-alt="Portrait photo of an international exchange student in Ghana with shoulder length blonde hair in a modern well-lit computer lab setting wearing a clean denim jacket." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7AkrJ_XHfJioESxRPOjwUozGZP71kecU9WmcNe6CsNtccuPuQ9hTyeW-Cell025M568SERF-IFhUVSM_5eiv4NtVGfo4KESJgFP81S9lv6acXKsJt0HqmLKQrnYgX0Hr4EAKPkh0tS2mUg8Wc9B0zrjvG81i-biPuUBISPsUnZ0ZrxlYO8v5upE4w7SXPYeqG5WJmEX2Pa-55XpecCz35gRxzSzl36H5hrbLm1ityQQqjwiRLCETX"/>
+<div>
+<p class="font-semibold text-on-surface">Sarah Jenkins</p>
+<p class="text-outline text-body-sm">Room 312 • Mac: 00:1A:2B:3C:4D:5E</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="school">school</span>
+<span class="font-medium text-on-surface">Semester Scholar 50GB</span>
+</div>
+</td>
+<td class="py-3 px-space-md font-semibold text-on-surface">
+                  GH₵ 80.00
+                </td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-high text-primary font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="credit_card">credit_card</span>
+                    Mastercard
+                  </span>
+</td>
+<td class="py-3 px-space-md text-on-surface-variant">
+                  Nov 23, 2025 • 13:40
+                </td>
+<td class="py-3 px-space-lg text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-md text-label-md font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Active
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Summary Footer -->
+<div class="px-space-lg py-3 border-t border-outline-variant/30 flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant bg-surface-container-low/30">
+<span>Showing 4 of 248 authentication records</span>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 rounded border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface disabled:opacity-40" disabled="">Previous</button>
+<button class="px-3 py-1 rounded bg-primary-container text-on-primary font-medium">1</button>
+<button class="px-3 py-1 rounded border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface">2</button>
+<button class="px-3 py-1 rounded border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface">3</button>
+<button class="px-3 py-1 rounded border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface">Next</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- ================= INTERACTIVE 'ADD NEW USER' MODAL DIALOG ================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm transition-opacity duration-200" id="addUserModal">
+<div class="relative w-full max-w-lg bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant/40 overflow-hidden transform transition-transform">
+<!-- Modal Header -->
+<div class="px-6 py-5 border-b border-outline-variant/30 flex items-center justify-between bg-surface-container-low/40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</div>
+<div>
+<h3 class="text-title-md font-title-md font-bold text-on-surface">Add New Student / Resident</h3>
+<p class="text-body-sm font-body-sm text-outline">Provision hostel Wi-Fi credentials &amp; assign quota.</p>
+</div>
+</div>
+<button aria-label="Close dialog" class="p-1.5 text-outline hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body (Form Fields) -->
+<form class="p-6 space-y-4" onsubmit="handleFormSubmit(event)">
+<!-- Full Name -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1.5">
+            Full Name <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="badge">badge</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Samuel K. Adom" required="" type="text"/>
+</div>
+</div>
+<!-- Phone Number & Room No Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Phone Number -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1.5">
+              Phone Number (for SMS voucher/MoMo) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="smartphone">smartphone</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="+233 24 000 0000" required="" type="tel"/>
+</div>
+</div>
+<!-- Assigned Room Number -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1.5">
+              Assigned Room Number <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="meeting_room">meeting_room</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Rm 408 - Block B" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Hardware MAC Address -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-label-md font-label-md text-on-surface">
+              MAC Address (Hardware Identifier) <span class="text-error">*</span>
+</label>
+<span class="text-label-sm font-label-sm text-outline uppercase font-semibold">Format: 00:1A:2B:3C:4D:5E</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="lan">lan</span>
+<input class="w-full pl-10 pr-4 py-2.5 font-mono text-body-sm bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$" placeholder="00:1A:2B:3C:4D:5E" required="" type="text"/>
+</div>
+</div>
+<!-- Default Tier Dropdown -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1.5">
+            Default Plan Tier Assignment
+          </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="wifi_protected_setup">wifi_protected_setup</span>
+<select class="w-full pl-10 pr-10 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+<option value="semester">Semester Scholar 50GB — GH₵ 80.00</option>
+<option value="unlimited">Ultra Unlimited 30 Days — GH₵ 140.00</option>
+<option value="daily">Daily Sprint 5GB — GH₵ 10.00</option>
+<option value="trial">Welcome Trial 2GB — Free Voucher</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="unfold_more">unfold_more</span>
+</div>
+</div>
+<!-- Instant SMS Notification Checkbox -->
+<div class="flex items-center gap-2 pt-1">
+<input checked="" class="w-4 h-4 text-primary-container rounded border-outline-variant/60 focus:ring-primary" id="sendSms" type="checkbox"/>
+<label class="text-body-sm font-body-sm text-on-surface-variant" for="sendSms">Send login code &amp; Wi-Fi voucher code instantly via SMS</label>
+</div>
+<!-- Modal Footer Actions -->
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-end gap-3">
+<button class="px-4 py-2.5 border border-outline-variant/50 rounded-lg text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors" onclick="closeModal()" type="button">
+            Cancel
+          </button>
+<button class="px-5 py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm flex items-center gap-2 active:scale-[0.98] transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]" data-icon="verified_user">verified_user</span>
+<span>Save &amp; Grant Access</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Micro-interaction JS Script -->
+<script>
+    function openModal() {
+      const modal = document.getElementById('addUserModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('addUserModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span>
+        <span>Registering MAC...</span>
+      `;
+      setTimeout(() => {
+        submitBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[18px]">check_circle</span>
+          <span>Access Granted!</span>
+        `;
+        setTimeout(() => {
+          closeModal();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }, 1200);
+      }, 1000);
+    }
+  </script>
+</body></html>

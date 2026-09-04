@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Hostel NetOps - Admin Dashboard</title>
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind Theme Configuration -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#e3dfff",
+            "surface-container-high": "#e2e7ff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#c3c0ff",
+            "surface-tint": "#5148d7",
+            "tertiary-container": "#005a6a",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#4edea3",
+            "secondary-fixed": "#6ffbbe",
+            "surface-dim": "#d2d9f4",
+            "on-primary": "#ffffff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#464554",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed-variant": "#005236",
+            "surface-container": "#eaedff",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#372abf",
+            "on-primary-fixed": "#100069",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#6cf8bb",
+            "outline": "#777586",
+            "on-background": "#131b2e",
+            "on-secondary-fixed": "#002113",
+            "primary-fixed-dim": "#c3c0ff",
+            "surface-variant": "#dae2fd",
+            "on-primary-container": "#c1beff",
+            "outline-variant": "#c7c4d7",
+            "on-tertiary-container": "#4ad5f4",
+            "surface-bright": "#faf8ff",
+            "tertiary-fixed": "#acedff",
+            "primary": "#2a14b4",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-error": "#ffffff",
+            "background": "#faf8ff",
+            "surface": "#faf8ff",
+            "secondary": "#006c49",
+            "tertiary": "#00414d",
+            "primary-container": "#4338ca",
+            "on-tertiary-fixed": "#001f26",
+            "surface-container-highest": "#dae2fd",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#283044"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "md": "0.75rem",
+            "sm": "0.25rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.75rem",
+            "space-xl": "2rem",
+            "margin-desktop": "2rem",
+            "margin-mobile": "1rem",
+            "space-3xl": "4rem",
+            "space-xxs": "0.25rem",
+            "gutter-desktop": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Space Grotesk", "sans-serif"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "label-md": ["Space Grotesk", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"],
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Space Grotesk", "sans-serif"],
+            "display-lg": ["Space Grotesk", "sans-serif"],
+            "label-lg": ["Space Grotesk", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f2f3ff;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c7c4d7;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex selection:bg-primary-fixed selection:text-on-primary-fixed pb-16">
+
+  <!-- ================= LEFT FIXED SIDEBAR ================= -->
+  <aside class="w-64 fixed inset-y-0 left-0 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col justify-between p-space-md z-40">
+    <div class="flex flex-col gap-6">
+      
+      <!-- Brand & Product Identity -->
+      <a href="index.html" class="flex items-center gap-3 px-2 py-1">
+        <div class="relative w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-[24px]" data-icon="wifi_tethering">wifi_tethering</span>
+          <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-secondary-fixed-dim border-2 border-surface-container-lowest rounded-full ring-2 ring-secondary/20"></span>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <h1 class="text-title-md font-title-md font-bold text-on-surface truncate">Hostel NetOps</h1>
+          <p class="text-body-sm font-body-sm text-on-surface-variant truncate">Network Admin Console</p>
+        </div>
+      </a>
+
+      <!-- Quick Action CTA Button -->
+      <button class="w-full h-11 bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-150" onclick="openAddUserModal()">
+        <span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+        <span>+ Add User</span>
+      </button>
+
+      <!-- Primary Navigation Tabs -->
+      <nav aria-label="Main Navigation" class="flex flex-col gap-1.5">
+        <!-- Dashboard (Active) -->
+        <a class="flex items-center gap-3 px-4 py-3 bg-surface-container text-primary font-label-lg text-label-lg rounded-lg shadow-xs transition-colors duration-150" href="admin-dashboard.html">
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span>Dashboard</span>
+        </a>
+        <!-- Student Dashboard Link -->
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="student-dashboard.html">
+          <span class="material-symbols-outlined" data-icon="school">school</span>
+          <span>Student View</span>
+        </a>
+        <!-- Captive Portal Link -->
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="index.html">
+          <span class="material-symbols-outlined" data-icon="login">login</span>
+          <span>Captive Portal</span>
+        </a>
+        <!-- Vouchers -->
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#vouchers" onclick="showToast('Voucher batch generation: 50 PINs ready for printing', 'info')">
+          <span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+          <span>Vouchers</span>
+        </a>
+        <!-- Settings -->
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#ap-health" onclick="showToast('RADIUS Gateway & Omada Controller: Online', 'info')">
+          <span class="material-symbols-outlined" data-icon="router">router</span>
+          <span>Access Points</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Secondary / Footer Navigation -->
+    <div class="border-t border-outline-variant/30 pt-4 flex flex-col gap-1.5">
+      <!-- Current Admin Footnote -->
+      <div class="p-2.5 rounded-lg bg-surface-container-low flex items-center gap-3">
+        <img class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" alt="Admin Kwame O." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH9D9WfUUEz1u3nB-BDdRvvi_GdQtg-r96fYCcI1GUSVmrKW0qLWqfyRexttY74W29QQk-S3rgD2wZMNA0Ni8dNtdicup_zRHE2CNk8L3oiRFpCW6yZ-8MfE9Tf7Zob-YfpWQYzgZdOUgE6dsQPYbLZMhb9Hmj_ogLV2RjKQUIwMP__7DuX5kzfUkvJJZDCPbsiuozCq69g8hHFE7VqUVNLSSrsRGjEXmrH0-jd4gnXBScpt2sqrq-"/>
+        <div class="min-w-0 flex-1">
+          <p class="text-label-md font-label-md text-on-surface font-bold truncate">Admin Kwame O.</p>
+          <p class="text-body-sm font-body-sm text-outline truncate">Super-Admin • NetOps</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN WORKSPACE CANVAS ================= -->
+  <main class="ml-64 flex-1 flex flex-col min-w-0 bg-background">
+    
+    <!-- TOP HEADER -->
+    <header class="sticky top-0 z-30 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 px-margin-desktop flex items-center justify-between gap-4">
+      <!-- Left: Search & Location Filter -->
+      <div class="flex items-center gap-4 flex-1 max-w-2xl">
+        <!-- Global Search Bar -->
+        <div class="relative flex-1 max-w-md">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+          <input id="admin-search-input" oninput="handleSearch(this.value)" class="w-full pl-9 pr-4 py-2 bg-surface-container-low border border-outline-variant/50 rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Search student name, room no, MAC or IP..." type="text"/>
+        </div>
+        <!-- Hostel Zone Selector -->
+        <div class="relative inline-flex items-center">
+          <select id="zone-filter-select" onchange="handleZoneChange(this.value)" class="flex items-center gap-2 px-3 py-1.5 bg-surface-container rounded-lg border border-outline-variant/30 text-on-surface cursor-pointer hover:bg-surface-container-high transition-colors text-label-md font-label-md font-semibold outline-none pr-8">
+            <option value="All">All Hostel Wings</option>
+            <option value="Hall A">Hall A - North Wing</option>
+            <option value="Hall B" selected>Hall B - West Wing</option>
+            <option value="Hall C">Hall C - East Wing</option>
+            <option value="Guest Houses">Guest Annex</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Right: Health Indicator & Primary Action -->
+      <div class="flex items-center gap-4">
+        <!-- Network Health Alert Indicator -->
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-container/40 border border-secondary/20">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+          </span>
+          <span class="text-label-sm font-label-sm text-on-secondary-container tracking-wider uppercase font-bold">Network Nominal</span>
+        </div>
+        <!-- Notification Bell -->
+        <button onclick="showToast('Alert: AP Hall-B-Floor4-West load at 78% capacity', 'info')" aria-label="System Alerts" class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors">
+          <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+        </button>
+        <!-- Add New User Action Button -->
+        <button class="h-10 px-4 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm flex items-center gap-2 active:scale-[0.98] transition-all font-bold" onclick="openAddUserModal()">
+          <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+          <span>+ Add New User</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="p-space-xl flex flex-col gap-6 max-w-7xl w-full mx-auto">
+      
+      <!-- SUB-HEADER / WELCOME TILE -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-headline-lg-mobile sm:text-headline-md font-headline-md font-bold text-on-surface tracking-tight">
+            Network Operations Center (NOC)
+          </h2>
+          <p class="text-body-md font-body-md text-on-surface-variant mt-0.5">
+            Hostel Wi-Fi radius telemetry, captive session control &amp; bandwidth governance.
+          </p>
+        </div>
+        <!-- Quick Stats Pill -->
+        <div class="flex items-center gap-2 self-start sm:self-auto bg-surface-container-low border border-outline-variant/30 px-3.5 py-1.5 rounded-lg text-body-sm font-body-sm">
+          <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="wifi_protected_setup">wifi_protected_setup</span>
+          <span>Access Points: <strong>32 Active (100% Up)</strong></span>
+        </div>
+      </div>
+
+      <!-- ================= 3-COLUMN METRICS BENTO GRID ================= -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+        
+        <!-- CARD 1: ACTIVE DEVICES -->
+        <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary-container/40 transition-all">
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-label-md font-label-md text-on-surface-variant tracking-wider uppercase font-semibold">Active Connected Sessions</p>
+              <h3 class="text-headline-lg font-headline-lg font-bold text-on-surface mt-1" id="stat-active-users">342</h3>
+            </div>
+            <span class="p-2.5 bg-primary-fixed text-primary rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined" data-icon="devices">devices</span>
+            </span>
+          </div>
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-body-sm font-body-sm">
+              <span class="px-2 py-0.5 rounded-md bg-secondary-container/40 text-on-secondary-container font-semibold flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                +14.2%
+              </span>
+              <span class="text-on-surface-variant">vs yesterday</span>
+            </div>
+            <span class="text-body-sm font-body-sm font-medium text-outline">Max Capacity: 500</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: BANDWIDTH CONSUMPTION -->
+        <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary-container/40 transition-all">
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-label-md font-label-md text-on-surface-variant tracking-wider uppercase font-semibold">Monthly Data Traffic</p>
+              <h3 class="text-headline-lg font-headline-lg font-bold text-primary mt-1">1.84 TB</h3>
+            </div>
+            <span class="p-2.5 bg-secondary-container/40 text-on-secondary-container rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined" data-icon="cloud_sync">cloud_sync</span>
+            </span>
+          </div>
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-body-sm font-body-sm">
+              <span class="px-2 py-0.5 rounded-md bg-secondary-container/40 text-on-secondary-container font-semibold flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span>
+                18.4%
+              </span>
+              <span class="text-on-surface-variant">quota consumption</span>
+            </div>
+            <span class="text-body-sm font-body-sm font-medium text-outline">Quota Pool: 5.0 TB</span>
+          </div>
+        </div>
+
+        <!-- CARD 3: NETWORK STATUS -->
+        <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary-container/40 transition-all">
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-label-md font-label-md text-on-surface-variant tracking-wider uppercase font-semibold">Gateway Status</p>
+              <div class="flex items-center gap-2 mt-1">
+                <h3 class="text-headline-sm font-headline-sm font-bold text-secondary">Healthy</h3>
+                <span class="text-label-sm font-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-bold">99.8% Uptime</span>
+              </div>
+            </div>
+            <span class="p-2.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined" data-icon="speed">speed</span>
+            </span>
+          </div>
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-1.5">
+            <div class="flex items-center justify-between text-body-sm font-body-sm">
+              <span class="text-on-surface-variant">Aggregate Throughput</span>
+              <span class="font-semibold text-on-surface">840 Mbps / 1.0 Gbps</span>
+            </div>
+            <!-- Bandwidth load bar -->
+            <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+              <div class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full" style="width: 84%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= RECENT ACTIVITY & SESSIONS SECTION ================= -->
+      <section class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm overflow-hidden flex flex-col">
+        <!-- Table Toolbar -->
+        <div class="px-space-lg py-space-md border-b border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="p-2 bg-surface-container rounded-lg text-primary">
+              <span class="material-symbols-outlined" data-icon="wifi_channel">wifi_channel</span>
+            </div>
+            <div>
+              <h3 class="text-title-md font-title-md font-bold text-on-surface">Active Student Sessions</h3>
+              <p class="text-body-sm font-body-sm text-outline">Real-time captive leases, bandwidth usage &amp; hardware controls.</p>
+            </div>
+          </div>
+          <!-- Table Filters -->
+          <div class="flex items-center gap-2">
+            <div class="inline-flex rounded-lg border border-outline-variant/40 p-0.5 bg-surface-container-low text-label-md font-label-md">
+              <button onclick="filterTableByStatus('All')" id="btn-filter-all" class="px-3 py-1 rounded-md bg-surface-container-lowest text-primary font-bold shadow-xs">All</button>
+              <button onclick="filterTableByStatus('Online')" id="btn-filter-online" class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors">Online</button>
+              <button onclick="filterTableByStatus('Throttled')" id="btn-filter-throttled" class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors">Throttled</button>
+            </div>
+            <button onclick="showToast('Exporting sessions to CSV...', 'info')" class="p-2 border border-outline-variant/40 rounded-lg hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Export CSV">
+              <span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Structured Data Table -->
+        <div class="overflow-x-auto custom-scroll">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-surface-container-low/60 border-b border-outline-variant/30 text-label-md font-label-md text-on-surface-variant">
+                <th class="py-3.5 px-4">Student / Resident</th>
+                <th class="py-3.5 px-4">IP &amp; MAC Identifier</th>
+                <th class="py-3.5 px-4">Hostel Access Point</th>
+                <th class="py-3.5 px-4">Current Speed</th>
+                <th class="py-3.5 px-4">Quota Allocation</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 text-right">Session Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-sessions-tbody" class="divide-y divide-outline-variant/20 text-body-sm font-body-sm">
+              <!-- Rendered dynamically by js/app.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination / Summary Footer -->
+        <div class="px-space-lg py-3 border-t border-outline-variant/30 flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant bg-surface-container-low/30">
+          <span>Displaying live RADIUS authenticated sessions</span>
+          <div class="flex items-center gap-1">
+            <button class="px-3 py-1 rounded border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface disabled:opacity-40" disabled="">Previous</button>
+            <button class="px-3 py-1 rounded bg-primary-container text-on-primary font-medium">1</button>
+            <button class="px-3 py-1 rounded border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface">Next</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= ADD NEW USER MODAL ================= -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm hidden" id="addUserModal">
+    <div class="relative w-full max-w-lg bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant/40 overflow-hidden transform transition-transform">
+      <!-- Modal Header -->
+      <div class="px-6 py-5 border-b border-outline-variant/30 flex items-center justify-between bg-surface-container-low/40">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center font-bold">
+            <span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+          </div>
+          <div>
+            <h3 class="text-title-md font-title-md font-bold text-on-surface">Add New Student / Resident</h3>
+            <p class="text-body-sm font-body-sm text-outline">Provision hostel Wi-Fi credentials &amp; assign quota.</p>
+          </div>
+        </div>
+        <button aria-label="Close dialog" class="p-1.5 text-outline hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" onclick="closeAddUserModal()">
+          <span class="material-symbols-outlined" data-icon="close">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body (Form Fields) -->
+      <form class="p-6 space-y-4" onsubmit="handleAddUserSubmit(event)">
+        <!-- Full Name -->
+        <div>
+          <label class="block text-label-md font-label-md text-on-surface mb-1.5">
+            Full Name <span class="text-error">*</span>
+          </label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="badge">badge</span>
+            <input name="userName" class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Samuel K. Adom" required="" type="text"/>
+          </div>
+        </div>
+
+        <!-- Roll Number & Room No Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-label-md font-label-md text-on-surface mb-1.5">
+              Roll / ID Number <span class="text-error">*</span>
+            </label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="badge">badge</span>
+              <input name="userRoll" class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-mono" placeholder="CS2025-551" required="" type="text"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-label-md font-label-md text-on-surface mb-1.5">
+              Room Number <span class="text-error">*</span>
+            </label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="meeting_room">meeting_room</span>
+              <input name="userRoom" class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="B3-109" required="" type="text"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Default Tier Dropdown -->
+        <div>
+          <label class="block text-label-md font-label-md text-on-surface mb-1.5">
+            Initial Quota Package
+          </label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="wifi_protected_setup">wifi_protected_setup</span>
+            <select name="userQuota" class="w-full pl-10 pr-10 py-2.5 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+              <option value="50">Semester Scholar 50GB — Standard</option>
+              <option value="100">Ultra Unlimited 100GB — Priority</option>
+              <option value="20">Daily QuickSurge 20GB — Light</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="unfold_more">unfold_more</span>
+          </div>
+        </div>
+
+        <!-- Instant SMS Notification Checkbox -->
+        <div class="flex items-center gap-2 pt-1">
+          <input checked="" class="w-4 h-4 text-primary rounded border-outline-variant/60 focus:ring-primary" id="sendSms" type="checkbox"/>
+          <label class="text-body-sm font-body-sm text-on-surface-variant" for="sendSms">Send Wi-Fi credentials instantly to student</label>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="pt-4 border-t border-outline-variant/30 flex items-center justify-end gap-3">
+          <button class="px-4 py-2.5 border border-outline-variant/50 rounded-lg text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors" onclick="closeAddUserModal()" type="button">
+            Cancel
+          </button>
+          <button class="px-5 py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm flex items-center gap-2 active:scale-[0.98] transition-all font-bold" type="submit">
+            <span class="material-symbols-outlined text-[18px]" data-icon="verified_user">verified_user</span>
+            <span>Save &amp; Grant Access</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core App Logic -->
+  <script src="js/app.js"></script>
+  <script>
+    let currentSearch = "";
+    let currentZone = "Hall B";
+
+    function handleSearch(val) {
+      currentSearch = val;
+      renderAdminTable(currentSearch, currentZone);
+    }
+
+    function handleZoneChange(val) {
+      currentZone = val;
+      renderAdminTable(currentSearch, currentZone);
+      showToast(`Filtered sessions for: ${val}`, "info");
+    }
+
+    function filterTableByStatus(status) {
+      const btnAll = document.getElementById("btn-filter-all");
+      const btnOnline = document.getElementById("btn-filter-online");
+      const btnThrottled = document.getElementById("btn-filter-throttled");
+
+      [btnAll, btnOnline, btnThrottled].forEach(b => {
+        if (b) {
+          b.className = "px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors";
+        }
+      });
+
+      if (status === "All" && btnAll) btnAll.className = "px-3 py-1 rounded-md bg-surface-container-lowest text-primary font-bold shadow-xs";
+      if (status === "Online" && btnOnline) btnOnline.className = "px-3 py-1 rounded-md bg-surface-container-lowest text-primary font-bold shadow-xs";
+      if (status === "Throttled" && btnThrottled) btnThrottled.className = "px-3 py-1 rounded-md bg-surface-container-lowest text-primary font-bold shadow-xs";
+
+      const state = loadState();
+      const tbody = document.getElementById("admin-sessions-tbody");
+      if (!tbody) return;
+
+      const filtered = state.adminUsers.filter(u => status === "All" || u.status === status);
+      renderFilteredAdminList(filtered);
+    }
+
+    function renderFilteredAdminList(filtered) {
+      const tbody = document.getElementById("admin-sessions-tbody");
+      if (!tbody) return;
+
+      tbody.innerHTML = filtered.map(u => {
+        const isOnline = u.status === "Online";
+        const isThrottled = u.status === "Throttled";
+        const badgeBg = isOnline ? "bg-secondary-container/30 text-on-secondary-container" : isThrottled ? "bg-amber-100 text-amber-800" : "bg-rose-100 text-rose-800";
+        const dotBg = isOnline ? "bg-secondary" : isThrottled ? "bg-amber-500" : "bg-rose-500";
+
+        return `
+          <tr class="hover:bg-surface-container-low/60 transition-colors border-b border-outline-variant/20 group">
+            <td class="py-3.5 px-4">
+              <div class="flex items-center gap-3">
+                <img class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/30" src="${u.avatar}" alt="${u.name}" />
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface font-semibold">${u.name}</p>
+                  <p class="text-body-sm text-outline font-mono">${u.rollNo} • ${u.room}</p>
+                </div>
+              </div>
+            </td>
+            <td class="py-3.5 px-4 font-mono text-body-sm text-on-surface">
+              <div>${u.ip}</div>
+              <div class="text-outline text-[11px]">${u.mac}</div>
+            </td>
+            <td class="py-3.5 px-4 text-body-sm text-on-surface-variant">
+              <span class="inline-flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px] text-primary">router</span>
+                ${u.ap}
+              </span>
+            </td>
+            <td class="py-3.5 px-4 text-body-sm font-semibold font-mono text-on-surface">
+              ${u.currentSpeed}
+            </td>
+            <td class="py-3.5 px-4 text-body-sm text-on-surface-variant">
+              ${u.quotaUsed}
+            </td>
+            <td class="py-3.5 px-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-label-sm text-label-sm font-bold ${badgeBg}">
+                <span class="w-1.5 h-1.5 rounded-full ${dotBg}"></span>
+                ${u.status}
+              </span>
+            </td>
+            <td class="py-3.5 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="adminToggleThrottle('${u.id}')" title="Toggle Speed Throttle" class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-[18px]">speed</span>
+                </button>
+                <button onclick="adminDisconnectUser('${u.id}')" title="Disconnect Session" class="p-1.5 rounded hover:bg-rose-50 text-outline hover:text-error transition-colors">
+                  <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      injectDemoNavbar("admin");
+      renderAdminTable("", currentZone);
+      updateAdminStatsUI();
+    });
+  </script>
+</body>
+</html>

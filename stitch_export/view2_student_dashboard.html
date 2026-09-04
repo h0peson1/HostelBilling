@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CampusPulse Wi-Fi - Student Dashboard &amp; Plan Management</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#e3dfff",
+            "surface-container-high": "#e2e7ff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#c3c0ff",
+            "surface-tint": "#5148d7",
+            "tertiary-container": "#005a6a",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#4edea3",
+            "secondary-fixed": "#6ffbbe",
+            "surface-dim": "#d2d9f4",
+            "on-primary": "#ffffff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#464554",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed-variant": "#005236",
+            "surface-container": "#eaedff",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#372abf",
+            "on-primary-fixed": "#100069",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#6cf8bb",
+            "outline": "#777586",
+            "on-background": "#131b2e",
+            "on-secondary-fixed": "#002113",
+            "primary-fixed-dim": "#c3c0ff",
+            "surface-variant": "#dae2fd",
+            "on-primary-container": "#c1beff",
+            "outline-variant": "#c7c4d7",
+            "on-tertiary-container": "#4ad5f4",
+            "surface-bright": "#faf8ff",
+            "tertiary-fixed": "#acedff",
+            "primary": "#2a14b4",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-error": "#ffffff",
+            "background": "#faf8ff",
+            "surface": "#faf8ff",
+            "secondary": "#006c49",
+            "tertiary": "#00414d",
+            "primary-container": "#4338ca",
+            "on-tertiary-fixed": "#001f26",
+            "surface-container-highest": "#dae2fd",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#283044"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-mobile": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xxs": "0.25rem",
+            "space-sm": "0.75rem",
+            "space-3xl": "4rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "space-xl": "2rem",
+            "margin-desktop": "2rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "label-md": ["Space Grotesk", "sans-serif"],
+            "headline-sm": ["Space Grotesk", "sans-serif"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"],
+            "display-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Space Grotesk", "sans-serif"],
+            "display-lg": ["Space Grotesk", "sans-serif"],
+            "label-lg": ["Space Grotesk", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+    .pulse-online {
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen relative flex flex-col font-body-md">
+<!-- TopNavBar Component from JSON Blueprint -->
+<header class="bg-surface-container-lowest border-b border-outline-variant/30 sticky top-0 z-30 shadow-sm">
+<div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop h-16 max-w-7xl mx-auto">
+<!-- Brand & Status Pill -->
+<div class="flex items-center gap-4">
+<a class="text-headline-sm font-headline-sm font-bold text-primary tracking-tight flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary" data-icon="wifi">wifi</span>
+          CampusPulse Wi-Fi
+        </a>
+<!-- Quick Status Pill: Block B, Room 402 -->
+<div class="hidden sm:flex items-center gap-2 bg-secondary-container/20 border border-secondary/30 px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-secondary pulse-online"></span>
+<span class="font-label-md text-label-md text-on-secondary-container">Connected: Block B, Room 402</span>
+</div>
+</div>
+<!-- Navigation Links from JSON: Status, Plans, Help (Plans Active) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="#">Status</a>
+<a class="text-primary font-label-md text-label-md font-bold border-b-2 border-primary pb-1" href="#">Plans</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="#">Help</a>
+</nav>
+<!-- Trailing Action & User Avatar -->
+<div class="flex items-center gap-3">
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-primary transition-colors shadow-sm active:scale-[0.98]">
+          Connect
+        </button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" title="Help">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<!-- Student Avatar: Kwame Mensah -->
+<div class="flex items-center gap-2 pl-2 border-l border-outline-variant/30">
+<img class="w-9 h-9 rounded-full object-cover border-2 border-primary-fixed" data-alt="A portrait headshot of a young university student named Kwame Mensah, smiling warmly in a bright modern campus lounge environment, wearing a sleek deep navy collared shirt, modern crisp minimalist lighting and sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDobhRQpIq8xtfBvYVk9lrkfIN26CKZWwZtA8jQfEanFEqjs3KAbj0gM7-ywWxDmaqlhQOpTp0XeMQVAJTlpXAOYPakvrR9oO4ZVr7akQtl8W0ntaUWMDfmga6hC0T9FXbgG4Uyds1roJ_Cg8-LxRlxPMuPiBcHAWRSDIygoZEU5dwTMVQVUMBxIJ3g8CgPx4ATxkBNFtV3c0K0uED0zmUUtW6TOwyQa99jR0EydrKCWUYC5Jbvf9IQ"/>
+<div class="hidden lg:block text-left">
+<p class="font-label-md text-label-md text-on-surface leading-tight">Kwame Mensah</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hostel Resident</p>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 max-w-7xl w-full mx-auto px-gutter-mobile md:px-gutter-desktop py-space-lg md:py-space-xl">
+<!-- Hero Greeting -->
+<div class="mb-space-lg flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+<div>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface">
+          Welcome back, Kwame 👋
+        </h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">
+          Your hostel internet connection is running at optimal speeds.
+        </p>
+</div>
+<div class="flex items-center gap-2 self-start md:self-auto bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="router">router</span>
+<span class="font-label-md text-label-md text-on-surface">AP: Hall-B-Floor4-West</span>
+</div>
+</div>
+<!-- Bento Grid Section: Status & Bandwidth Telemetry -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-2xl">
+<!-- Prominent Status Card (7 cols on desktop) -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-40 h-40 bg-surface-container-high/40 rounded-full blur-2xl pointer-events-none"></div>
+<div>
+<!-- Header & Live Pulse -->
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4 mb-4">
+<div class="flex items-center gap-2.5">
+<div class="w-3 h-3 rounded-full bg-secondary pulse-online"></div>
+<span class="font-label-lg text-label-lg text-secondary uppercase tracking-wider font-bold">Active Connection</span>
+</div>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md">
+              DHCP Lease: Valid
+            </span>
+</div>
+<!-- Network Identifiers Bento Sub-row -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+<div class="bg-surface-container-low p-3 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Assigned IP</span>
+<span class="font-label-md text-label-md text-on-surface font-mono mt-0.5 block">10.142.28.94</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">MAC Identifier</span>
+<span class="font-label-md text-label-md text-on-surface font-mono mt-0.5 block">E4:5F:01:BC:88:21</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg col-span-2 sm:col-span-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Gateway Ping</span>
+<span class="font-label-md text-label-md text-secondary font-mono mt-0.5 block flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="bolt">bolt</span> 12 ms
+              </span>
+</div>
+</div>
+<!-- Expiration Countdown & Renewal Banner -->
+<div class="bg-surface-container/60 border border-outline-variant/30 rounded-lg p-3.5 mb-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="timer">timer</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">5 Days, 14 Hours Remaining</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Renews on Nov 28, 2025 at 23:59 GMT</p>
+</div>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-3 py-1.5 rounded-md hover:bg-primary-container transition-colors" onclick="document.getElementById('checkoutModal').classList.remove('hidden')">
+              Extend Now
+            </button>
+</div>
+</div>
+<!-- Quick Speedometer Widget -->
+<div class="pt-3 border-t border-outline-variant/20 flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-6">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">DOWNLOAD SPEED</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">85.4 <span class="font-label-md text-label-md text-on-surface-variant">Mbps</span></span>
+</div>
+<div class="h-8 w-px bg-outline-variant/40"></div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">UPLOAD SPEED</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">32.8 <span class="font-label-md text-label-md text-on-surface-variant">Mbps</span></span>
+</div>
+</div>
+<button class="flex items-center gap-1.5 text-primary hover:text-primary-container font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]" data-icon="speed">speed</span>
+            Run Speed Test
+          </button>
+</div>
+</div>
+<!-- Data Usage Progress Bar Widget (5 cols on desktop) -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-title-md text-title-md text-on-surface">Data Consumption</h2>
+<span class="bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm px-2.5 py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              High speed unthrottled
+            </span>
+</div>
+<!-- Main Metric -->
+<div class="flex items-baseline justify-between mb-2">
+<div>
+<span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">15<span class="text-headline-md font-headline-md text-on-surface-variant">GB</span></span>
+<span class="font-body-md text-body-md text-on-surface-variant ml-1">/ 50GB used</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">30%</span>
+</div>
+<!-- Dynamic Dual-Tone Progress Track -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden mb-3">
+<div class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full transition-all duration-500" style="width: 30%"></div>
+</div>
+<div class="flex justify-between items-center font-label-sm text-label-sm text-on-surface-variant mb-6">
+<span>0 GB</span>
+<span class="text-secondary font-bold">35 GB remaining in quota</span>
+<span>50 GB Limit</span>
+</div>
+<!-- Consumption Breakdown Stats -->
+<div class="grid grid-cols-2 gap-3 pt-4 border-t border-outline-variant/20">
+<div class="bg-surface-bright p-3 rounded-lg border border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Daily Average</p>
+<p class="font-title-md text-title-md text-on-surface mt-1">1.82 GB/day</p>
+</div>
+<div class="bg-surface-bright p-3 rounded-lg border border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Peak Session</p>
+<p class="font-title-md text-title-md text-on-surface mt-1">3.4 GB (Yesterday)</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-tertiary" data-icon="info">info</span>
+<span>No speed drop applied until quota threshold is reached.</span>
+</div>
+</div>
+</div>
+<!-- 'Buy New Plan' Section -->
+<div class="mb-space-2xl">
+<div class="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Buy New Plan</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Instant activation tied directly to your hostel room portal session.</p>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg border border-outline-variant/30 text-label-md font-label-md">
+<button class="px-3 py-1 bg-surface-container-lowest shadow-sm rounded text-primary font-bold">Prepaid Tiers</button>
+<button class="px-3 py-1 text-on-surface-variant hover:text-on-surface">Vouchers</button>
+</div>
+</div>
+<!-- 3 Tier Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg items-stretch">
+<!-- Tier 1: Daily Sprint -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-3">
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase">Basic Tier</span>
+<span class="material-symbols-outlined text-outline" data-icon="schedule">schedule</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Daily Sprint</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">5GB / 24 hrs validity</p>
+<div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
+<span class="text-headline-lg font-headline-lg text-on-surface font-bold">GH₵ 10</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">($1.00 USD)</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface mb-6">Great for quick downloads, urgent assignment submissions &amp; research.</p>
+<ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Single Device Access
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Up to 50 Mbps speeds
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Instant MoMo activation
+              </li>
+</ul>
+</div>
+<button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="document.getElementById('checkoutModal').classList.remove('hidden')">
+            Select Daily Sprint
+          </button>
+</div>
+<!-- Tier 2: Semester Scholar (Popular / Featured) -->
+<div class="bg-surface-container-lowest border-2 border-primary rounded-xl p-space-lg shadow-md relative flex flex-col justify-between">
+<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm text-label-sm px-3.5 py-0.5 rounded-full uppercase tracking-wider font-bold shadow-sm">
+            Most Popular
+          </div>
+<div>
+<div class="flex justify-between items-start mb-3 pt-2">
+<span class="bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Pro Tier</span>
+<span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Semester Scholar</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">50GB / 30 Days validity</p>
+<div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
+<span class="text-headline-lg font-headline-lg text-primary font-bold">GH₵ 80</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">($7.50 USD)</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface mb-6">Full HD streaming, online classes, continuous zoom lectures &amp; gaming.</p>
+<ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Up to 3 Simultaneous Devices
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Unthrottled 100 Mbps Speeds
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Hostel LAN Low-Latency Gaming
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Unused Data Rollover eligible
+              </li>
+</ul>
+</div>
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-colors text-center font-bold shadow-sm active:scale-[0.98]" onclick="document.getElementById('checkoutModal').classList.remove('hidden')">
+            Choose Semester Scholar
+          </button>
+</div>
+<!-- Tier 3: Unlimited SpeedPass -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-3">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Ultra Tier</span>
+<span class="material-symbols-outlined text-tertiary" data-icon="all_inclusive">all_inclusive</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Unlimited SpeedPass</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">Unlimited data / 30 Days validity</p>
+<div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
+<span class="text-headline-lg font-headline-lg text-on-surface font-bold">GH₵ 140</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">($13.00 USD)</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface mb-6">Multi-device priority bandwidth, torrenting support &amp; zero monthly limits.</p>
+<ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Up to 5 Devices (Laptop, Phone, Console)
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Maximum Gigabit Channel Priority
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Dedicated 24/7 IT Hostel Concierge
+              </li>
+</ul>
+</div>
+<button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="document.getElementById('checkoutModal').classList.remove('hidden')">
+            Select SpeedPass
+          </button>
+</div>
+</div>
+</div>
+<!-- Active Registered Devices Minimal Section -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Registered Devices for Kwame</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Slot Allocation: 2 of 3 devices currently active</p>
+</div>
+<button class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+          Register New Device
+        </button>
+</div>
+<div class="divide-y divide-outline-variant/20">
+<!-- Device 1 -->
+<div class="py-3 flex items-center justify-between hover:bg-surface-container-low/50 px-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="laptop_mac">laptop_mac</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface text-[15px]">MacBook Air M2 (Current Device)</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-mono">10.142.28.94 • E4:5F:01:BC:88:21</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/20 px-2.5 py-1 rounded">Active Now</span>
+</div>
+<!-- Device 2 -->
+<div class="py-3 flex items-center justify-between hover:bg-surface-container-low/50 px-2 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="smartphone">smartphone</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface text-[15px]">iPhone 14 Pro</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-mono">10.142.28.112 • 3C:06:30:4A:12:DF</p>
+</div>
+</div>
+<button class="text-error hover:text-on-error-container font-label-md text-label-md px-2 py-1 rounded hover:bg-error-container/20 transition-colors">
+            Disconnect Session
+          </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Visible Mock Checkout Modal (Overlaid & Present on Screen) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm" id="checkoutModal">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden relative animate-in fade-in zoom-in-95 duration-200">
+<!-- Modal Header -->
+<div class="bg-surface-container-low px-6 py-4 border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_cart_checkout">shopping_cart_checkout</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface text-[18px]">Upgrade / Renew Internet Plan</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container-highest transition-colors" onclick="document.getElementById('checkoutModal').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-6 space-y-5">
+<!-- Order Summary Card -->
+<div class="bg-surface-container/60 border border-outline-variant/40 rounded-xl p-4 flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase">Selected Package</span>
+<p class="font-title-md text-title-md text-on-surface">Semester Scholar (50GB)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">30 Days unthrottled campus-wide quota</p>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">GH₵ 80.00</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tax included</p>
+</div>
+</div>
+<!-- Payment Selection -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2 font-bold">Select Payment Method</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Mobile Money (Selected Default) -->
+<div class="border-2 border-primary bg-primary-fixed/20 p-3.5 rounded-xl cursor-pointer relative flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-primary font-bold">Mobile Money (MoMo)</span>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="text-[10px] bg-surface-container-lowest font-bold text-on-surface px-1.5 py-0.5 rounded border border-outline-variant/40">MTN</span>
+<span class="text-[10px] bg-surface-container-lowest font-bold text-on-surface px-1.5 py-0.5 rounded border border-outline-variant/40">Vodafone</span>
+<span class="text-[10px] bg-surface-container-lowest font-bold text-on-surface px-1.5 py-0.5 rounded border border-outline-variant/40">AirtelTigo</span>
+</div>
+</div>
+<!-- Card Payment -->
+<div class="border border-outline-variant/50 bg-surface-container-lowest p-3.5 rounded-xl cursor-pointer hover:border-outline transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Pay with Card</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="credit_card">credit_card</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="text-[10px] bg-surface-container-low font-bold text-on-surface-variant px-1.5 py-0.5 rounded">Visa</span>
+<span class="text-[10px] bg-surface-container-low font-bold text-on-surface-variant px-1.5 py-0.5 rounded">Mastercard</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Phone Number Input for MoMo -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5">Mobile Money Phone Number</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-1.5 border-outline-variant rounded-lg px-3.5 py-2.5 font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-mono" placeholder="Enter MoMo Number" type="text" value="024 491 8820"/>
+<span class="absolute right-3 top-2.5 text-secondary font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span> MTN GH
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">A payment authorization prompt will pop up on your mobile handset immediately.</p>
+</div>
+<!-- Security & Auto-connect notice -->
+<div class="bg-surface-bright p-3 rounded-lg border border-outline-variant/30 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5" data-icon="lock">lock</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-on-surface font-semibold">256-Bit SSL Secured &amp; Instant Re-auth:</strong> 
+            Your MAC (<span class="font-mono text-on-surface">E4:5F:01:BC:88:21</span>) will stay connected with refreshed quota without logging out.
+          </div>
+</div>
+<!-- Action Button -->
+<div class="pt-2">
+<button class="w-full py-3 px-4 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg font-bold transition-all shadow-md active:scale-[0.99] flex items-center justify-center gap-2">
+<span>Authorize GH₵ 80.00 via MoMo</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
