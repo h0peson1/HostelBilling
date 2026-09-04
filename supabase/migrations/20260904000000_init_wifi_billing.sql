@@ -361,6 +361,20 @@ ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE devices ENABLE ROW LEVEL SECURITY;
 ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
 
+-- Security Definer function to check admin role without RLS infinite recursion
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public
+STABLE
+AS $$
+    SELECT EXISTS (
+        SELECT 1 FROM profiles
+        WHERE id = auth.uid() AND role = 'admin'
+    );
+$$;
+
 -- 1. Profiles RLS
 CREATE POLICY "Users can view own profile" 
     ON profiles FOR SELECT 
@@ -372,7 +386,7 @@ CREATE POLICY "Users can update own profile"
 
 CREATE POLICY "Admins have full access to profiles" 
     ON profiles FOR ALL 
-    USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'));
+    USING (public.is_admin());
 
 -- 2. Plans RLS (Public read for active tiers)
 CREATE POLICY "Anyone can view active plans" 
@@ -381,7 +395,7 @@ CREATE POLICY "Anyone can view active plans"
 
 CREATE POLICY "Admins can manage plans" 
     ON plans FOR ALL 
-    USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'));
+    USING (public.is_admin());
 
 -- 3. Subscriptions RLS
 CREATE POLICY "Users can view own subscriptions" 
@@ -390,7 +404,7 @@ CREATE POLICY "Users can view own subscriptions"
 
 CREATE POLICY "Admins can view and manage all subscriptions" 
     ON subscriptions FOR ALL 
-    USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'));
+    USING (public.is_admin());
 
 -- 4. Devices RLS
 CREATE POLICY "Users can view own devices" 
@@ -407,7 +421,7 @@ CREATE POLICY "Users can delete own devices"
 
 CREATE POLICY "Admins can view all devices" 
     ON devices FOR ALL 
-    USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'));
+    USING (public.is_admin());
 
 -- 5. Payments RLS
 CREATE POLICY "Users can view own payments" 
@@ -416,7 +430,7 @@ CREATE POLICY "Users can view own payments"
 
 CREATE POLICY "Admins can view all payments" 
     ON payments FOR ALL 
-    USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'));
+    USING (public.is_admin());
 
 -- ============================================================================
 -- PART 6: SEED DEFAULT INTERNET PLANS
