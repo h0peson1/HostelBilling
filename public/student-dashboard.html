@@ -122,32 +122,7 @@
       },
     }
   </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 1;
-    }
-    .pulse-online {
-      box-shadow: 0 0 0 0 rgba(0, 108, 73, 0.7);
-      animation: pulse-green 2s infinite;
-    }
-    @keyframes pulse-green {
-      0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(0, 108, 73, 0.7);
-      }
-      70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 6px rgba(0, 108, 73, 0);
-      }
-      100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(0, 108, 73, 0);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed pb-20">
 
@@ -305,7 +280,7 @@
 
           <!-- Dynamic Dual-Tone Progress Track -->
           <div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden mb-3">
-            <div id="usage-progress-bar" class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full transition-all duration-500" style="width: 30%"></div>
+            <div id="usage-progress-bar" class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full transition-all duration-500 w-[30%]"></div>
           </div>
 
           <p class="font-body-sm text-body-sm text-on-surface-variant">
