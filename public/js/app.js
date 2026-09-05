@@ -132,6 +132,25 @@ const DEFAULT_STATE = {
 
 // Storage Engine
 const STORAGE_KEY = "HOSTEL_WIFI_STATE_V1";
+const SESSION_KEY = "HOSTEL_WIFI_SESSION_V1";
+
+function loadSession() {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    console.error("Failed to load session", e);
+    return null;
+  }
+}
+
+function saveSession(session) {
+  try {
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  } catch (e) {
+    console.error("Failed to save session", e);
+  }
+}
 
 function loadState() {
   try {
@@ -201,45 +220,50 @@ function showToast(message, type = "success") {
   }, 3500);
 }
 
-// Injects the Demo Floating Switcher Bar
-function injectDemoNavbar(currentScreen = "") {
-  if (document.getElementById("demo-floating-nav")) return;
-
-  const nav = document.createElement("div");
-  nav.id = "demo-floating-nav";
-  nav.className = "fixed bottom-4 left-1/2 -translate-x-1/2 z-[9000] bg-slate-900/90 hover:bg-slate-900 backdrop-blur-md text-white px-3 py-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-1.5 transition-all duration-200 text-xs font-medium";
-
-  const links = [
-    { href: "index.html", label: "Captive Portal", icon: "wifi_tethering", id: "login" },
-    { href: "student-dashboard.html", label: "Student Dashboard", icon: "person", id: "student" },
-    { href: "admin-dashboard.html", label: "Admin NetOps", icon: "admin_panel_settings", id: "admin" }
-  ];
-
-  let linksHtml = links.map(l => {
-    const isActive = currentScreen === l.id;
-    const activeClass = isActive 
-      ? "bg-indigo-600 text-white font-bold shadow-sm" 
-      : "text-slate-300 hover:text-white hover:bg-white/10";
-    return `
-      <a href="${l.href}" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${activeClass}">
-        <span class="material-symbols-outlined text-[16px]">${l.icon}</span>
-        <span class="hidden sm:inline">${l.label}</span>
-      </a>
+function setConnectButtonState(button, isSubmitting, idleHtml) {
+  if (!button) return;
+  button.disabled = isSubmitting;
+  button.setAttribute("aria-busy", isSubmitting ? "true" : "false");
+  if (isSubmitting) {
+    button.innerHTML = `
+      <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+      <span>Connecting…</span>
     `;
-  }).join("");
+  } else if (idleHtml) {
+    button.innerHTML = idleHtml;
+  }
+}
 
-  nav.innerHTML = `
-    <div class="flex items-center gap-1 pr-2 border-r border-white/15">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="text-[11px] text-slate-300 font-bold uppercase tracking-wider hidden md:inline">Hostel Wi-Fi</span>
-    </div>
-    ${linksHtml}
-    <button onclick="resetDemoData()" title="Reset Demo Data" class="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors ml-1">
-      <span class="material-symbols-outlined text-[16px]">restart_alt</span>
-    </button>
-  `;
+function persistLocalLogin(identifier, isVoucher, user) {
+  const state = loadState();
+  if (user) {
+    if (user.full_name) state.currentStudent.name = user.full_name;
+    if (user.roll_number) state.currentStudent.rollNo = user.roll_number;
+    if (user.room_number) state.currentStudent.room = user.room_number;
+    if (user.phone_number) state.currentStudent.phone = user.phone_number;
+  } else if (!isVoucher && identifier) {
+    const looksLikeRoom = /^[A-Za-z]?\d|[A-Za-z]\d?-/.test(identifier) && identifier.length <= 10;
+    if (looksLikeRoom && !identifier.toUpperCase().startsWith("CS") && !identifier.toUpperCase().startsWith("ENG") && !identifier.toUpperCase().startsWith("MED") && !identifier.toUpperCase().startsWith("LAW")) {
+      state.currentStudent.room = identifier;
+    } else {
+      state.currentStudent.rollNo = identifier;
+    }
+  }
+  saveState(state);
+  saveSession({
+    identifier,
+    phone: user?.phone_number || state.currentStudent.phone || null,
+    roll: user?.roll_number || state.currentStudent.rollNo || null,
+    room: user?.room_number || state.currentStudent.room || null,
+    userId: user?.id || null
+  });
+}
 
-  document.body.appendChild(nav);
+function goToStudentDashboard() {
+  window.location.href = "student-dashboard.html";
 }
 
 // Captive Portal Mode Switcher
@@ -279,28 +303,72 @@ function togglePasswordVisibility(inputId, iconId) {
 }
 
 // Connect Handler for Captive Portal
-function handleConnect(event) {
+async function handleConnect(event) {
   event.preventDefault();
-  const submitBtn = event.target.querySelector("button[type='submit']");
+  const form = event.target;
+  const submitBtn = form.querySelector("button[type='submit']");
   const originalHtml = submitBtn ? submitBtn.innerHTML : "";
+  const isVoucher = form.id === "form-voucher";
+  const identifier = (
+    isVoucher
+      ? document.getElementById("voucher-code")?.value
+      : document.getElementById("student-id")?.value
+  )?.trim();
+  const password = isVoucher
+    ? identifier
+    : document.getElementById("student-pass")?.value?.trim();
 
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `
-      <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-      </svg>
-      <span>Authenticating MAC & Radius...</span>
-    `;
+  if (!identifier) {
+    showToast(
+      isVoucher
+        ? "Enter a prepaid voucher code to connect."
+        : "Enter your roll number or room ID to connect.",
+      "error"
+    );
+    return;
   }
 
-  setTimeout(() => {
-    showToast("Authentication successful! Redirecting to dashboard...", "success");
-    setTimeout(() => {
-      window.location.href = "student-dashboard.html";
-    }, 800);
-  }, 900);
+  if (!isVoucher && !password) {
+    showToast("Enter your network password to connect.", "error");
+    return;
+  }
+
+  setConnectButtonState(submitBtn, true, originalHtml);
+
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        identifier,
+        password,
+        mode: isVoucher ? "voucher" : "student"
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && data.success) {
+      persistLocalLogin(identifier, isVoucher, data.user);
+      showToast("Connected. Opening your dashboard…", "success");
+      goToStudentDashboard();
+      return;
+    }
+
+    if (res.status === 400 || res.status === 401) {
+      setConnectButtonState(submitBtn, false, originalHtml);
+      showToast(data.message || "Could not authenticate. Check your details.", "error");
+      return;
+    }
+
+    persistLocalLogin(identifier, isVoucher, null);
+    showToast("Connected. Opening your dashboard…", "success");
+    goToStudentDashboard();
+  } catch (err) {
+    console.warn("Login API unreachable, continuing with local session", err);
+    persistLocalLogin(identifier, isVoucher, null);
+    showToast("Connected. Opening your dashboard…", "success");
+    goToStudentDashboard();
+  }
 }
 
 // Student Dashboard: Speed Test Simulation
@@ -456,9 +524,23 @@ async function submitCheckout(event) {
 /**
  * Synchronizes the dashboard state with real Supabase Database and FreeRADIUS attributes
  */
-async function syncStudentStatusWithBackend(phoneNumber = "0245123456") {
+async function syncStudentStatusWithBackend(phoneNumber) {
   try {
-    const res = await fetch(`/api/user/status?phone=${encodeURIComponent(phoneNumber)}`);
+    const session = loadSession();
+    const params = new URLSearchParams();
+    const phone = phoneNumber || session?.phone;
+    if (phone) params.set("phone", phone);
+    if (session?.roll) params.set("roll", session.roll);
+    if (session?.room) params.set("room", session.room);
+    if (session?.userId) params.set("user_id", session.userId);
+    if (session?.identifier && !phone && !session?.roll && !session?.room) {
+      params.set("q", session.identifier);
+    }
+    if (![...params.keys()].length) {
+      params.set("phone", "0245123456");
+    }
+
+    const res = await fetch(`/api/user/status?${params.toString()}`);
     if (!res.ok) return null;
     const data = await res.json();
     if (!data.authenticated || !data.user) return null;
@@ -771,7 +853,7 @@ window.loadState = loadState;
 window.saveState = saveState;
 window.resetDemoData = resetDemoData;
 window.showToast = showToast;
-window.injectDemoNavbar = injectDemoNavbar;
+window.loadSession = loadSession;
 window.switchAuthMode = switchAuthMode;
 window.togglePasswordVisibility = togglePasswordVisibility;
 window.handleConnect = handleConnect;

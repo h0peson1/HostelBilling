@@ -124,7 +124,7 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed pb-20">
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
 
   <!-- Shared TopNavBar Component -->
   <header class="bg-surface-container-lowest border-b border-outline-variant/30 shadow-sm sticky top-0 z-40">
@@ -527,7 +527,6 @@
   <script src="js/app.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
-      injectDemoNavbar("student");
       renderStudentDevices();
 
       function updateDashboardUI(s) {

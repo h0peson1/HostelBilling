@@ -6,6 +6,26 @@ export type Subscription = Database['public']['Tables']['subscriptions']['Row'];
 export type Device = Database['public']['Tables']['devices']['Row'];
 export type Payment = Database['public']['Tables']['payments']['Row'];
 
+export interface LoginRequestBody {
+  identifier: string;
+  password?: string;
+  mode?: 'student' | 'voucher';
+}
+
+export interface LoginResponse {
+  success: boolean;
+  message: string;
+  user?: {
+    id: string;
+    full_name: string;
+    phone_number: string;
+    roll_number: string | null;
+    room_number: string | null;
+    role: string;
+  };
+  error?: string;
+}
+
 export interface RegisterRequestBody {
   email: string;
   password?: string;

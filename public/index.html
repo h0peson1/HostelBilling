@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>CampusPulse Wi-Fi - Captive Portal</title>
+  <title>Hopeson’s Net - Captive Portal</title>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -124,7 +124,7 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-background text-on-surface font-body-md min-h-full flex flex-col justify-between selection:bg-primary-container selection:text-on-primary relative overflow-x-hidden pb-16">
+<body class="bg-background text-on-surface font-body-md min-h-full flex flex-col justify-between selection:bg-primary-container selection:text-on-primary relative overflow-x-hidden">
 
   <!-- Subtle SVG Background Wave Pattern -->
   <div class="fixed inset-0 pointer-events-none opacity-40 z-0 wave-bg">
@@ -141,71 +141,26 @@
 
   <!-- Shared TopNavBar Component -->
   <header class="bg-surface-container-lowest border-b border-outline-variant/30 shadow-sm sticky top-0 z-50">
-    <div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop h-16 max-w-7xl mx-auto">
-      <!-- Brand & Product Name -->
+    <div class="flex items-center w-full px-gutter-mobile md:px-gutter-desktop h-16">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
           <span class="material-symbols-outlined text-2xl" data-icon="wifi">wifi</span>
         </div>
-        <div>
-          <span class="text-headline-sm font-headline-sm font-bold text-primary tracking-tight">CampusPulse Wi-Fi</span>
-          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-bold">HOSTEL-NET</span>
-        </div>
-      </div>
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8">
-        <a class="text-primary font-label-md text-label-md font-bold border-b-2 border-primary pb-1 transition-colors" href="index.html">Connect</a>
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors" href="student-dashboard.html#plans">Plans</a>
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors" href="admin-dashboard.html">NetOps Admin</a>
-      </nav>
-      <!-- Right Telemetry & Status Badge -->
-      <div class="flex items-center gap-3">
-        <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 px-3 py-1.5 rounded-full shadow-sm">
-          <span class="relative flex h-2.5 w-2.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-fixed-dim opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
-          </span>
-          <span class="text-label-md font-label-md text-secondary font-bold tracking-tight">Network Online • 150 Mbps Fiber</span>
-        </div>
-        <button onclick="showToast('Campus Gateway Nominal. Signal: 98% (Block B AP-04)', 'info')" class="hidden sm:flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant" title="Network Help">
-          <span class="material-symbols-outlined" data-icon="help">help</span>
-        </button>
+        <span class="text-headline-sm font-headline-sm font-bold text-primary tracking-tight">Hopeson’s Net</span>
       </div>
     </div>
   </header>
 
   <!-- Main Content Canvas -->
-  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8 sm:py-10">
     <div class="w-full max-w-lg mx-auto">
-      
-      <!-- Signal Badge & Hostel Header Capsule -->
-      <div class="flex items-center justify-between mb-4 px-1">
-        <div class="inline-flex items-center gap-1.5 text-label-md font-label-md text-on-surface-variant">
-          <span class="material-symbols-outlined text-secondary text-lg" data-icon="network_check">network_check</span>
-          <span>Hostel Access Point: <strong>B-Block 3F AP-04</strong></span>
-        </div>
-        <div class="flex items-center gap-1 text-label-md font-label-md text-secondary font-bold">
-          <span class="material-symbols-outlined text-base" data-icon="signal_wifi_4_bar">signal_wifi_4_bar</span>
-          <span>98% Excellent</span>
-        </div>
-      </div>
-
       <!-- High Contrast Centered Card (Tiers 2/3 Surface) -->
       <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-xl overflow-hidden transition-all duration-200">
-        <!-- Card Top Accents & Sub-header -->
         <div class="p-6 sm:p-8 pb-4">
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="space-y-1">
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label-sm font-label-sm">
-                <span class="material-symbols-outlined text-sm" data-icon="wifi_tethering">wifi_tethering</span>
-                CampusPulse Wi-Fi - Premier Hostel High-Speed Network
-              </div>
-              <h1 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface tracking-tight mt-2">
-                Welcome to Hostel Net
-              </h1>
-            </div>
-          </div>
-          <p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+          <h1 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface tracking-tight">
+            Welcome to Hostel Net
+          </h1>
+          <p class="mt-2 text-body-md font-body-md text-on-surface-variant leading-relaxed">
             Sign in with your room credentials or enter an active voucher code to connect.
           </p>
         </div>
@@ -373,10 +328,5 @@
 
   <!-- Core App Logic -->
   <script src="js/app.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      injectDemoNavbar("login");
-    });
-  </script>
 </body>
 </html>

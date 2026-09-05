@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin, createScopedClient } from '@/lib/supabase';
+import { findProfileByIdentifier } from '@/lib/profiles';
 import { formatRemainingTime, formatDataUsage } from '@/lib/freeradius';
 import { UserStatusResponse } from '@/types';
 
@@ -19,6 +20,9 @@ export async function GET(req: NextRequest): Promise<NextResponse<UserStatusResp
     const { searchParams } = new URL(req.url);
     const queryUserId = searchParams.get('user_id');
     const queryPhone = searchParams.get('phone');
+    const queryRoll = searchParams.get('roll');
+    const queryRoom = searchParams.get('room');
+    const queryQ = searchParams.get('q');
 
     let userId: string | null = null;
 
@@ -42,8 +46,17 @@ export async function GET(req: NextRequest): Promise<NextResponse<UserStatusResp
         .from('profiles')
         .select('id')
         .eq('phone_number', cleanPhone)
-        .single();
+        .maybeSingle();
 
+      if (profile) {
+        userId = profile.id;
+      }
+    }
+
+    if (!userId && (queryQ || queryRoll || queryRoom)) {
+      const profile = await findProfileByIdentifier(
+        queryQ || queryRoll || queryRoom || ''
+      );
       if (profile) {
         userId = profile.id;
       }
