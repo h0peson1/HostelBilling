@@ -453,6 +453,61 @@ async function submitCheckout(event) {
   }
 }
 
+/**
+ * Synchronizes the dashboard state with real Supabase Database and FreeRADIUS attributes
+ */
+async function syncStudentStatusWithBackend(phoneNumber = "0245123456") {
+  try {
+    const res = await fetch(`/api/user/status?phone=${encodeURIComponent(phoneNumber)}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data.authenticated || !data.user) return null;
+
+    const state = loadState();
+    if (data.user.full_name) {
+      state.currentStudent.name = data.user.full_name;
+    }
+    if (data.user.roll_number) {
+      state.currentStudent.rollNo = data.user.roll_number;
+    }
+    if (data.user.room_number) {
+      state.currentStudent.room = data.user.room_number;
+    }
+    state.currentStudent.phone = data.user.phone_number;
+
+    if (data.subscription) {
+      state.currentStudent.planName = data.subscription.plan_name;
+      state.currentStudent.dlSpeed = data.subscription.download_speed_mbps;
+      state.currentStudent.ulSpeed = data.subscription.upload_speed_mbps;
+      if (data.subscription.data_limit_gb !== null) {
+        state.currentStudent.totalGB = data.subscription.data_limit_gb;
+        state.currentStudent.usedGB = data.subscription.data_used_gb || 0;
+      }
+      if (data.subscription.remaining_formatted) {
+        state.currentStudent.remainingFormatted = data.subscription.remaining_formatted;
+      }
+    }
+
+    if (Array.isArray(data.devices) && data.devices.length > 0) {
+      state.devices = data.devices.map((d, idx) => ({
+        id: d.id,
+        name: d.device_name || `Device ${idx + 1}`,
+        type: d.device_name?.toLowerCase().includes("mac") || d.device_name?.toLowerCase().includes("laptop") ? "laptop_mac" : "smartphone",
+        ip: `10.142.28.${94 + idx}`,
+        mac: d.mac_address,
+        isCurrent: idx === 0,
+        active: true
+      }));
+    }
+
+    saveState(state);
+    return state;
+  } catch (err) {
+    console.warn("Backend status sync skipped, using local state:", err);
+    return null;
+  }
+}
+
 // Device Management
 function disconnectDevice(deviceId) {
   const state = loadState();

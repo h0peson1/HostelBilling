@@ -198,7 +198,7 @@
     <div class="mb-space-lg flex flex-col md:flex-row md:items-center md:justify-between gap-3">
       <div>
         <h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface">
-          Welcome back, Kwame 👋
+          Welcome back, <span id="student-display-name">Kwame</span> 👋
         </h1>
         <p class="text-body-md font-body-md text-on-surface-variant mt-1">
           Your hostel internet connection is running at optimal speeds.
@@ -452,7 +452,7 @@
     <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm">
       <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
-          <h3 class="font-title-md text-title-md text-on-surface">Registered Devices for Kwame</h3>
+          <h3 class="font-title-md text-title-md text-on-surface">Registered Devices for <span id="student-devices-name">Kwame</span></h3>
           <p class="font-body-sm text-body-sm text-on-surface-variant" id="device-count-label">Slot Allocation: 2 of 3 devices currently active</p>
         </div>
         <button onclick="promptRegisterDevice()" class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-1 font-bold px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary-fixed/20 transition-all">
@@ -551,24 +551,66 @@
   <!-- Core App Logic -->
   <script src="js/app.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
       injectDemoNavbar("student");
       renderStudentDevices();
 
+      function updateDashboardUI(s) {
+        if (!s) return;
+        if (s.name) {
+          const firstName = s.name.split(" ")[0];
+          const nameEl = document.getElementById("student-display-name");
+          if (nameEl) nameEl.textContent = firstName;
+          const devNameEl = document.getElementById("student-devices-name");
+          if (devNameEl) devNameEl.textContent = firstName;
+        }
+        if (s.planName) {
+          const planEl = document.getElementById("current-plan-name");
+          if (planEl) planEl.textContent = s.planName;
+        }
+        if (s.usedGB !== undefined) {
+          const usedEl = document.getElementById("used-gb-label");
+          if (usedEl) usedEl.innerHTML = `${s.usedGB}<span class="text-headline-md font-headline-md text-on-surface-variant">GB</span>`;
+        }
+        if (s.totalGB !== undefined) {
+          const totalEl = document.getElementById("total-gb-label");
+          if (totalEl) totalEl.textContent = `/ ${s.totalGB}GB used`;
+        }
+        if (s.totalGB) {
+          const pct = Math.min(100, Math.round(((s.usedGB || 0) / s.totalGB) * 100));
+          const pctEl = document.getElementById("used-percent-label");
+          if (pctEl) pctEl.textContent = `${pct}%`;
+          const progBar = document.getElementById("usage-progress-bar");
+          if (progBar) progBar.style.width = `${pct}%`;
+        }
+        if (s.dlSpeed !== undefined) {
+          const dlEl = document.getElementById("speedtest-dl");
+          if (dlEl) dlEl.textContent = s.dlSpeed;
+        }
+        if (s.ulSpeed !== undefined) {
+          const ulEl = document.getElementById("speedtest-ul");
+          if (ulEl) ulEl.textContent = s.ulSpeed;
+        }
+        if (s.remainingFormatted) {
+          const daysEl = document.getElementById("days-remaining-label");
+          if (daysEl) daysEl.textContent = s.remainingFormatted;
+        } else if (s.daysLeft !== undefined) {
+          const daysEl = document.getElementById("days-remaining-label");
+          if (daysEl) daysEl.textContent = `${s.daysLeft} Days, ${s.hoursLeft || 0} Hours Remaining`;
+        }
+      }
+
       // Initialize UI with stored state
       const state = loadState();
-      const s = state.currentStudent;
-      if (s) {
-        document.getElementById("current-plan-name").textContent = s.planName;
-        document.getElementById("used-gb-label").innerHTML = `${s.usedGB}<span class="text-headline-md font-headline-md text-on-surface-variant">GB</span>`;
-        document.getElementById("total-gb-label").textContent = `/ ${s.totalGB}GB used`;
-        
-        const pct = Math.min(100, Math.round((s.usedGB / s.totalGB) * 100));
-        document.getElementById("used-percent-label").textContent = `${pct}%`;
-        document.getElementById("usage-progress-bar").style.width = `${pct}%`;
-        document.getElementById("speedtest-dl").textContent = s.dlSpeed;
-        document.getElementById("speedtest-ul").textContent = s.ulSpeed;
-        document.getElementById("days-remaining-label").textContent = `${s.daysLeft} Days, ${s.hoursLeft} Hours Remaining`;
+      updateDashboardUI(state.currentStudent);
+
+      // Fetch live data from Supabase / FreeRADIUS backend
+      if (typeof syncStudentStatusWithBackend === "function") {
+        const synced = await syncStudentStatusWithBackend();
+        if (synced && synced.currentStudent) {
+          updateDashboardUI(synced.currentStudent);
+          renderStudentDevices();
+        }
       }
     });
   </script>
