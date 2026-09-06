@@ -440,32 +440,32 @@ INSERT INTO plans (name, description, price_ghs, duration_days, download_speed_m
 VALUES 
     (
         'Daily QuickSurge', 
-        '24 Hours burst quota for intensive downloads, assignments, and lectures.', 
+        '24 Hours unlimited burst high-speed access for downloads, study, and video lectures.', 
         15.00, 
         1, 
         50, 
         20, 
-        10.00, 
+        NULL, 
         1
     ),
     (
         'Monthly Scholar', 
-        '30 Days (1 Month) unthrottled campus-wide high-speed access for HD video, study, and streaming.', 
+        '30 Days (1 Month) unlimited unthrottled campus-wide high-speed connection with zero data limits.', 
         100.00, 
         30, 
         100, 
         30, 
-        60.00, 
+        NULL, 
         3
     ),
     (
         'Semester Scholar', 
-        'Full Semester (3–4 Months / 120 Days) unthrottled priority high-speed access for courses, streaming & gaming.', 
+        'Full Semester (3–4 Months / 120 Days) unlimited unthrottled priority high-speed access with zero caps.', 
         300.00, 
         120, 
         120, 
         40, 
-        250.00, 
+        NULL, 
         4
     ),
     (

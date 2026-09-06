@@ -68,9 +68,9 @@ export async function GET(req: NextRequest) {
         const ap = `Block-${zone.slice(-1)}-Floor${(idx % 3) + 1}-AP0${(idx % 4) + 1}`;
 
         const dlSpeed = plan?.download_speed_mbps || 100;
-        const totalGB = plan?.data_limit_gb || 50;
+        const totalGB = plan?.data_limit_gb ?? null;
         const usedGB = sub?.data_used_bytes ? +(sub.data_used_bytes / (1024 * 1024 * 1024)).toFixed(1) : 0;
-        const pct = Math.round((usedGB / totalGB) * 100);
+        const quotaUsed = totalGB ? `${usedGB} / ${totalGB} GB (${Math.round((usedGB / totalGB) * 100)}%)` : `${usedGB} GB (Unlimited)`;
 
         return {
           id: p.id,
@@ -82,7 +82,7 @@ export async function GET(req: NextRequest) {
           mac,
           ap,
           currentSpeed: `${dlSpeed}.0 Mbps`,
-          quotaUsed: `${usedGB} / ${totalGB} GB (${pct}%)`,
+          quotaUsed,
           plan: plan?.name || 'Semester Scholar',
           zone,
           status: sub?.status === 'active' ? 'Online' : 'Offline',

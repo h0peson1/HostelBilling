@@ -234,10 +234,10 @@
               </div>
               <div>
                 <p class="font-label-lg text-label-lg text-on-surface font-bold" id="days-remaining-label">119 Days, 23 Hours Remaining</p>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">Active Plan: <strong class="text-primary" id="current-plan-name">Semester Scholar (3–4 Months)</strong></p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Active Plan: <strong class="text-primary" id="current-plan-name">Semester Scholar (Unlimited)</strong></p>
               </div>
             </div>
-            <button class="bg-primary text-on-primary font-label-md text-label-md px-3.5 py-2 rounded-lg hover:bg-primary-container transition-colors shadow-sm font-bold" onclick="openCheckoutModal('Semester Scholar (3–4 Months)', 'Full Semester (3-4 Months) unthrottled campus-wide quota', 'GH₵ 300.00', 250)">
+            <button class="bg-primary text-on-primary font-label-md text-label-md px-3.5 py-2 rounded-lg hover:bg-primary-container transition-colors shadow-sm font-bold" onclick="openCheckoutModal('Semester Scholar (Unlimited)', 'Full Semester (3-4 Months) unthrottled unlimited data', 'GH₵ 300.00', 0)">
               Extend Now
             </button>
           </div>
@@ -278,25 +278,25 @@
           <div class="flex items-baseline justify-between mb-2">
             <div>
               <span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface" id="used-gb-label">0<span class="text-headline-md font-headline-md text-on-surface-variant">GB</span></span>
-              <span class="font-body-md text-body-md text-on-surface-variant ml-1" id="total-gb-label">/ 250GB used</span>
+              <span class="font-body-md text-body-md text-on-surface-variant ml-1" id="total-gb-label">/ Unlimited</span>
             </div>
-            <span class="font-headline-sm text-headline-sm text-primary font-bold" id="used-percent-label">0%</span>
+            <span class="font-headline-sm text-headline-sm text-secondary font-bold" id="used-percent-label">Uncapped</span>
           </div>
 
           <!-- Dynamic Dual-Tone Progress Track -->
           <div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden mb-3">
-            <div id="usage-progress-bar" class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full transition-all duration-500 w-[0%]"></div>
+            <div id="usage-progress-bar" class="bg-gradient-to-r from-primary-container to-secondary h-full rounded-full transition-all duration-500 w-[100%]"></div>
           </div>
 
           <p class="font-body-sm text-body-sm text-on-surface-variant">
-            Full semester billing cycle active. Speed reduces to 512 Kbps only if 100% is exhausted.
+            Full semester billing cycle active. Truly unlimited high-speed data with zero caps or throttling.
           </p>
         </div>
 
         <div class="mt-6 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
-          <span class="font-body-sm text-body-sm text-on-surface-variant">Need emergency data?</span>
-          <button onclick="openCheckoutModal('Daily QuickSurge (10GB)', '24 Hours burst quota for intensive downloads', 'GH₵ 15.00', 10)" class="text-primary hover:underline font-label-md text-label-md font-bold inline-flex items-center gap-1">
-            Buy 10GB Surge Pass
+          <span class="font-body-sm text-body-sm text-on-surface-variant">Need emergency access?</span>
+          <button onclick="openCheckoutModal('Daily QuickSurge (Unlimited)', '24 Hours unthrottled unlimited access', 'GH₵ 15.00', 0)" class="text-primary hover:underline font-label-md text-label-md font-bold inline-flex items-center gap-1">
+            Buy 24h Surge Pass
             <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
           </button>
         </div>
@@ -308,7 +308,7 @@
       <div class="flex items-center justify-between mb-space-lg flex-wrap gap-2">
         <div>
           <h2 class="text-headline-md font-headline-md text-on-surface">Available Internet Plans</h2>
-          <p class="text-body-md font-body-md text-on-surface-variant mt-0.5">Flexible hostel-wide packages billed directly via Mobile Money or Card.</p>
+          <p class="text-body-md font-body-md text-on-surface-variant mt-0.5">Flexible hostel-wide packages billed directly via Mobile Money or Card. All plans are unlimited.</p>
         </div>
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label-sm font-label-sm font-bold">
           <span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
@@ -321,16 +321,16 @@
         <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-3">
-              <span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Light Tier</span>
+              <span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Daily Tier</span>
               <span class="material-symbols-outlined text-outline" data-icon="schedule">schedule</span>
             </div>
             <h3 class="text-headline-sm font-headline-sm text-on-surface">Daily QuickSurge</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">10GB / 24 Hours validity</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">Unlimited Data / 24 Hours validity</p>
             <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
               <span class="text-headline-lg font-headline-lg text-on-surface font-bold">GH₵ 15</span>
               <span class="text-body-sm font-body-sm text-on-surface-variant">($1.20 USD)</span>
             </div>
-            <p class="text-body-md font-body-md text-on-surface mb-6">Ideal for quick assignments, YouTube lectures, and emergency study sessions.</p>
+            <p class="text-body-md font-body-md text-on-surface mb-6">Uncapped high-speed access for intensive downloads, assignments, and lectures.</p>
             <ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
@@ -342,11 +342,11 @@
               </li>
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
-                Campus-wide roaming
+                Zero Data Caps / Campus-wide Roaming
               </li>
             </ul>
           </div>
-          <button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="openCheckoutModal('Daily QuickSurge (10GB)', '24 Hours burst quota for intensive downloads', 'GH₵ 15.00', 10)">
+          <button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="openCheckoutModal('Daily QuickSurge (Unlimited)', '24 Hours unthrottled unlimited access', 'GH₵ 15.00', 0)">
             Select QuickSurge
           </button>
         </div>
@@ -359,12 +359,12 @@
               <span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
             </div>
             <h3 class="text-headline-sm font-headline-sm text-on-surface">Monthly Scholar</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">60GB / 30 Days (1 Month) validity</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">Unlimited Data / 30 Days (1 Month) validity</p>
             <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
               <span class="text-headline-lg font-headline-lg text-on-surface font-bold">GH₵ 100</span>
               <span class="text-body-sm font-body-sm text-on-surface-variant">($8.00 USD)</span>
             </div>
-            <p class="text-body-md font-body-md text-on-surface mb-6">Full HD streaming, online classes, continuous Zoom lectures &amp; study sessions.</p>
+            <p class="text-body-md font-body-md text-on-surface mb-6">Full HD streaming, online classes, continuous Zoom lectures &amp; zero data limits.</p>
             <ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
@@ -382,9 +382,13 @@
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
                 30 Days Month-to-Month Flexibility
               </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Truly Unlimited / Zero Data Limits
+              </li>
             </ul>
           </div>
-          <button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="openCheckoutModal('Monthly Scholar (60GB)', '30 Days unthrottled campus-wide quota', 'GH₵ 100.00', 60)">
+          <button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="openCheckoutModal('Monthly Scholar (Unlimited)', '30 Days unthrottled unlimited data', 'GH₵ 100.00', 0)">
             Choose Monthly Scholar
           </button>
         </div>
@@ -400,12 +404,12 @@
               <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
             </div>
             <h3 class="text-headline-sm font-headline-sm text-on-surface">Semester Scholar</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">250GB / Full Semester (3–4 Months)</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">Unlimited Data / Full Semester (3–4 Months)</p>
             <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
               <span class="text-headline-lg font-headline-lg text-primary font-bold">GH₵ 300</span>
               <span class="text-body-sm font-body-sm text-on-surface-variant">($24.00 USD)</span>
             </div>
-            <p class="text-body-md font-body-md text-on-surface mb-6">Complete coverage for the entire 3 to 4 month semester (120 Days). Huge savings vs monthly!</p>
+            <p class="text-body-md font-body-md text-on-surface mb-6">Complete uncapped coverage for the entire 3 to 4 month semester (120 Days). Huge savings vs monthly!</p>
             <ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
@@ -425,11 +429,11 @@
               </li>
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
-                Unused Data Rollover eligible
+                Truly Uncapped / Unlimited Quota
               </li>
             </ul>
           </div>
-          <button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-colors text-center font-bold shadow-sm active:scale-[0.98]" onclick="openCheckoutModal('Semester Scholar (3–4 Months)', 'Full Semester (3-4 Months) unthrottled campus-wide quota', 'GH₵ 300.00', 250)">
+          <button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-colors text-center font-bold shadow-sm active:scale-[0.98]" onclick="openCheckoutModal('Semester Scholar (Unlimited)', 'Full Semester (3-4 Months) unthrottled unlimited data', 'GH₵ 300.00', 0)">
             Choose Semester Scholar
           </button>
         </div>
@@ -477,8 +481,8 @@
         <div class="bg-surface-container/60 border border-outline-variant/40 rounded-xl p-4 flex items-center justify-between">
           <div>
             <span class="font-label-sm text-label-sm text-primary font-bold uppercase">Selected Package</span>
-            <p class="font-title-md text-title-md text-on-surface" id="modal-plan-title">Semester Scholar (3–4 Months)</p>
-            <p class="font-body-sm text-body-sm text-on-surface-variant" id="modal-plan-desc">Full Semester (3-4 Months) unthrottled campus-wide quota</p>
+            <p class="font-title-md text-title-md text-on-surface" id="modal-plan-title">Semester Scholar (Unlimited)</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant" id="modal-plan-desc">Full Semester (3-4 Months) unthrottled unlimited data</p>
           </div>
           <div class="text-right">
             <span class="font-headline-sm text-headline-sm text-primary font-bold" id="modal-plan-price">GH₵ 300.00</span>
@@ -569,16 +573,21 @@
           const usedEl = document.getElementById("used-gb-label");
           if (usedEl) usedEl.innerHTML = `${s.usedGB}<span class="text-headline-md font-headline-md text-on-surface-variant">GB</span>`;
         }
-        if (s.totalGB !== undefined) {
+        if (s.totalGB && s.totalGB !== "Unlimited") {
           const totalEl = document.getElementById("total-gb-label");
           if (totalEl) totalEl.textContent = `/ ${s.totalGB}GB used`;
-        }
-        if (s.totalGB) {
           const pct = Math.min(100, Math.round(((s.usedGB || 0) / s.totalGB) * 100));
           const pctEl = document.getElementById("used-percent-label");
           if (pctEl) pctEl.textContent = `${pct}%`;
           const progBar = document.getElementById("usage-progress-bar");
           if (progBar) progBar.style.width = `${pct}%`;
+        } else {
+          const totalEl = document.getElementById("total-gb-label");
+          if (totalEl) totalEl.textContent = `/ Unlimited`;
+          const pctEl = document.getElementById("used-percent-label");
+          if (pctEl) pctEl.textContent = `Uncapped`;
+          const progBar = document.getElementById("usage-progress-bar");
+          if (progBar) progBar.style.width = `100%`;
         }
         if (s.dlSpeed !== undefined) {
           const dlEl = document.getElementById("speedtest-dl");

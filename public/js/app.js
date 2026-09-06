@@ -15,10 +15,10 @@ const DEFAULT_STATE = {
     ap: "Hopeson-Hall-B3-AP04",
     ip: "10.142.28.94",
     mac: "AA:BB:CC:DD:EE:77",
-    planName: "Semester Scholar (3–4 Months)",
+    planName: "Semester Scholar (Unlimited)",
     planTier: "Semester Tier",
     usedGB: 0.0,
-    totalGB: 250.0,
+    totalGB: "Unlimited",
     dlSpeed: 120.0,
     ulSpeed: 40.0,
     ping: 11,
@@ -57,7 +57,7 @@ const DEFAULT_STATE = {
       mac: "AA:BB:CC:DD:EE:77",
       ap: "Block-B-Floor3-AP04",
       currentSpeed: "100.0 Mbps",
-      quotaUsed: "0.0 / 50 GB (0%)",
+      quotaUsed: "0.0 GB (Unlimited)",
       plan: "Semester Scholar",
       zone: "Block B",
       status: "Online"
@@ -427,13 +427,13 @@ function runSpeedTest() {
 
 // Student Dashboard: Plan Selection & Checkout Modal
 let selectedCheckoutPlan = {
-  name: "Semester Scholar (3–4 Months)",
-  desc: "Full Semester (3-4 Months) unthrottled campus-wide quota",
+  name: "Semester Scholar (Unlimited)",
+  desc: "Full Semester (3-4 Months) unthrottled unlimited data",
   priceGhc: "GH₵ 300.00",
-  gbToAdd: 250
+  gbToAdd: 0
 };
 
-function openCheckoutModal(planName, desc, priceGhc, gbToAdd = 250) {
+function openCheckoutModal(planName, desc, priceGhc, gbToAdd = 0) {
   selectedCheckoutPlan = { name: planName, desc, priceGhc, gbToAdd };
   const modal = document.getElementById("checkoutModal");
   if (!modal) return;
@@ -526,7 +526,7 @@ async function submitCheckout(event) {
     }).catch(e => console.log("Webhook mock ping:", e));
 
     state.currentStudent.planName = selectedCheckoutPlan.name;
-    state.currentStudent.totalGB += selectedCheckoutPlan.gbToAdd;
+    state.currentStudent.totalGB = "Unlimited";
     state.currentStudent.daysLeft += daysToAdd;
     saveState(state);
 
@@ -541,23 +541,8 @@ async function submitCheckout(event) {
   } catch (err) {
     console.warn("Backend API not reachable, continuing with local store", err);
     state.currentStudent.planName = selectedCheckoutPlan.name;
-    state.currentStudent.totalGB += selectedCheckoutPlan.gbToAdd;
+    state.currentStudent.totalGB = "Unlimited";
     state.currentStudent.daysLeft += daysToAdd;
-    saveState(state);
-
-    closeCheckoutModal();
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = `<span>Complete Payment</span>`;
-    }
-
-    showToast(`Payment of ${selectedCheckoutPlan.priceGhc} approved! Ref: ${reference}`, "success");
-    setTimeout(() => window.location.reload(), 900);
-  } catch (err) {
-    console.warn("Backend API not reachable, continuing with local store", err);
-    state.currentStudent.planName = selectedCheckoutPlan.name;
-    state.currentStudent.totalGB += selectedCheckoutPlan.gbToAdd;
-    state.currentStudent.daysLeft += 30;
     saveState(state);
 
     closeCheckoutModal();
@@ -611,8 +596,11 @@ async function syncStudentStatusWithBackend(phoneNumber) {
       state.currentStudent.planName = data.subscription.plan_name;
       state.currentStudent.dlSpeed = data.subscription.download_speed_mbps;
       state.currentStudent.ulSpeed = data.subscription.upload_speed_mbps;
-      if (data.subscription.data_limit_gb !== null) {
+      if (data.subscription.data_limit_gb !== null && data.subscription.data_limit_gb !== undefined) {
         state.currentStudent.totalGB = data.subscription.data_limit_gb;
+        state.currentStudent.usedGB = data.subscription.data_used_gb || 0;
+      } else {
+        state.currentStudent.totalGB = "Unlimited";
         state.currentStudent.usedGB = data.subscription.data_used_gb || 0;
       }
       if (data.subscription.remaining_formatted) {
