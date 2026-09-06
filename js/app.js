@@ -4,40 +4,41 @@
  * Captive Portal, Student Dashboard, and Admin NetOps Console.
  */
 
-// Default Demo State
+// Default State (Real Production Data & Seed Defaults)
 const DEFAULT_STATE = {
   currentStudent: {
-    name: "Kwame Mensah",
-    rollNo: "CS2024-402",
-    room: "B3-204",
+    name: "Kojo Mensah",
+    rollNo: "CS2025-901",
+    room: "B3-102",
+    phone: "0245123456",
     status: "Active",
-    ap: "Hall-B-Floor4-West",
+    ap: "Hopeson-Hall-B3-AP04",
     ip: "10.142.28.94",
-    mac: "E4:5F:01:BC:88:21",
+    mac: "AA:BB:CC:DD:EE:77",
     planName: "Semester Scholar (50GB)",
     planTier: "Pro Tier",
-    usedGB: 15.0,
+    usedGB: 0.0,
     totalGB: 50.0,
-    dlSpeed: 85.4,
-    ulSpeed: 32.8,
-    ping: 12,
-    daysLeft: 5,
-    hoursLeft: 14,
-    expiryDate: "Nov 28, 2025 at 23:59 GMT"
+    dlSpeed: 100.0,
+    ulSpeed: 30.0,
+    ping: 11,
+    daysLeft: 29,
+    hoursLeft: 23,
+    expiryDate: "Oct 4, 2026 at 23:59 GMT"
   },
   devices: [
     {
-      id: "dev-1",
-      name: "MacBook Air M2 (Current Device)",
+      id: "e90b7f89-1441-4cef-942a-92035334ea22",
+      name: "Kojo MacBook Pro (Current Device)",
       type: "laptop_mac",
       ip: "10.142.28.94",
-      mac: "E4:5F:01:BC:88:21",
+      mac: "AA:BB:CC:DD:EE:77",
       isCurrent: true,
       active: true
     },
     {
       id: "dev-2",
-      name: "iPhone 14 Pro",
+      name: "iPhone 15 Pro",
       type: "smartphone",
       ip: "10.142.28.112",
       mac: "3C:06:30:4A:12:DF",
@@ -48,17 +49,17 @@ const DEFAULT_STATE = {
   adminUsers: [
     {
       id: "u-1",
-      name: "Kwame Mensah",
+      name: "Kojo Mensah",
       avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDobhRQpIq8xtfBvYVk9lrkfIN26CKZWwZtA8jQfEanFEqjs3KAbj0gM7-ywWxDmaqlhQOpTp0XeMQVAJTlpXAOYPakvrR9oO4ZVr7akQtl8W0ntaUWMDfmga6hC0T9FXbgG4Uyds1roJ_Cg8-LxRlxPMuPiBcHAWRSDIygoZEU5dwTMVQVUMBxIJ3g8CgPx4ATxkBNFtV3c0K0uED0zmUUtW6TOwyQa99jR0EydrKCWUYC5Jbvf9IQ",
-      room: "Room B3-204",
-      rollNo: "CS2024-402",
+      room: "Room B3-102",
+      rollNo: "CS2025-901",
       ip: "10.142.28.94",
-      mac: "E4:5F:01:BC:88:21",
-      ap: "Hall-B-Floor4-West",
-      currentSpeed: "85.4 Mbps",
-      quotaUsed: "15.0 / 50 GB (30%)",
+      mac: "AA:BB:CC:DD:EE:77",
+      ap: "Block-B-Floor3-AP04",
+      currentSpeed: "100.0 Mbps",
+      quotaUsed: "0.0 / 50 GB (0%)",
       plan: "Semester Scholar",
-      zone: "Hall B",
+      zone: "Block B",
       status: "Online"
     },
     {
@@ -66,14 +67,14 @@ const DEFAULT_STATE = {
       name: "Ama Acheampong",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
       room: "Room A1-102",
-      rollNo: "ENG2023-118",
+      rollNo: "ENG2025-118",
       ip: "10.142.12.55",
       mac: "72:2B:90:4C:AA:11",
-      ap: "Hall-A-Floor1-East",
-      currentSpeed: "112.0 Mbps",
-      quotaUsed: "42.1 / 50 GB (84%)",
+      ap: "Block-A-Floor1-East",
+      currentSpeed: "100.0 Mbps",
+      quotaUsed: "14.2 / 50 GB (28%)",
       plan: "Semester Scholar",
-      zone: "Hall A",
+      zone: "Block A",
       status: "Online"
     },
     {
@@ -81,57 +82,57 @@ const DEFAULT_STATE = {
       name: "Kofi Boateng",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
       room: "Room C2-310",
-      rollNo: "MED2022-094",
+      rollNo: "MED2024-094",
       ip: "10.142.34.18",
       mac: "A0:88:B4:EF:29:43",
-      ap: "Hall-C-Floor2-Center",
-      currentSpeed: "2.4 Mbps",
-      quotaUsed: "98.5 / 100 GB (98%)",
+      ap: "Block-C-Floor2-Center",
+      currentSpeed: "150.0 Mbps",
+      quotaUsed: "48.5 / 100 GB (48%)",
       plan: "Unlimited SpeedPass",
-      zone: "Hall C",
-      status: "Throttled"
+      zone: "Block C",
+      status: "Online"
     },
     {
       id: "u-4",
       name: "Abena Serwaa",
       avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
       room: "Room B1-114",
-      rollNo: "LAW2024-305",
+      rollNo: "LAW2025-305",
       ip: "10.142.29.41",
       mac: "9A:44:11:F2:B6:88",
-      ap: "Hall-B-Floor1-South",
-      currentSpeed: "45.8 Mbps",
-      quotaUsed: "8.2 / 20 GB (41%)",
+      ap: "Block-B-Floor1-South",
+      currentSpeed: "50.0 Mbps",
+      quotaUsed: "2.4 / 10 GB (24%)",
       plan: "Daily QuickSurge",
-      zone: "Hall B",
+      zone: "Block B",
       status: "Online"
     },
     {
       id: "u-5",
       name: "Yaw Frimpong",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
-      room: "Room GH-04",
-      rollNo: "GUEST-9921",
+      room: "Room Annex-04",
+      rollNo: "ACC2025-412",
       ip: "10.142.99.12",
       mac: "DC:A6:32:11:78:09",
-      ap: "Guest-Annex-AP",
+      ap: "Annex-Floor1-AP",
       currentSpeed: "0.0 Mbps",
-      quotaUsed: "5.0 / 5 GB (100%)",
-      plan: "Prepaid Voucher",
-      zone: "Guest Houses",
+      quotaUsed: "10.0 / 10 GB (100%)",
+      plan: "Daily QuickSurge",
+      zone: "Annex",
       status: "Offline"
     }
   ],
   networkStats: {
     totalActive: 342,
-    bandwidthTB: "1.84 TB",
-    peakMbps: "840 Mbps",
-    blockedRogue: 3
+    bandwidthTB: "2.14 TB",
+    peakMbps: "920 Mbps",
+    blockedRogue: 0
   }
 };
 
 // Storage Engine
-const STORAGE_KEY = "HOSTEL_WIFI_STATE_V1";
+const STORAGE_KEY = "HOSTEL_WIFI_STATE_V2";
 const SESSION_KEY = "HOSTEL_WIFI_SESSION_V1";
 
 function loadSession() {
@@ -453,7 +454,7 @@ async function submitCheckout(event) {
     else planId = "57d736f7-36eb-4c8f-9a6e-3042aad2e2cc";
   }
 
-  const momoNumber = document.getElementById("momo-number")?.value || "54 991 2840";
+  const momoNumber = document.getElementById("momo-number")?.value || "24 512 3456";
   const state = loadState();
 
   try {

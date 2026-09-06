@@ -158,10 +158,10 @@
       <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-xl overflow-hidden transition-all duration-200">
         <div class="p-6 sm:p-8 pb-4">
           <h1 class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-on-surface tracking-tight">
-            Welcome to Hostel Net
+            Welcome to Hopeson’s Net
           </h1>
           <p class="mt-2 text-body-md font-body-md text-on-surface-variant leading-relaxed">
-            Sign in with your room credentials or enter an active voucher code to connect.
+            Sign in with your student phone number, roll number, or room credentials to connect.
           </p>
         </div>
 
@@ -185,13 +185,13 @@
           <form class="space-y-5" id="form-student" onsubmit="handleConnect(event)">
             <div>
               <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="student-id">
-                Roll Number or Room ID
+                Phone Number, Roll Number, or Room ID
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
                   <span class="material-symbols-outlined text-xl" data-icon="person">person</span>
                 </div>
-                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-id" placeholder="e.g. CS2024-402 or B3-204" value="CS2024-402" required="" type="text"/>
+                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-id" placeholder="e.g. 0245123456, CS2025-901 or B3-102" required="" type="text"/>
               </div>
             </div>
 
@@ -200,13 +200,13 @@
                 <label class="block text-label-md font-label-md text-on-surface" for="student-pass">
                   Network Password
                 </label>
-                <a class="text-label-md font-label-md text-primary hover:underline cursor-pointer" onclick="showToast('Password reset PIN sent to Kwame Mensah via Campus Portal SMS.', 'info')">Forgot password?</a>
+                <a class="text-label-md font-label-md text-primary hover:underline cursor-pointer" onclick="showToast('Password reset PIN will be sent to your registered student phone via SMS.', 'info')">Forgot password?</a>
               </div>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
                   <span class="material-symbols-outlined text-xl" data-icon="lock">lock</span>
                 </div>
-                <input class="w-full pl-11 pr-11 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-pass" placeholder="••••••••••••" value="student2025" required="" type="password"/>
+                <input class="w-full pl-11 pr-11 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-pass" placeholder="Enter password (e.g. 0245123456)" required="" type="password"/>
                 <button class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-outline hover:text-on-surface transition-colors" onclick="togglePasswordVisibility('student-pass', 'pass-eye-icon')" type="button">
                   <span class="material-symbols-outlined text-xl" data-icon="visibility" id="pass-eye-icon">visibility</span>
                 </button>
@@ -286,7 +286,7 @@
           <span class="material-symbols-outlined text-base text-primary" data-icon="help_outline">help_outline</span>
           <span>How to find your voucher</span>
         </button>
-        <button onclick="showToast('CampusPulse guarantees 50 Mbps minimum per student session.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
+        <button onclick="showToast('Hopeson’s Net guarantees 100 Mbps high-speed access per student session.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
           <span class="material-symbols-outlined text-base text-secondary" data-icon="speed">speed</span>
           <span>Hostel Speed Guarantee</span>
         </button>
@@ -303,10 +303,10 @@
         </p>
         <div class="inline-flex items-center gap-2 font-headline-sm font-headline-sm text-on-surface text-base">
           <span class="material-symbols-outlined text-primary text-xl" data-icon="support_agent">support_agent</span>
-          <span>Hostel NetOps Desk: <strong class="text-primary font-bold">Ext. 4080</strong> or <a class="hover:underline font-bold text-primary" href="tel:+18005550199">+1 (800) 555-0199</a></span>
+          <span>Hopeson NetOps Support: <strong class="text-primary font-bold">Ext. 4080</strong> or <a class="hover:underline font-bold text-primary" href="tel:+233549912840">+233 54 991 2840</a></span>
         </div>
         <p class="text-body-sm font-body-sm text-outline">
-          Warden IT Office, Block B, Ground Floor • Mon-Sun, 24/7 Service
+          Hopeson Hall IT Desk, Block B Ground Floor • Mon-Sun, 24/7 Service
         </p>
       </div>
     </div>
@@ -315,7 +315,7 @@
   <!-- Minimal Footer Bar -->
   <footer class="relative z-10 py-6 border-t border-outline-variant/20 bg-surface-container-lowest/80 backdrop-blur-xs text-center text-body-sm font-body-sm text-outline">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div>© 2025 CampusPulse Wi-Fi Networks. All rights reserved.</div>
+      <div>© 2026 Hopeson’s Net. All rights reserved.</div>
       <div class="flex items-center gap-4 text-label-md font-label-md">
         <a class="hover:text-on-surface transition-colors" href="#">Privacy Notice</a>
         <span>•</span>
