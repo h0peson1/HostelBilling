@@ -233,11 +233,11 @@
                 <span class="material-symbols-outlined text-[20px]" data-icon="timer">timer</span>
               </div>
               <div>
-                <p class="font-label-lg text-label-lg text-on-surface font-bold" id="days-remaining-label">29 Days, 23 Hours Remaining</p>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">Active Plan: <strong class="text-primary" id="current-plan-name">Semester Scholar (50GB)</strong></p>
+                <p class="font-label-lg text-label-lg text-on-surface font-bold" id="days-remaining-label">119 Days, 23 Hours Remaining</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Active Plan: <strong class="text-primary" id="current-plan-name">Semester Scholar (3–4 Months)</strong></p>
               </div>
             </div>
-            <button class="bg-primary text-on-primary font-label-md text-label-md px-3.5 py-2 rounded-lg hover:bg-primary-container transition-colors shadow-sm font-bold" onclick="openCheckoutModal('Semester Scholar (50GB)', 'Extend 30 Days unthrottled campus-wide quota', 'GH₵ 80.00', 50)">
+            <button class="bg-primary text-on-primary font-label-md text-label-md px-3.5 py-2 rounded-lg hover:bg-primary-container transition-colors shadow-sm font-bold" onclick="openCheckoutModal('Semester Scholar (3–4 Months)', 'Full Semester (3-4 Months) unthrottled campus-wide quota', 'GH₵ 300.00', 250)">
               Extend Now
             </button>
           </div>
@@ -248,12 +248,12 @@
           <div class="flex items-center gap-6">
             <div>
               <span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">DOWNLOAD SPEED</span>
-              <span class="font-headline-sm text-headline-sm text-on-surface font-bold"><span id="speedtest-dl">100.0</span> <span class="font-label-md text-label-md text-on-surface-variant font-normal">Mbps</span></span>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-bold"><span id="speedtest-dl">120.0</span> <span class="font-label-md text-label-md text-on-surface-variant font-normal">Mbps</span></span>
             </div>
             <div class="h-8 w-px bg-outline-variant/40"></div>
             <div>
               <span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">UPLOAD SPEED</span>
-              <span class="font-headline-sm text-headline-sm text-on-surface font-bold"><span id="speedtest-ul">30.0</span> <span class="font-label-md text-label-md text-on-surface-variant font-normal">Mbps</span></span>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-bold"><span id="speedtest-ul">40.0</span> <span class="font-label-md text-label-md text-on-surface-variant font-normal">Mbps</span></span>
             </div>
           </div>
           <button id="speedtest-btn" onclick="runSpeedTest()" class="flex items-center gap-1.5 text-primary hover:text-primary-container font-label-md text-label-md font-bold px-3 py-1.5 rounded-lg hover:bg-surface-container transition-colors">
@@ -278,7 +278,7 @@
           <div class="flex items-baseline justify-between mb-2">
             <div>
               <span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface" id="used-gb-label">0<span class="text-headline-md font-headline-md text-on-surface-variant">GB</span></span>
-              <span class="font-body-md text-body-md text-on-surface-variant ml-1" id="total-gb-label">/ 50GB used</span>
+              <span class="font-body-md text-body-md text-on-surface-variant ml-1" id="total-gb-label">/ 250GB used</span>
             </div>
             <span class="font-headline-sm text-headline-sm text-primary font-bold" id="used-percent-label">0%</span>
           </div>
@@ -289,7 +289,7 @@
           </div>
 
           <p class="font-body-sm text-body-sm text-on-surface-variant">
-            Next billing reset on Oct 4, 2026. Speed reduces to 512 Kbps only if 100% is exhausted.
+            Full semester billing cycle active. Speed reduces to 512 Kbps only if 100% is exhausted.
           </p>
         </div>
 
@@ -351,23 +351,20 @@
           </button>
         </div>
 
-        <!-- Tier 2: Semester Scholar (Popular) -->
-        <div class="bg-surface-container-lowest border-2 border-primary rounded-xl p-space-lg shadow-md relative flex flex-col justify-between">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm text-label-sm px-3.5 py-0.5 rounded-full uppercase tracking-wider font-bold shadow-sm">
-            Most Popular
-          </div>
+        <!-- Tier 2: Monthly Scholar (Monthly Option) -->
+        <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div>
-            <div class="flex justify-between items-start mb-3 pt-2">
-              <span class="bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Pro Tier</span>
-              <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+            <div class="flex justify-between items-start mb-3">
+              <span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Monthly Option</span>
+              <span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
             </div>
-            <h3 class="text-headline-sm font-headline-sm text-on-surface">Semester Scholar</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">50GB / 30 Days validity</p>
+            <h3 class="text-headline-sm font-headline-sm text-on-surface">Monthly Scholar</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">60GB / 30 Days (1 Month) validity</p>
             <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
-              <span class="text-headline-lg font-headline-lg text-primary font-bold">GH₵ 80</span>
-              <span class="text-body-sm font-body-sm text-on-surface-variant">($7.50 USD)</span>
+              <span class="text-headline-lg font-headline-lg text-on-surface font-bold">GH₵ 100</span>
+              <span class="text-body-sm font-body-sm text-on-surface-variant">($8.00 USD)</span>
             </div>
-            <p class="text-body-md font-body-md text-on-surface mb-6">Full HD streaming, online classes, continuous Zoom lectures &amp; gaming.</p>
+            <p class="text-body-md font-body-md text-on-surface mb-6">Full HD streaming, online classes, continuous Zoom lectures &amp; study sessions.</p>
             <ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
@@ -383,46 +380,57 @@
               </li>
               <li class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                30 Days Month-to-Month Flexibility
+              </li>
+            </ul>
+          </div>
+          <button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="openCheckoutModal('Monthly Scholar (60GB)', '30 Days unthrottled campus-wide quota', 'GH₵ 100.00', 60)">
+            Choose Monthly Scholar
+          </button>
+        </div>
+
+        <!-- Tier 3: Semester Scholar (Popular & Best Value) -->
+        <div class="bg-surface-container-lowest border-2 border-primary rounded-xl p-space-lg shadow-md relative flex flex-col justify-between">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm text-label-sm px-3.5 py-0.5 rounded-full uppercase tracking-wider font-bold shadow-sm">
+            Most Popular • Save GH₵ 100
+          </div>
+          <div>
+            <div class="flex justify-between items-start mb-3 pt-2">
+              <span class="bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Semester Tier (3-4 Mos)</span>
+              <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+            </div>
+            <h3 class="text-headline-sm font-headline-sm text-on-surface">Semester Scholar</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">250GB / Full Semester (3–4 Months)</p>
+            <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
+              <span class="text-headline-lg font-headline-lg text-primary font-bold">GH₵ 300</span>
+              <span class="text-body-sm font-body-sm text-on-surface-variant">($24.00 USD)</span>
+            </div>
+            <p class="text-body-md font-body-md text-on-surface mb-6">Complete coverage for the entire 3 to 4 month semester (120 Days). Huge savings vs monthly!</p>
+            <ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Full 3 to 4 Months (120 Days) Validity
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Up to 4 Simultaneous Devices
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Priority 120 Mbps Gigabit Bandwidth
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
+                Zero Reconnection / Full Term Access
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
                 Unused Data Rollover eligible
               </li>
             </ul>
           </div>
-          <button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-colors text-center font-bold shadow-sm active:scale-[0.98]" onclick="openCheckoutModal('Semester Scholar (50GB)', '30 Days unthrottled campus-wide quota', 'GH₵ 80.00', 50)">
+          <button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-colors text-center font-bold shadow-sm active:scale-[0.98]" onclick="openCheckoutModal('Semester Scholar (3–4 Months)', 'Full Semester (3-4 Months) unthrottled campus-wide quota', 'GH₵ 300.00', 250)">
             Choose Semester Scholar
-          </button>
-        </div>
-
-        <!-- Tier 3: Unlimited SpeedPass -->
-        <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-3">
-              <span class="bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md uppercase font-bold">Ultra Tier</span>
-              <span class="material-symbols-outlined text-tertiary" data-icon="all_inclusive">all_inclusive</span>
-            </div>
-            <h3 class="text-headline-sm font-headline-sm text-on-surface">Unlimited SpeedPass</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-4">Unlimited data / 30 Days validity</p>
-            <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant/20">
-              <span class="text-headline-lg font-headline-lg text-on-surface font-bold">GH₵ 140</span>
-              <span class="text-body-sm font-body-sm text-on-surface-variant">($13.00 USD)</span>
-            </div>
-            <p class="text-body-md font-body-md text-on-surface mb-6">Multi-device priority bandwidth, torrenting support &amp; zero monthly limits.</p>
-            <ul class="space-y-2 mb-6 font-body-sm text-body-sm text-on-surface-variant">
-              <li class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
-                Up to 5 Devices (Laptop, Phone, Console)
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
-                Maximum Gigabit Channel Priority
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-secondary text-[18px]" data-icon="check_circle">check_circle</span>
-                Dedicated 24/7 IT Hostel Concierge
-              </li>
-            </ul>
-          </div>
-          <button class="w-full py-2.5 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center font-bold" onclick="openCheckoutModal('Unlimited SpeedPass (Unlimited)', '30 Days unlimited unthrottled gigabit bandwidth', 'GH₵ 140.00', 150)">
-            Select SpeedPass
           </button>
         </div>
       </div>
@@ -469,11 +477,11 @@
         <div class="bg-surface-container/60 border border-outline-variant/40 rounded-xl p-4 flex items-center justify-between">
           <div>
             <span class="font-label-sm text-label-sm text-primary font-bold uppercase">Selected Package</span>
-            <p class="font-title-md text-title-md text-on-surface" id="modal-plan-title">Semester Scholar (50GB)</p>
-            <p class="font-body-sm text-body-sm text-on-surface-variant" id="modal-plan-desc">30 Days unthrottled campus-wide quota</p>
+            <p class="font-title-md text-title-md text-on-surface" id="modal-plan-title">Semester Scholar (3–4 Months)</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant" id="modal-plan-desc">Full Semester (3-4 Months) unthrottled campus-wide quota</p>
           </div>
           <div class="text-right">
-            <span class="font-headline-sm text-headline-sm text-primary font-bold" id="modal-plan-price">GH₵ 80.00</span>
+            <span class="font-headline-sm text-headline-sm text-primary font-bold" id="modal-plan-price">GH₵ 300.00</span>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Tax included</p>
           </div>
         </div>

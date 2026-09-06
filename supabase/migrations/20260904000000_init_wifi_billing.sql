@@ -449,14 +449,24 @@ VALUES
         1
     ),
     (
-        'Semester Scholar', 
-        '30 Days unthrottled campus-wide high-speed access for HD video and study.', 
-        80.00, 
+        'Monthly Scholar', 
+        '30 Days (1 Month) unthrottled campus-wide high-speed access for HD video, study, and streaming.', 
+        100.00, 
         30, 
         100, 
         30, 
-        50.00, 
+        60.00, 
         3
+    ),
+    (
+        'Semester Scholar', 
+        'Full Semester (3–4 Months / 120 Days) unthrottled priority high-speed access for courses, streaming & gaming.', 
+        300.00, 
+        120, 
+        120, 
+        40, 
+        250.00, 
+        4
     ),
     (
         'Unlimited SpeedPass', 

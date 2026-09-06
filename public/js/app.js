@@ -15,16 +15,16 @@ const DEFAULT_STATE = {
     ap: "Hopeson-Hall-B3-AP04",
     ip: "10.142.28.94",
     mac: "AA:BB:CC:DD:EE:77",
-    planName: "Semester Scholar (50GB)",
-    planTier: "Pro Tier",
+    planName: "Semester Scholar (3–4 Months)",
+    planTier: "Semester Tier",
     usedGB: 0.0,
-    totalGB: 50.0,
-    dlSpeed: 100.0,
-    ulSpeed: 30.0,
+    totalGB: 250.0,
+    dlSpeed: 120.0,
+    ulSpeed: 40.0,
     ping: 11,
-    daysLeft: 29,
+    daysLeft: 119,
     hoursLeft: 23,
-    expiryDate: "Oct 4, 2026 at 23:59 GMT"
+    expiryDate: "Jan 4, 2027 at 23:59 GMT"
   },
   devices: [
     {
@@ -427,13 +427,13 @@ function runSpeedTest() {
 
 // Student Dashboard: Plan Selection & Checkout Modal
 let selectedCheckoutPlan = {
-  name: "Semester Scholar (50GB)",
-  desc: "30 Days unthrottled campus-wide quota",
-  priceGhc: "GH₵ 80.00",
-  gbToAdd: 50
+  name: "Semester Scholar (3–4 Months)",
+  desc: "Full Semester (3-4 Months) unthrottled campus-wide quota",
+  priceGhc: "GH₵ 300.00",
+  gbToAdd: 250
 };
 
-function openCheckoutModal(planName, desc, priceGhc, gbToAdd = 50) {
+function openCheckoutModal(planName, desc, priceGhc, gbToAdd = 250) {
   selectedCheckoutPlan = { name: planName, desc, priceGhc, gbToAdd };
   const modal = document.getElementById("checkoutModal");
   if (!modal) return;
@@ -466,9 +466,27 @@ async function submitCheckout(event) {
   let planId = selectedCheckoutPlan.id;
   if (!planId) {
     if (selectedCheckoutPlan.name.includes("QuickSurge")) planId = "9f2bbbf2-7cf9-40ea-bb58-1f3ea4fa70ce";
+    else if (selectedCheckoutPlan.name.includes("Monthly")) planId = "05edbbd4-2cf8-4cdd-b244-54a78c3b7a3f";
+    else if (selectedCheckoutPlan.name.includes("Semester")) planId = "57d736f7-36eb-4c8f-9a6e-3042aad2e2cc";
     else if (selectedCheckoutPlan.name.includes("SpeedPass")) planId = "e677cb00-bc8c-4bd5-b929-24c720a343fa";
     else planId = "57d736f7-36eb-4c8f-9a6e-3042aad2e2cc";
   }
+
+  const daysToAdd = selectedCheckoutPlan.name.includes("Semester")
+    ? 120
+    : selectedCheckoutPlan.name.includes("Monthly")
+    ? 30
+    : selectedCheckoutPlan.name.includes("QuickSurge")
+    ? 1
+    : 30;
+
+  const amountPesewas = selectedCheckoutPlan.priceGhc.includes("300")
+    ? 30000
+    : selectedCheckoutPlan.priceGhc.includes("100")
+    ? 10000
+    : selectedCheckoutPlan.priceGhc.includes("15")
+    ? 1500
+    : 30000;
 
   const momoNumber = document.getElementById("momo-number")?.value || "24 512 3456";
   const state = loadState();
@@ -500,7 +518,7 @@ async function submitCheckout(event) {
         event: "charge.success",
         data: {
           reference: reference,
-          amount: 8000,
+          amount: amountPesewas,
           channel: "momo",
           paid_at: new Date().toISOString()
         }
@@ -509,7 +527,22 @@ async function submitCheckout(event) {
 
     state.currentStudent.planName = selectedCheckoutPlan.name;
     state.currentStudent.totalGB += selectedCheckoutPlan.gbToAdd;
-    state.currentStudent.daysLeft += 30;
+    state.currentStudent.daysLeft += daysToAdd;
+    saveState(state);
+
+    closeCheckoutModal();
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = `<span>Complete Payment</span>`;
+    }
+
+    showToast(`Payment of ${selectedCheckoutPlan.priceGhc} approved! Ref: ${reference}`, "success");
+    setTimeout(() => window.location.reload(), 900);
+  } catch (err) {
+    console.warn("Backend API not reachable, continuing with local store", err);
+    state.currentStudent.planName = selectedCheckoutPlan.name;
+    state.currentStudent.totalGB += selectedCheckoutPlan.gbToAdd;
+    state.currentStudent.daysLeft += daysToAdd;
     saveState(state);
 
     closeCheckoutModal();
