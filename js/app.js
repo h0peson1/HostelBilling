@@ -153,6 +153,22 @@ function saveSession(session) {
   }
 }
 
+function clearSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+  } catch (e) {
+    console.error("Failed to clear session", e);
+  }
+}
+
+function studentLogout() {
+  clearSession();
+  showToast("Signed out. Returning to captive portal...", "info");
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 600);
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -855,6 +871,9 @@ window.saveState = saveState;
 window.resetDemoData = resetDemoData;
 window.showToast = showToast;
 window.loadSession = loadSession;
+window.saveSession = saveSession;
+window.clearSession = clearSession;
+window.studentLogout = studentLogout;
 window.switchAuthMode = switchAuthMode;
 window.togglePasswordVisibility = togglePasswordVisibility;
 window.handleConnect = handleConnect;

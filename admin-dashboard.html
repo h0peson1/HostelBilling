@@ -124,6 +124,12 @@
     }
   </script>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/admin.js"></script>
+  <script>
+    if (typeof requireAdminAuth === "function") {
+      requireAdminAuth();
+    }
+  </script>
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen flex selection:bg-primary-fixed selection:text-on-primary-fixed">
 
@@ -156,31 +162,26 @@
           <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
           <span>Dashboard</span>
         </a>
-        <!-- Student Dashboard Link -->
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="student-dashboard.html">
-          <span class="material-symbols-outlined" data-icon="school">school</span>
-          <span>Student View</span>
-        </a>
-        <!-- Captive Portal Link -->
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="index.html">
-          <span class="material-symbols-outlined" data-icon="login">login</span>
-          <span>Captive Portal</span>
-        </a>
         <!-- Vouchers -->
         <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#vouchers" onclick="showToast('Voucher batch generation: 50 PINs ready for printing', 'info')">
           <span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
           <span>Vouchers</span>
         </a>
-        <!-- Settings -->
+        <!-- Access Points -->
         <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#ap-health" onclick="showToast('RADIUS Gateway & Omada Controller: Online', 'info')">
           <span class="material-symbols-outlined" data-icon="router">router</span>
           <span>Access Points</span>
+        </a>
+        <!-- Bandwidth Shaping -->
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-lg text-label-lg rounded-lg hover:text-on-surface hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150" href="#bandwidth" onclick="showToast('MikroTik Rate Limiting: 100M/30M active', 'info')">
+          <span class="material-symbols-outlined" data-icon="tune">tune</span>
+          <span>Bandwidth Policies</span>
         </a>
       </nav>
     </div>
 
     <!-- Secondary / Footer Navigation -->
-    <div class="border-t border-outline-variant/30 pt-4 flex flex-col gap-1.5">
+    <div class="border-t border-outline-variant/30 pt-4 flex flex-col gap-2">
       <!-- Current Admin Footnote -->
       <div class="p-2.5 rounded-lg bg-surface-container-low flex items-center gap-3">
         <img class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" alt="Admin Hopeson" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH9D9WfUUEz1u3nB-BDdRvvi_GdQtg-r96fYCcI1GUSVmrKW0qLWqfyRexttY74W29QQk-S3rgD2wZMNA0Ni8dNtdicup_zRHE2CNk8L3oiRFpCW6yZ-8MfE9Tf7Zob-YfpWQYzgZdOUgE6dsQPYbLZMhb9Hmj_ogLV2RjKQUIwMP__7DuX5kzfUkvJJZDCPbsiuozCq69g8hHFE7VqUVNLSSrsRGjEXmrH0-jd4gnXBScpt2sqrq-"/>
@@ -189,6 +190,11 @@
           <p class="text-body-sm font-body-sm text-outline truncate">Hostel NetOps Administrator</p>
         </div>
       </div>
+      <!-- Admin Logout Button -->
+      <button onclick="handleAdminLogout()" class="w-full flex items-center justify-center gap-2 py-2 px-3 text-label-sm font-label-sm font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 rounded-lg transition-colors">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+        <span>Sign Out of NetOps</span>
+      </button>
     </div>
   </aside>
 
@@ -583,10 +589,23 @@
       }).join("");
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (typeof requireAdminAuth === "function") {
+        requireAdminAuth();
+      }
+
       renderAdminTable("", currentZone);
       updateAdminStatsUI();
+
+      // Load live sessions from backend
+      if (typeof fetchLiveAdminSessions === "function") {
+        const live = await fetchLiveAdminSessions(currentZone);
+        if (live && Array.isArray(live.sessions) && live.sessions.length > 0) {
+          renderFilteredAdminList(live.sessions);
+        }
+      }
     });
   </script>
+  <script src="js/admin.js"></script>
 </body>
 </html>

@@ -10,50 +10,46 @@ This application fulfills a dual-purpose environment:
 
 ## 🚀 Quick Start
 
-### Option 1: Run with Node.js
+### Option 1: Run with Next.js (Full Database & API Integration)
+```bash
+npm run dev
+```
+Then visit:
+- **Student Captive Portal**: [http://localhost:3000](http://localhost:3000)
+- **Student Self-Service Dashboard**: [http://localhost:3000/student-dashboard.html](http://localhost:3000/student-dashboard.html)
+- **Dedicated Admin Login**: [http://localhost:3000/admin-login.html](http://localhost:3000/admin-login.html)
+- **IT Admin NetOps Console (Guarded)**: [http://localhost:3000/admin-dashboard.html](http://localhost:3000/admin-dashboard.html)
+
+#### Default Demo Credentials:
+- **Resident Student**: Phone: `0245123456` | Roll: `CS2025-901` | Room: `B3-102` (Kojo Mensah)
+- **Super Administrator**: Phone: `0552420079` | Roll: `ADMIN-001` | Email: `admin@hopeson.net` (Hopeson Super Admin)
+
+### Option 2: Zero-Dependency Server
 ```bash
 npm start
 # or
 node server.js
 ```
-Then visit:
-- **Captive Portal (Login)**: [http://localhost:3000](http://localhost:3000)
-- **Student Dashboard & Checkout**: [http://localhost:3000/student-dashboard.html](http://localhost:3000/student-dashboard.html)
-- **IT Admin NetOps Console**: [http://localhost:3000/admin-dashboard.html](http://localhost:3000/admin-dashboard.html)
-
-### Option 2: Open Directly in Browser
-You can also directly double-click or open `index.html` in any modern web browser without needing a server.
 
 ---
 
-## 🎨 Screens & Architecture
+## 🎨 Architecture & Separation of Concerns
 
-### 1. Captive Portal (`index.html`)
-- **Dual Authentication Modes**:
-  - **Student ID / Room Login**: Authenticates via Student Roll Number / Room ID and Network Password.
-  - **Prepaid Voucher**: PIN code redemption with instant MAC binding.
-- **Hardware AP Indicator**: Shows current AP connection (`B-Block 3F AP-04`, 98% signal).
-- **Responsive Viewport**: Optimized for both mobile devices (390px) and desktop browsers.
-
-### 2. Student Dashboard (`student-dashboard.html`)
-- **Live Session Telemetry**: Assigned IP (`10.142.28.94`), MAC identifier (`E4:5F:01:BC:88:21`), and ping (12ms).
+### 1. Student Captive Portal & Self-Service (`index.html` & `student-dashboard.html`)
+- **Strictly Isolated**: No administrative actions or NetOps navigation links are exposed to students.
+- **Instant Radius Session Verification**: Authenticates via Student Roll Number, Phone Number, or Voucher PIN.
+- **Live Session Telemetry**: Assigned IP (`10.142.28.94`), MAC identifier (`AA:BB:CC:DD:EE:77`), and ping (11ms).
 - **Dynamic Speedometer**: Interactive speed test simulating live download/upload throughput.
 - **Bandwidth Quota Meter**: Visual progress bar tracking consumed vs. remaining data.
-- **Registered Devices List**: Displays active hardware slots with the ability to disconnect or register new devices.
-- **Checkout Modal**: Interactive plan renewal supporting Mobile Money (MTN MoMo, Telecel Cash) and Bank Cards.
+- **Device Management**: View registered hardware slots, register new MACs, or terminate active sessions.
+- **Checkout Modal**: Mobile Money (MTN MoMo, Telecel Cash) and Card gateway top-up.
 
-### 3. IT Admin NetOps Console (`admin-dashboard.html`)
-- **Real-Time KPIs**: Total active users (342), aggregate bandwidth (1.84 TB), peak throughput (840 Mbps), and network health.
-- **Active Sessions Data Table**: Search and filter by student name, roll number, room, MAC, IP, or hostel zone.
-- **Hardware Controls**: Instant session disconnection and speed throttling.
-- **User Provisioning**: Add new residents with custom quotas and instant credentials dispatch.
-
-### 4. Floating Demo Role Switcher
-Every screen includes a discreet floating bottom bar allowing 1-click navigation between:
-- 🎓 **Captive Portal**
-- 📱 **Student Dashboard**
-- 🛠️ **Admin NetOps**
-- 🔄 **Reset Demo Data** (Restores default state)
+### 2. Dedicated IT Admin NetOps Portal (`admin-login.html` & `admin-dashboard.html`)
+- **Dedicated Admin Authentication Gate (`admin-login.html`)**: Separate NOC-themed authentication screen submitting to `/api/admin/login`. Students attempting login receive strict `403 Forbidden` rejection.
+- **Route Guarding (`js/admin.js`)**: `requireAdminAuth()` continuously verifies `HOSTEL_ADMIN_SESSION_V1`. Any unauthenticated attempt or student credential immediately redirects to `admin-login.html`.
+- **Live Supabase Sessions (`/api/admin/sessions`)**: Elevated backend service-role API dynamically pulls active student subscriptions, assigned MACs, and IP allocations directly from the Supabase database.
+- **Real-Time Network Telemetry**: Aggregate bandwidth consumption, peak throughput, active access points, and RADIUS connection logs.
+- **Hardware Controls**: Instant session disconnection, rogue MAC isolation, and bandwidth throttling.
 
 ---
 

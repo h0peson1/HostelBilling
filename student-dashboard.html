@@ -143,7 +143,7 @@
       <nav class="hidden md:flex items-center gap-6">
         <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="index.html">Connect</a>
         <a class="text-primary font-label-md text-label-md font-bold border-b-2 border-primary pb-1" href="#plans">Plans &amp; Top-up</a>
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="admin-dashboard.html">NetOps Admin</a>
+        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="#student-device-list">My Devices</a>
       </nav>
       <!-- Trailing Action & User Avatar -->
       <div class="flex items-center gap-3">
@@ -162,6 +162,11 @@
             <p class="font-body-sm text-body-sm text-on-surface-variant" id="student-room-header">Room B3-102</p>
           </div>
         </div>
+        <!-- Student Sign Out Button -->
+        <button onclick="studentLogout()" class="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded-lg transition-colors flex items-center gap-1" title="Sign Out">
+          <span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+          <span class="hidden sm:inline font-label-sm text-label-sm font-semibold">Sign Out</span>
+        </button>
       </div>
     </div>
   </header>
