@@ -1,6 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ==========================================================================
    Hostel Wi-Fi Management Portal - Global Custom Stylesheet
    ========================================================================== */
+
+:root {
+  --font-inter: var(--font-sans);
+  --font-plus-jakarta-sans: var(--font-heading);
+}
 
 /* Material Symbols Icon Configuration */
 .material-symbols-outlined {

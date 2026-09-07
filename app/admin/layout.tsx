@@ -69,7 +69,7 @@ export default function AdminLayout({
                 <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full ring-2 ring-emerald-500/20 animate-pulse"></span>
               </div>
               <div className="min-w-0">
-                <span className="text-base font-bold font-headline-md tracking-tight block text-white truncate">
+                <span className="text-base font-bold font-heading tracking-tight block text-white truncate">
                   Hopeson’s NetOps
                 </span>
                 <span className="text-[11px] font-medium text-indigo-400 block tracking-wider uppercase truncate">

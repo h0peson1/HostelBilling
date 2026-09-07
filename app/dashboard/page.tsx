@@ -299,7 +299,7 @@ export default function StudentDashboardPage() {
               <span className="material-symbols-outlined text-2xl">wifi</span>
             </div>
             <div>
-              <span className="text-lg font-bold text-indigo-900 tracking-tight block leading-tight">
+              <span className="text-lg font-bold font-heading text-indigo-900 tracking-tight block leading-tight">
                 Hopeson’s Net
               </span>
               <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-full">
@@ -358,7 +358,7 @@ export default function StudentDashboardPage() {
         
         {/* Hero Greeting */}
         <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold font-heading text-slate-900 tracking-tight">
             Welcome back, {student.name.split(' ')[0]} 👋
           </h1>
           <p className="text-sm text-slate-600 mt-1">
@@ -474,7 +474,7 @@ export default function StudentDashboardPage() {
           <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-base font-bold text-slate-900">Data Consumption</h2>
+                <h2 className="text-base font-bold font-heading text-slate-900">Data Consumption</h2>
                 <span className="bg-emerald-50 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                   Unthrottled
@@ -520,7 +520,7 @@ export default function StudentDashboardPage() {
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
               <div>
-                <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <h2 className="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
                   <span className="material-symbols-outlined text-indigo-600">devices</span>
                   My Devices
                 </h2>
@@ -622,7 +622,7 @@ export default function StudentDashboardPage() {
         <section id="plans" className="mb-12">
           <div className="mb-6 flex items-center justify-between flex-wrap gap-2">
             <div>
-              <h2 className="text-xl font-bold text-slate-900">Available Internet Plans</h2>
+              <h2 className="text-xl font-bold font-heading text-slate-900">Available Internet Plans</h2>
               <p className="text-xs text-slate-500 mt-0.5">
                 All plans feature 2 simultaneous devices and truly unlimited uncapped data.
               </p>

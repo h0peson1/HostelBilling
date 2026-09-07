@@ -172,7 +172,7 @@ export default function UsersTable({ initialUsers }: UsersTableProps) {
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Hostel Network Operations • FreeRADIUS Management
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold font-headline-lg text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold font-heading text-white tracking-tight">
             Users & Devices
           </h1>
           <p className="mt-1 text-sm text-slate-400">

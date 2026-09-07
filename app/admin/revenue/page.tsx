@@ -12,7 +12,7 @@ export default function RevenuePage() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           Financial Management • MoMo & Cash Gateway
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold font-headline-lg text-white tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold font-heading text-white tracking-tight">
           Revenue Dashboard
         </h1>
         <p className="mt-1 text-sm text-slate-400">
@@ -49,7 +49,7 @@ export default function RevenuePage() {
         <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/20">
           <span className="material-symbols-outlined text-2xl">payments</span>
         </div>
-        <h2 className="text-lg font-bold text-white">Revenue & Billing Audit Feed</h2>
+        <h2 className="text-lg font-bold font-heading text-white">Revenue & Billing Audit Feed</h2>
         <p className="text-xs text-slate-400 max-w-md mx-auto">
           Detailed financial ledger syncing with Supabase <code className="text-indigo-400">payments</code> table and Paystack webhook event stream.
         </p>

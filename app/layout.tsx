@@ -1,5 +1,18 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import '@/css/style.css';
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Hopeson’s Net — Hostel Wi-Fi Portal",
@@ -14,12 +27,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full bg-slate-50">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
           rel="stylesheet"
@@ -49,14 +56,16 @@ export default function RootLayout({
                       'outline-variant': '#cbd5e1'
                     },
                     fontFamily: {
-                      'headline-lg': ['Space Grotesk', 'sans-serif'],
-                      'headline-md': ['Space Grotesk', 'sans-serif'],
-                      'headline-sm': ['Space Grotesk', 'sans-serif'],
-                      'label-lg': ['Space Grotesk', 'sans-serif'],
-                      'label-md': ['Space Grotesk', 'sans-serif'],
-                      'body-lg': ['Plus Jakarta Sans', 'sans-serif'],
-                      'body-md': ['Plus Jakarta Sans', 'sans-serif'],
-                      'body-sm': ['Plus Jakarta Sans', 'sans-serif']
+                      sans: ['var(--font-sans)', 'var(--font-inter)', 'Inter', 'sans-serif'],
+                      heading: ['var(--font-heading)', 'var(--font-plus-jakarta-sans)', 'Plus Jakarta Sans', 'sans-serif'],
+                      'headline-lg': ['var(--font-heading)', 'Plus Jakarta Sans', 'sans-serif'],
+                      'headline-md': ['var(--font-heading)', 'Plus Jakarta Sans', 'sans-serif'],
+                      'headline-sm': ['var(--font-heading)', 'Plus Jakarta Sans', 'sans-serif'],
+                      'label-lg': ['var(--font-sans)', 'Inter', 'sans-serif'],
+                      'label-md': ['var(--font-sans)', 'Inter', 'sans-serif'],
+                      'body-lg': ['var(--font-sans)', 'Inter', 'sans-serif'],
+                      'body-md': ['var(--font-sans)', 'Inter', 'sans-serif'],
+                      'body-sm': ['var(--font-sans)', 'Inter', 'sans-serif']
                     }
                   }
                 }
@@ -65,7 +74,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col justify-between text-slate-900 selection:bg-indigo-600 selection:text-white relative overflow-x-hidden">
+      <body className={`${inter.variable} ${plusJakartaSans.variable} font-sans min-h-full flex flex-col justify-between text-slate-900 selection:bg-indigo-600 selection:text-white relative overflow-x-hidden`}>
         {children}
       </body>
     </html>

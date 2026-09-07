@@ -111,7 +111,7 @@ function CaptivePortalForm() {
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Hostel Wi-Fi Captive Portal • WPA3 Enterprise
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold font-headline-lg text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold font-heading text-slate-900 tracking-tight">
             Welcome to Hopeson’s Net
           </h1>
           <p className="mt-2 text-sm text-slate-600 leading-relaxed">
@@ -262,7 +262,7 @@ export default function CaptivePortalPage() {
               <span className="material-symbols-outlined text-2xl">wifi</span>
             </div>
             <div>
-              <span className="text-lg font-bold text-indigo-900 tracking-tight block leading-tight">
+              <span className="text-lg font-bold font-heading text-indigo-900 tracking-tight block leading-tight">
                 Hopeson’s Net
               </span>
             </div>

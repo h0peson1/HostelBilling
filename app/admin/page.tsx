@@ -45,7 +45,7 @@ export default async function AdminPage() {
         <div className="p-6 max-w-4xl mx-auto my-8 bg-rose-950/40 border border-rose-800/80 rounded-2xl text-rose-200">
           <div className="flex items-center gap-3 mb-3 text-rose-400">
             <span className="material-symbols-outlined text-2xl">error</span>
-            <h2 className="text-lg font-bold">Failed to load users from database</h2>
+            <h2 className="text-lg font-bold font-heading">Failed to load users from database</h2>
           </div>
           <p className="text-sm text-rose-300 mb-2">
             An error occurred while executing the Supabase query:
@@ -64,7 +64,7 @@ export default async function AdminPage() {
           <div className="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mx-auto mb-4 border border-indigo-500/20">
             <span className="material-symbols-outlined text-2xl">group_off</span>
           </div>
-          <h2 className="text-lg font-bold text-white mb-1">No users found in the database yet</h2>
+          <h2 className="text-lg font-bold font-heading text-white mb-1">No users found in the database yet</h2>
           <p className="text-xs text-slate-400 max-w-sm mx-auto">
             When resident students connect to the captive portal, their accounts and hardware bindings will appear here automatically.
           </p>
@@ -81,7 +81,7 @@ export default async function AdminPage() {
       <div className="p-6 max-w-4xl mx-auto my-8 bg-rose-950/40 border border-rose-800/80 rounded-2xl text-rose-200">
         <div className="flex items-center gap-3 mb-3 text-rose-400">
           <span className="material-symbols-outlined text-2xl">warning</span>
-          <h2 className="text-lg font-bold">Unexpected Server Error</h2>
+          <h2 className="text-lg font-bold font-heading">Unexpected Server Error</h2>
         </div>
         <p className="text-sm text-rose-300 mb-2">
           An exception was thrown while fetching data:

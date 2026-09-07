@@ -12,7 +12,7 @@ export default function RouterSyncPage() {
           <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
           Core Network Infrastructure • MikroTik RouterOS & FreeRADIUS
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold font-headline-lg text-white tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold font-heading text-white tracking-tight">
           Router Sync
         </h1>
         <p className="mt-1 text-sm text-slate-400">
@@ -49,7 +49,7 @@ export default function RouterSyncPage() {
         <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/20">
           <span className="material-symbols-outlined text-2xl">sync</span>
         </div>
-        <h2 className="text-lg font-bold text-white">Automated MikroTik RouterOS Bridge</h2>
+        <h2 className="text-lg font-bold font-heading text-white">Automated MikroTik RouterOS Bridge</h2>
         <p className="text-xs text-slate-400 max-w-md mx-auto">
           Synchronizes registered student MAC addresses directly into MikroTik Simple Queues and RADIUS MAC authentication tables.
         </p>
