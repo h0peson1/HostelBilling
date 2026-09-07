@@ -38,9 +38,9 @@ export async function POST(req: NextRequest): Promise<NextResponse<RegisterRespo
     const cleanRoom = rawRoom.trim();
 
     // Resolve and validate MAC address with testing fallback
-    let cleanMac = rawMac ? rawMac.trim() : 'AA:BB:CC:DD:EE:77';
+    let cleanMac = rawMac ? rawMac.trim() : '00:11:22:33:44:55';
     if (!isValidMacAddress(cleanMac)) {
-      cleanMac = 'AA:BB:CC:DD:EE:77';
+      cleanMac = '00:11:22:33:44:55';
     }
     const normalizedMac = normalizeMacAddress(cleanMac);
 

@@ -7,12 +7,18 @@ function CaptivePortalForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Extract mac_address from URL params or use fallback for testing
-  const macAddress =
+  // Read the mac and ip values from the URL query string
+  // If mac is not present in URL (e.g. during local development), fall back to '00:11:22:33:44:55'
+  const macQuery =
     searchParams.get('mac') ||
     searchParams.get('mac_address') ||
-    searchParams.get('client_mac') ||
-    'AA:BB:CC:DD:EE:77';
+    searchParams.get('client_mac');
+  const macAddress = macQuery && macQuery.trim() ? macQuery.trim() : '00:11:22:33:44:55';
+
+  const ipQuery =
+    searchParams.get('ip') ||
+    searchParams.get('client_ip');
+  const ipAddress = ipQuery && ipQuery.trim() ? ipQuery.trim() : '10.142.28.94';
 
   const [phone, setPhone] = useState('');
   const [roomNumber, setRoomNumber] = useState('');
@@ -33,7 +39,7 @@ function CaptivePortalForm() {
     setLoading(true);
 
     try {
-      // 1. Send silent registration POST request
+      // 1. Send silent registration POST request with phone, room_number, and mac_address
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -43,6 +49,7 @@ function CaptivePortalForm() {
           phone: phone.trim(),
           room_number: roomNumber.trim(),
           mac_address: macAddress,
+          ip: ipAddress,
         }),
       });
 
@@ -63,6 +70,7 @@ function CaptivePortalForm() {
           userId: data.user?.id || null,
           token: data.session?.access_token || null,
           mac: data.device?.mac_address || macAddress,
+          ip: ipAddress,
         };
         localStorage.setItem('HOSTEL_WIFI_SESSION_V1', JSON.stringify(sessionPayload));
 
@@ -74,7 +82,8 @@ function CaptivePortalForm() {
           if (data.user?.full_name) state.currentStudent.name = data.user.full_name;
           state.currentStudent.phone = phone.trim();
           state.currentStudent.room = roomNumber.trim();
-          state.currentStudent.mac = macAddress;
+          state.currentStudent.mac = data.device?.mac_address || macAddress;
+          state.currentStudent.ip = ipAddress;
           localStorage.setItem('HOSTEL_WIFI_STATE_V2', JSON.stringify(state));
         } catch {
           // ignore local state parse errors
@@ -110,15 +119,22 @@ function CaptivePortalForm() {
           </p>
         </div>
 
-        {/* Hardware Telemetry Badge */}
-        <div className="px-6 sm:px-8 py-2.5 bg-slate-50 border-y border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
-          <span className="flex items-center gap-1.5">
+        {/* Hardware & Network Telemetry Badge */}
+        <div className="px-6 sm:px-8 py-2.5 bg-slate-50 border-y border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-500">
+          <div className="flex items-center gap-1.5">
             <span className="material-symbols-outlined text-[16px] text-indigo-600">devices</span>
-            Hardware MAC:
-          </span>
-          <span className="font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
-            {macAddress}
-          </span>
+            <span className="text-slate-600 font-sans">MAC:</span>
+            <span className="font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
+              {macAddress}
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="material-symbols-outlined text-[16px] text-emerald-600">router</span>
+            <span className="text-slate-600 font-sans">IP:</span>
+            <span className="font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
+              {ipAddress}
+            </span>
+          </div>
         </div>
 
         {/* Form Container */}

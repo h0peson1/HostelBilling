@@ -332,7 +332,11 @@ async function handleConnect(event) {
     searchParams.get('mac') ||
     searchParams.get('mac_address') ||
     searchParams.get('client_mac') ||
-    'AA:BB:CC:DD:EE:77';
+    '00:11:22:33:44:55';
+  const ipAddress =
+    searchParams.get('ip') ||
+    searchParams.get('client_ip') ||
+    '10.142.28.94';
 
   if (isVoucher) {
     const voucherCode = document.getElementById("voucher-code")?.value?.trim();
