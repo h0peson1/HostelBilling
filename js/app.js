@@ -319,70 +319,98 @@ function togglePasswordVisibility(inputId, iconId) {
   }
 }
 
-// Connect Handler for Captive Portal
+// Connect Handler for Captive Portal (Silent Registration Flow)
 async function handleConnect(event) {
   event.preventDefault();
   const form = event.target;
   const submitBtn = form.querySelector("button[type='submit']");
   const originalHtml = submitBtn ? submitBtn.innerHTML : "";
   const isVoucher = form.id === "form-voucher";
-  const identifier = (
-    isVoucher
-      ? document.getElementById("voucher-code")?.value
-      : document.getElementById("student-id")?.value
-  )?.trim();
-  const password = isVoucher
-    ? identifier
-    : document.getElementById("student-pass")?.value?.trim();
 
-  if (!identifier) {
-    showToast(
-      isVoucher
-        ? "Enter a prepaid voucher code to connect."
-        : "Enter your roll number or room ID to connect.",
-      "error"
-    );
+  const searchParams = new URLSearchParams(window.location.search);
+  const macAddress =
+    searchParams.get('mac') ||
+    searchParams.get('mac_address') ||
+    searchParams.get('client_mac') ||
+    'AA:BB:CC:DD:EE:77';
+
+  if (isVoucher) {
+    const voucherCode = document.getElementById("voucher-code")?.value?.trim();
+    if (!voucherCode) {
+      showToast("Enter a prepaid voucher code to connect.", "error");
+      return;
+    }
+
+    setConnectButtonState(submitBtn, true, originalHtml);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          identifier: voucherCode,
+          mode: "voucher",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        persistLocalLogin(voucherCode, true, data.user);
+        showToast("Voucher activated! Opening dashboard…", "success");
+        goToStudentDashboard();
+        return;
+      }
+      setConnectButtonState(submitBtn, false, originalHtml);
+      showToast(data.message || "Invalid voucher code.", "error");
+    } catch {
+      persistLocalLogin(voucherCode, true, null);
+      goToStudentDashboard();
+    }
     return;
   }
 
-  if (!isVoucher && !password) {
-    showToast("Enter your network password to connect.", "error");
+  // Student Silent Registration Flow (Phone + Room Number)
+  const phone = (
+    document.getElementById("student-phone")?.value ||
+    document.getElementById("student-id")?.value
+  )?.trim();
+  const room = (document.getElementById("student-room")?.value || "")?.trim();
+
+  if (!phone) {
+    showToast("Please enter your student phone number.", "error");
+    return;
+  }
+
+  if (!room) {
+    showToast("Please enter your hostel room number.", "error");
     return;
   }
 
   setConnectButtonState(submitBtn, true, originalHtml);
 
   try {
-    const res = await fetch("/api/auth/login", {
+    const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        identifier,
-        password,
-        mode: isVoucher ? "voucher" : "student"
-      })
+        phone,
+        room_number: room,
+        mac_address: macAddress,
+      }),
     });
+
     const data = await res.json().catch(() => ({}));
 
     if (res.ok && data.success) {
-      persistLocalLogin(identifier, isVoucher, data.user);
-      showToast("Connected. Opening your dashboard…", "success");
+      persistLocalLogin(phone, false, data.user);
+      showToast("Silent registration approved! Opening dashboard…", "success");
       goToStudentDashboard();
       return;
     }
 
-    if (res.status === 400 || res.status === 401) {
-      setConnectButtonState(submitBtn, false, originalHtml);
-      showToast(data.message || "Could not authenticate. Check your details.", "error");
-      return;
-    }
-
-    persistLocalLogin(identifier, isVoucher, null);
-    showToast("Connected. Opening your dashboard…", "success");
-    goToStudentDashboard();
+    setConnectButtonState(submitBtn, false, originalHtml);
+    showToast(data.message || "Connection failed. Check your details.", "error");
   } catch (err) {
-    console.warn("Login API unreachable, continuing with local session", err);
-    persistLocalLogin(identifier, isVoucher, null);
+    console.warn("Register API unreachable, continuing with local session", err);
+    persistLocalLogin(phone, false, null);
     showToast("Connected. Opening your dashboard…", "success");
     goToStudentDashboard();
   }

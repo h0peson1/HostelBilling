@@ -181,35 +181,29 @@
 
         <!-- Forms Container -->
         <div class="p-6 sm:p-8 pt-6">
-          <!-- Mode 1: Student Account Login Form -->
+          <!-- Mode 1: Student Silent Registration Form -->
           <form class="space-y-5" id="form-student" onsubmit="handleConnect(event)">
             <div>
-              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="student-id">
-                Phone Number, Roll Number, or Room ID
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="student-phone">
+                Student Phone Number
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
-                  <span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+                  <span class="material-symbols-outlined text-xl" data-icon="call">call</span>
                 </div>
-                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-id" placeholder="e.g. 0245123456, CS2025-901 or B3-102" required="" type="text"/>
+                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-phone" name="phone" placeholder="e.g. 0245123456 or 0552420079" required="" type="tel"/>
               </div>
             </div>
 
             <div>
-              <div class="flex items-center justify-between mb-1.5">
-                <label class="block text-label-md font-label-md text-on-surface" for="student-pass">
-                  Network Password
-                </label>
-                <a class="text-label-md font-label-md text-primary hover:underline cursor-pointer" onclick="showToast('Password reset PIN will be sent to your registered student phone via SMS.', 'info')">Forgot password?</a>
-              </div>
+              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="student-room">
+                Hostel Room Number
+              </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
-                  <span class="material-symbols-outlined text-xl" data-icon="lock">lock</span>
+                  <span class="material-symbols-outlined text-xl" data-icon="meeting_room">meeting_room</span>
                 </div>
-                <input class="w-full pl-11 pr-11 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-pass" placeholder="Enter password (e.g. 0245123456)" required="" type="password"/>
-                <button class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-outline hover:text-on-surface transition-colors" onclick="togglePasswordVisibility('student-pass', 'pass-eye-icon')" type="button">
-                  <span class="material-symbols-outlined text-xl" data-icon="visibility" id="pass-eye-icon">visibility</span>
-                </button>
+                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="student-room" name="room_number" placeholder="e.g. B3-102 or Room 204" required="" type="text"/>
               </div>
             </div>
 
@@ -217,7 +211,7 @@
             <div class="flex items-center justify-between pt-1">
               <label class="flex items-center gap-2.5 cursor-pointer select-none">
                 <input checked="" class="w-4 h-4 rounded text-primary-container border-outline-variant focus:ring-primary-container focus:ring-offset-0" type="checkbox"/>
-                <span class="text-label-md font-label-md text-on-surface-variant">Remember this device (MAC Binding)</span>
+                <span class="text-label-md font-label-md text-on-surface-variant">Auto-bind hardware MAC (Silent Registration)</span>
               </label>
             </div>
 

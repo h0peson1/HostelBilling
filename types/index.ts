@@ -27,19 +27,24 @@ export interface LoginResponse {
 }
 
 export interface RegisterRequestBody {
-  email: string;
-  password?: string;
-  full_name: string;
-  phone_number: string;
-  roll_number?: string;
+  phone?: string;
+  phone_number?: string;
   room_number?: string;
-  mac_address: string;
+  room?: string;
+  mac_address?: string;
+  mac?: string;
+  email?: string;
+  password?: string;
+  full_name?: string;
+  name?: string;
+  roll_number?: string;
   device_name?: string;
 }
 
 export interface RegisterResponse {
   success: boolean;
   message: string;
+  session?: any;
   user?: {
     id: string;
     email: string;
@@ -50,9 +55,10 @@ export interface RegisterResponse {
     role: string;
   };
   device?: {
-    id: string;
+    id?: string;
     mac_address: string;
     device_name: string;
+    last_seen_at?: string | null;
   };
   error?: string;
 }
