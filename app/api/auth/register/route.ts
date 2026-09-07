@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { supabaseAdmin, supabase } from '@/lib/supabase';
 import { isValidMacAddress, normalizeMacAddress } from '@/lib/freeradius';
+import { resolveDeviceName } from '@/lib/device-detection';
 import { RegisterRequestBody, RegisterResponse } from '@/types';
 
 /**
@@ -51,53 +52,78 @@ export async function POST(req: NextRequest): Promise<NextResponse<RegisterRespo
     const dummyPassword = `Hopeson!${hash}!`;
 
     let userId: string | null = null;
+    let existingProfileName: string | null = null;
 
-    // 2. Provision or retrieve user via Supabase Admin (auto-confirm enabled)
-    const { data: createData, error: createError } = await supabaseAdmin.auth.admin.createUser({
-      email: dummyEmail,
-      password: dummyPassword,
-      email_confirm: true,
-      user_metadata: {
-        phone: cleanPhone,
-        phone_number: cleanPhone,
-        room_number: cleanRoom,
-      },
-    });
+    // 2. Check if resident profile already exists by phone number
+    const { data: existingProfile } = await supabaseAdmin
+      .from('profiles')
+      .select('id, full_name')
+      .eq('phone_number', cleanPhone)
+      .maybeSingle();
 
-    if (createData?.user) {
-      userId = createData.user.id;
-    } else if (createError && (createError.message.includes('already registered') || createError.status === 422 || createError.status === 400)) {
-      // Returning resident: fetch existing user record
-      const { data: listData } = await supabaseAdmin.auth.admin.listUsers();
-      const existing = listData?.users?.find(u => u.email === dummyEmail || u.phone === cleanPhone);
-      if (existing) {
-        userId = existing.id;
-        // Keep credentials synchronized and auto-confirmed
+    if (existingProfile) {
+      userId = existingProfile.id;
+      existingProfileName = existingProfile.full_name;
+      // Synchronize auth user password & email confirmation
+      try {
         await supabaseAdmin.auth.admin.updateUserById(userId, {
           password: dummyPassword,
+          email: dummyEmail,
           email_confirm: true,
         });
+      } catch {
+        // If auth user wasn't registered with this ID yet, create with explicit ID
+        try {
+          await supabaseAdmin.auth.admin.createUser({
+            id: userId,
+            email: dummyEmail,
+            password: dummyPassword,
+            email_confirm: true,
+            user_metadata: {
+              phone: cleanPhone,
+              phone_number: cleanPhone,
+              room_number: cleanRoom,
+            },
+          });
+        } catch {
+          // ignore if already exists
+        }
       }
-    } else if (createError) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: `Failed to provision user: ${createError.message}`,
-          error: createError.message,
+    } else {
+      // New resident: Provision user via Supabase Admin (auto-confirm enabled)
+      const { data: createData, error: createError } = await supabaseAdmin.auth.admin.createUser({
+        email: dummyEmail,
+        password: dummyPassword,
+        email_confirm: true,
+        user_metadata: {
+          phone: cleanPhone,
+          phone_number: cleanPhone,
+          room_number: cleanRoom,
         },
-        { status: 500 }
-      );
-    }
+      });
 
-    if (!userId) {
-      // Fallback lookup in profiles
-      const { data: existingProfile } = await supabaseAdmin
-        .from('profiles')
-        .select('id')
-        .eq('phone_number', cleanPhone)
-        .maybeSingle();
-      if (existingProfile) {
-        userId = existingProfile.id;
+      if (createData?.user) {
+        userId = createData.user.id;
+      } else if (createError && (createError.message.includes('already registered') || createError.status === 422 || createError.status === 400)) {
+        // Returning resident: fetch existing user record
+        const { data: listData } = await supabaseAdmin.auth.admin.listUsers();
+        const existing = listData?.users?.find(u => u.email === dummyEmail || u.phone === cleanPhone);
+        if (existing) {
+          userId = existing.id;
+          await supabaseAdmin.auth.admin.updateUserById(userId, {
+            password: dummyPassword,
+            email_confirm: true,
+          });
+        }
+      } else if (createError) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: `Failed to provision user: ${createError.message}`,
+            error: createError.message,
+          },
+          { status: 500 }
+        );
       }
     }
 
@@ -123,7 +149,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<RegisterRespo
     }
 
     // 4. Upsert Profile record in profiles table
-    const fullName = rawName.trim() || `Resident ${cleanPhone.slice(-4)}`;
+    const fullName = existingProfileName || rawName.trim() || `Resident ${cleanPhone.slice(-4)}`;
     const { error: profileError } = await supabaseAdmin
       .from('profiles')
       .upsert(
@@ -142,14 +168,28 @@ export async function POST(req: NextRequest): Promise<NextResponse<RegisterRespo
       console.warn('Profile upsert warning:', profileError.message);
     }
 
-    // 5. Insert / Link MAC address in custom devices table
+    // 5. Automatically detect and resolve device name (via hostname or parsed User-Agent)
+    const userAgentHeader = req.headers.get('user-agent') || '';
+    const query = req.nextUrl.searchParams;
+    const providedHost =
+      body.hostname ||
+      body.host_name ||
+      body.device_name ||
+      query.get('hostname') ||
+      query.get('host_name') ||
+      query.get('device_name') ||
+      null;
+
+    const detectedDeviceName = resolveDeviceName(providedHost, userAgentHeader);
+
+    // Insert / Link MAC address in custom devices table
     const { data: deviceRecord, error: deviceError } = await supabaseAdmin
       .from('devices')
       .upsert(
         {
           user_id: userId,
           mac_address: normalizedMac,
-          device_name: body.device_name?.trim() || 'Personal Device',
+          device_name: detectedDeviceName,
           last_seen_at: new Date().toISOString(),
         },
         { onConflict: 'mac_address' }
@@ -212,7 +252,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<RegisterRespo
         },
         device: deviceRecord || {
           mac_address: normalizedMac,
-          device_name: 'Personal Device',
+          device_name: detectedDeviceName,
         },
       },
       { status: 200 }

@@ -39,6 +39,8 @@ export interface RegisterRequestBody {
   name?: string;
   roll_number?: string;
   device_name?: string;
+  hostname?: string;
+  host_name?: string;
   ip?: string;
 }
 
