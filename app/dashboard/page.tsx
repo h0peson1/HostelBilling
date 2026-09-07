@@ -518,43 +518,14 @@ export default function StudentDashboardPage() {
         {/* Requirement 3 & 4: Dedicated 'My Devices' Section */}
         <section id="my-devices" className="mb-12">
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-              <div>
-                <h2 className="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-indigo-600">devices</span>
-                  My Devices
-                </h2>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Slot Allocation: {devices.length} of 2 devices currently active (All plans support 2 devices)
-                </p>
-              </div>
-
-              <button
-                onClick={() => {
-                  const devName = prompt('Enter device name (e.g. iPad Pro, Linux Rig):');
-                  if (!devName) return;
-                  if (devices.length >= 2) {
-                    alert('Device quota reached (2/2). Please disconnect an existing device first.');
-                    return;
-                  }
-                  const hex = () => Math.floor(Math.random() * 256).toString(16).padStart(2, '0').toUpperCase();
-                  const newMac = `00:${hex()}:${hex()}:${hex()}:${hex()}:${hex()}`;
-                  setDevices((prev) => [
-                    ...prev,
-                    {
-                      id: `dev-${Date.now()}`,
-                      mac_address: newMac,
-                      device_name: devName.trim(),
-                      last_seen_at: new Date().toISOString(),
-                    },
-                  ]);
-                  showToast(`Registered device '${devName}'`, 'success');
-                }}
-                className="text-xs font-bold text-indigo-600 hover:bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-lg transition-all flex items-center gap-1"
-              >
-                <span className="material-symbols-outlined text-[16px]">add</span>
-                Register New Device
-              </button>
+            <div className="mb-4">
+              <h2 className="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                <span className="material-symbols-outlined text-indigo-600">devices</span>
+                My Devices
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Slot Allocation: {devices.length} of 2 devices currently active (All plans support 2 devices)
+              </p>
             </div>
 
             {/* Dynamic Rendering of Devices mapped over Supabase devices array with masked MAC */}
@@ -615,6 +586,29 @@ export default function StudentDashboardPage() {
                 ))}
               </div>
             )}
+
+            {/* Helper Note Banner / Device Limit Warning */}
+            <div className="mt-5 pt-2">
+              {devices.length >= 2 ? (
+                <div className="bg-amber-50/80 border border-amber-500/30 rounded-lg p-4 flex items-start gap-3 text-amber-900">
+                  <span className="material-symbols-outlined text-amber-600 text-lg shrink-0 mt-0.5">
+                    warning
+                  </span>
+                  <p className="text-xs leading-relaxed text-amber-800">
+                    Device limit reached. You must remove an existing device below before you can connect a new one.
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-blue-50/60 border border-blue-500/20 rounded-lg p-4 flex items-start gap-3 text-slate-700">
+                  <span className="material-symbols-outlined text-blue-600 text-lg shrink-0 mt-0.5">
+                    info
+                  </span>
+                  <p className="text-xs leading-relaxed text-slate-600">
+                    Want to add a new device? Simply connect your new phone or laptop to the Hopeson&apos;s Net Wi-Fi and log in with your existing phone number. Your device will be registered automatically.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 

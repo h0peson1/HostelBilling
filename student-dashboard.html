@@ -419,22 +419,26 @@
 
     <!-- Dedicated My Devices Section (Requirement 3) -->
     <section class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm mb-space-2xl" id="my-devices">
-      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <div>
-          <h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary">devices</span>
-            My Devices
-          </h3>
-          <p class="font-body-sm text-body-sm text-on-surface-variant" id="device-count-label">Slot Allocation: 1 of 2 devices currently active (All plans support 2 devices)</p>
-        </div>
-        <button onclick="promptRegisterDevice()" class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-1 font-bold px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary-fixed/20 transition-all">
-          <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
-          Register New Device
-        </button>
+      <div class="mb-4">
+        <h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">devices</span>
+          My Devices
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant" id="device-count-label">Slot Allocation: 1 of 2 devices currently active (All plans support 2 devices)</p>
       </div>
       
       <div class="divide-y divide-outline-variant/20" id="student-device-list">
         <!-- Rendered by js/app.js -->
+      </div>
+
+      <!-- Instructional Helper Note / Device Limit Warning -->
+      <div class="mt-5" id="device-helper-banner">
+        <div class="bg-blue-50/60 border border-blue-500/20 rounded-lg p-4 flex items-start gap-3 text-slate-700">
+          <span class="material-symbols-outlined text-blue-600 text-lg shrink-0 mt-0.5" data-icon="info">info</span>
+          <p class="text-xs leading-relaxed text-slate-600">
+            Want to add a new device? Simply connect your new phone or laptop to the Hopeson's Net Wi-Fi and log in with your existing phone number. Your device will be registered automatically.
+          </p>
+        </div>
       </div>
     </section>
 

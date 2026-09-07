@@ -735,6 +735,29 @@ function renderStudentDevices() {
     </div>
   `;
   }).join("");
+
+  const bannerEl = document.getElementById("device-helper-banner");
+  if (bannerEl) {
+    if (state.devices.length >= 2) {
+      bannerEl.innerHTML = `
+        <div class="bg-amber-50 border border-amber-500/30 rounded-lg p-4 flex items-start gap-3 text-amber-900">
+          <span class="material-symbols-outlined text-amber-600 text-lg shrink-0 mt-0.5" data-icon="warning">warning</span>
+          <p class="text-xs leading-relaxed text-amber-800">
+            Device limit reached. You must remove an existing device below before you can connect a new one.
+          </p>
+        </div>
+      `;
+    } else {
+      bannerEl.innerHTML = `
+        <div class="bg-blue-50/60 border border-blue-500/20 rounded-lg p-4 flex items-start gap-3 text-slate-700">
+          <span class="material-symbols-outlined text-blue-600 text-lg shrink-0 mt-0.5" data-icon="info">info</span>
+          <p class="text-xs leading-relaxed text-slate-600">
+            Want to add a new device? Simply connect your new phone or laptop to the Hopeson's Net Wi-Fi and log in with your existing phone number. Your device will be registered automatically.
+          </p>
+        </div>
+      `;
+    }
+  }
 }
 
 // Admin Dashboard Functions
