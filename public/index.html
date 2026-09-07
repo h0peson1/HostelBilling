@@ -165,23 +165,31 @@
           </p>
         </div>
 
-        <!-- Mode Toggle Tabs (Room Account vs. Voucher Code) -->
-        <div class="px-6 sm:px-8 border-b border-surface-container">
-          <div class="flex space-x-6" id="portal-tab-group" role="tablist">
-            <button class="pb-3 text-label-lg font-label-lg font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2" id="tab-btn-student" onclick="switchAuthMode('student')">
-              <span class="material-symbols-outlined text-lg" data-icon="badge">badge</span>
-              Student ID / Room Login
-            </button>
-            <button class="pb-3 text-label-lg font-label-lg font-semibold text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-all flex items-center gap-2" id="tab-btn-voucher" onclick="switchAuthMode('voucher')">
-              <span class="material-symbols-outlined text-lg" data-icon="confirmation_number">confirmation_number</span>
-              Prepaid Voucher
-            </button>
+        <!-- Hardware & Network Telemetry Badge (Prominent Above Input Fields) -->
+        <div class="px-6 sm:px-8 py-3 bg-slate-50 border-y border-outline-variant/30 flex flex-wrap items-center justify-between gap-3 text-xs font-mono" id="portal-telemetry-badge">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-md bg-indigo-100 text-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-[16px]" data-icon="devices">devices</span>
+            </div>
+            <span class="text-on-surface-variant font-sans font-semibold">MAC:</span>
+            <span class="font-bold text-on-surface bg-white px-2.5 py-1 rounded-md border border-outline-variant/60 shadow-xs" id="client-mac-display">
+              00:11:22:33:44:55
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-md bg-emerald-100 text-secondary flex items-center justify-center">
+              <span class="material-symbols-outlined text-[16px]" data-icon="router">router</span>
+            </div>
+            <span class="text-on-surface-variant font-sans font-semibold">IP:</span>
+            <span class="font-bold text-on-surface bg-white px-2.5 py-1 rounded-md border border-outline-variant/60 shadow-xs" id="client-ip-display">
+              10.142.28.94
+            </span>
           </div>
         </div>
 
-        <!-- Forms Container -->
+        <!-- Single Static Form Container -->
         <div class="p-6 sm:p-8 pt-6">
-          <!-- Mode 1: Student Silent Registration Form -->
+          <!-- Student Silent Registration Form -->
           <form class="space-y-5" id="form-student" onsubmit="handleConnect(event)">
             <div>
               <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="student-phone">
@@ -207,45 +215,18 @@
               </div>
             </div>
 
-            <!-- Options: Remember Device & Session Duration -->
+            <!-- Options: Auto-bind Device Checkbox -->
             <div class="flex items-center justify-between pt-1">
               <label class="flex items-center gap-2.5 cursor-pointer select-none">
                 <input checked="" class="w-4 h-4 rounded text-primary-container border-outline-variant focus:ring-primary-container focus:ring-offset-0" type="checkbox"/>
-                <span class="text-label-md font-label-md text-on-surface-variant">Auto-bind hardware MAC (Silent Registration)</span>
+                <span class="text-label-md font-label-md text-on-surface-variant">Auto-bind this hardware device (Silent Registration)</span>
               </label>
             </div>
 
-            <!-- Primary CTA Button -->
+            <!-- Main Connect to Internet Button -->
             <button class="w-full h-12 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4" id="submit-btn" type="submit">
               <span class="material-symbols-outlined text-xl" data-icon="bolt">bolt</span>
               <span>Connect to Internet</span>
-            </button>
-          </form>
-
-          <!-- Mode 2: Voucher Code Form (Initially Hidden) -->
-          <form class="space-y-5 hidden" id="form-voucher" onsubmit="handleConnect(event)">
-            <div>
-              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="voucher-code">
-                Prepaid Voucher Code / PIN
-              </label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
-                  <span class="material-symbols-outlined text-xl" data-icon="receipt">receipt</span>
-                </div>
-                <input class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all uppercase tracking-wider font-mono outline-none" id="voucher-code" placeholder="e.g. HOSTEL-9942-TX" value="HOSTEL-9942-TX" type="text"/>
-              </div>
-              <p class="text-body-sm font-body-sm text-outline mt-1.5">12-digit scratch card or digital receipt PIN.</p>
-            </div>
-            <div>
-              <label class="block text-label-md font-label-md text-on-surface mb-1.5" for="guest-room">
-                Room Number (Optional)
-              </label>
-              <input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary-container focus:ring-4 focus:ring-primary/10 text-body-md font-body-md text-on-surface placeholder:text-outline/70 bg-white transition-all outline-none" id="guest-room" placeholder="Block &amp; Room Number" value="Block B Room 204" type="text"/>
-            </div>
-            <!-- Primary CTA Button for Voucher -->
-            <button class="w-full h-12 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all active:scale-[0.98] mt-4" type="submit">
-              <span class="material-symbols-outlined text-xl" data-icon="wifi_protected_setup">wifi_protected_setup</span>
-              <span>Redeem &amp; Connect</span>
             </button>
           </form>
 
@@ -265,7 +246,7 @@
         <div class="bg-surface-container-low px-6 py-4 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-3 text-body-sm font-body-sm text-on-surface-variant">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-base text-outline" data-icon="devices">devices</span>
-            <span>Device limit: <strong>3 active devices / account</strong></span>
+            <span>Device limit: <strong>2 active devices / account</strong></span>
           </div>
           <div class="flex items-center gap-1.5 text-secondary font-medium">
             <span class="material-symbols-outlined text-base" data-icon="lock_open_right">lock_open_right</span>
@@ -276,10 +257,6 @@
 
       <!-- FAQ & Helpful Badges Pill Cluster -->
       <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
-        <button onclick="showToast('Vouchers can be purchased at the Porter Desk or online via Mobile Money.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
-          <span class="material-symbols-outlined text-base text-primary" data-icon="help_outline">help_outline</span>
-          <span>How to find your voucher</span>
-        </button>
         <button onclick="showToast('Hopeson’s Net guarantees 100 Mbps high-speed access per student session.', 'info')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-outline-variant/50 text-on-surface text-label-md font-label-md shadow-xs hover:border-primary transition-all">
           <span class="material-symbols-outlined text-base text-secondary" data-icon="speed">speed</span>
           <span>Hostel Speed Guarantee</span>

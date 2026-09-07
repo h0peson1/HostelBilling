@@ -283,49 +283,11 @@ function goToStudentDashboard() {
   window.location.href = "student-dashboard.html";
 }
 
-// Captive Portal Mode Switcher
-function switchAuthMode(mode) {
-  const studentBtn = document.getElementById("tab-btn-student");
-  const voucherBtn = document.getElementById("tab-btn-voucher");
-  const formStudent = document.getElementById("form-student");
-  const formVoucher = document.getElementById("form-voucher");
-
-  if (!studentBtn || !voucherBtn) return;
-
-  if (mode === "student") {
-    studentBtn.className = "pb-3 text-label-lg font-label-lg font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2";
-    voucherBtn.className = "pb-3 text-label-lg font-label-lg font-semibold text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-all flex items-center gap-2";
-    formStudent.classList.remove("hidden");
-    formVoucher.classList.add("hidden");
-  } else {
-    voucherBtn.className = "pb-3 text-label-lg font-label-lg font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2";
-    studentBtn.className = "pb-3 text-label-lg font-label-lg font-semibold text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-all flex items-center gap-2";
-    formVoucher.classList.remove("hidden");
-    formStudent.classList.add("hidden");
-  }
-}
-
-// Password visibility toggler
-function togglePasswordVisibility(inputId, iconId) {
-  const input = document.getElementById(inputId);
-  const icon = document.getElementById(iconId);
-  if (!input || !icon) return;
-  if (input.type === "password") {
-    input.type = "text";
-    icon.textContent = "visibility_off";
-  } else {
-    input.type = "password";
-    icon.textContent = "visibility";
-  }
-}
-
-// Connect Handler for Captive Portal (Silent Registration Flow)
-async function handleConnect(event) {
-  event.preventDefault();
-  const form = event.target;
-  const submitBtn = form.querySelector("button[type='submit']");
-  const originalHtml = submitBtn ? submitBtn.innerHTML : "";
-  const isVoucher = form.id === "form-voucher";
+// Captive Portal Telemetry Initializer
+function initCaptivePortalTelemetry() {
+  const macEl = document.getElementById("client-mac-display");
+  const ipEl = document.getElementById("client-ip-display");
+  if (!macEl && !ipEl) return;
 
   const searchParams = new URLSearchParams(window.location.search);
   const macAddress =
@@ -338,38 +300,27 @@ async function handleConnect(event) {
     searchParams.get('client_ip') ||
     '10.142.28.94';
 
-  if (isVoucher) {
-    const voucherCode = document.getElementById("voucher-code")?.value?.trim();
-    if (!voucherCode) {
-      showToast("Enter a prepaid voucher code to connect.", "error");
-      return;
-    }
+  if (macEl) macEl.textContent = macAddress;
+  if (ipEl) ipEl.textContent = ipAddress;
+}
 
-    setConnectButtonState(submitBtn, true, originalHtml);
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          identifier: voucherCode,
-          mode: "voucher",
-        }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok && data.success) {
-        persistLocalLogin(voucherCode, true, data.user);
-        showToast("Voucher activated! Opening dashboard…", "success");
-        goToStudentDashboard();
-        return;
-      }
-      setConnectButtonState(submitBtn, false, originalHtml);
-      showToast(data.message || "Invalid voucher code.", "error");
-    } catch {
-      persistLocalLogin(voucherCode, true, null);
-      goToStudentDashboard();
-    }
-    return;
-  }
+// Connect Handler for Captive Portal (Silent Registration Flow)
+async function handleConnect(event) {
+  event.preventDefault();
+  const form = event.target;
+  const submitBtn = form.querySelector("button[type='submit']");
+  const originalHtml = submitBtn ? submitBtn.innerHTML : "";
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const macAddress =
+    searchParams.get('mac') ||
+    searchParams.get('mac_address') ||
+    searchParams.get('client_mac') ||
+    '00:11:22:33:44:55';
+  const ipAddress =
+    searchParams.get('ip') ||
+    searchParams.get('client_ip') ||
+    '10.142.28.94';
 
   // Student Silent Registration Flow (Phone + Room Number)
   const phone = (
@@ -398,6 +349,7 @@ async function handleConnect(event) {
         phone,
         room_number: room,
         mac_address: macAddress,
+        ip: ipAddress,
       }),
     });
 
@@ -970,8 +922,7 @@ window.loadSession = loadSession;
 window.saveSession = saveSession;
 window.clearSession = clearSession;
 window.studentLogout = studentLogout;
-window.switchAuthMode = switchAuthMode;
-window.togglePasswordVisibility = togglePasswordVisibility;
+window.initCaptivePortalTelemetry = initCaptivePortalTelemetry;
 window.handleConnect = handleConnect;
 window.runSpeedTest = runSpeedTest;
 window.openCheckoutModal = openCheckoutModal;
@@ -986,3 +937,12 @@ window.adminDisconnectUser = adminDisconnectUser;
 window.openAddUserModal = openAddUserModal;
 window.closeAddUserModal = closeAddUserModal;
 window.handleAddUserSubmit = handleAddUserSubmit;
+
+// Auto-run captive portal telemetry on load
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCaptivePortalTelemetry);
+  } else {
+    initCaptivePortalTelemetry();
+  }
+}

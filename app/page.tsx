@@ -119,25 +119,29 @@ function CaptivePortalForm() {
           </p>
         </div>
 
-        {/* Hardware & Network Telemetry Badge */}
-        <div className="px-6 sm:px-8 py-2.5 bg-slate-50 border-y border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-500">
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[16px] text-indigo-600">devices</span>
-            <span className="text-slate-600 font-sans">MAC:</span>
-            <span className="font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
+        {/* Prominent Network Hardware Telemetry Display (Above Input Fields) */}
+        <div className="px-6 sm:px-8 py-3 bg-slate-50 border-y border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 flex items-center justify-center">
+              <span className="material-symbols-outlined text-[16px]">devices</span>
+            </div>
+            <span className="text-slate-500 font-sans font-semibold">MAC:</span>
+            <span className="font-bold text-slate-800 bg-white px-2.5 py-1 rounded-md border border-slate-200 shadow-2xs">
               {macAddress}
             </span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[16px] text-emerald-600">router</span>
-            <span className="text-slate-600 font-sans">IP:</span>
-            <span className="font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center">
+              <span className="material-symbols-outlined text-[16px]">router</span>
+            </div>
+            <span className="text-slate-500 font-sans font-semibold">IP:</span>
+            <span className="font-bold text-slate-800 bg-white px-2.5 py-1 rounded-md border border-slate-200 shadow-2xs">
               {ipAddress}
             </span>
           </div>
         </div>
 
-        {/* Form Container */}
+        {/* Single Static Form Container */}
         <div className="p-6 sm:p-8 pt-6">
           {errorMsg && (
             <div className="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm flex items-center gap-2.5">
@@ -154,7 +158,7 @@ function CaptivePortalForm() {
           )}
 
           <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* Phone Number Field */}
+            {/* Student Phone Number Input */}
             <div>
               <label className="block text-xs uppercase tracking-wider font-bold text-slate-700 mb-1.5" htmlFor="phone">
                 Student Phone Number
@@ -175,7 +179,7 @@ function CaptivePortalForm() {
               </div>
             </div>
 
-            {/* Room Number Field */}
+            {/* Hostel Room Number Input */}
             <div>
               <label className="block text-xs uppercase tracking-wider font-bold text-slate-700 mb-1.5" htmlFor="room_number">
                 Hostel Room Number
@@ -196,7 +200,7 @@ function CaptivePortalForm() {
               </div>
             </div>
 
-            {/* MAC Binding Option */}
+            {/* Auto-bind Hardware Device Checkbox */}
             <div className="flex items-center justify-between pt-1">
               <label className="flex items-center gap-2.5 cursor-pointer select-none text-xs text-slate-600">
                 <input
@@ -208,7 +212,7 @@ function CaptivePortalForm() {
               </label>
             </div>
 
-            {/* Primary Action Button */}
+            {/* Main Connect to Internet Button */}
             <button
               id="submit-btn"
               type="submit"
