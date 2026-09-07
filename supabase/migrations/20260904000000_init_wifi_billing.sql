@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS plans (
     download_speed_mbps INTEGER NOT NULL CHECK (download_speed_mbps > 0),
     upload_speed_mbps INTEGER NOT NULL CHECK (upload_speed_mbps > 0),
     data_limit_gb NUMERIC(10, 2) DEFAULT NULL, -- NULL indicates unlimited data
-    simultaneous_devices INTEGER NOT NULL DEFAULT 3 CHECK (simultaneous_devices > 0),
+    simultaneous_devices INTEGER NOT NULL DEFAULT 2 CHECK (simultaneous_devices > 0),
     is_active BOOLEAN NOT NULL DEFAULT true,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -446,7 +446,7 @@ VALUES
         50, 
         20, 
         NULL, 
-        1
+        2
     ),
     (
         'Monthly Scholar', 
@@ -456,7 +456,7 @@ VALUES
         100, 
         30, 
         NULL, 
-        3
+        2
     ),
     (
         'Semester Scholar', 
@@ -466,17 +466,7 @@ VALUES
         120, 
         40, 
         NULL, 
-        4
-    ),
-    (
-        'Unlimited SpeedPass', 
-        '30 Days priority gigabit bandwidth with multi-device priority & zero data limits.', 
-        140.00, 
-        30, 
-        150, 
-        50, 
-        NULL, 
-        5
+        2
     )
 ON CONFLICT (name) DO UPDATE SET
     price_ghs = EXCLUDED.price_ghs,
@@ -485,3 +475,4 @@ ON CONFLICT (name) DO UPDATE SET
     upload_speed_mbps = EXCLUDED.upload_speed_mbps,
     data_limit_gb = EXCLUDED.data_limit_gb,
     simultaneous_devices = EXCLUDED.simultaneous_devices;
+

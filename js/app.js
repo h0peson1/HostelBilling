@@ -87,8 +87,8 @@ const DEFAULT_STATE = {
       mac: "A0:88:B4:EF:29:43",
       ap: "Block-C-Floor2-Center",
       currentSpeed: "150.0 Mbps",
-      quotaUsed: "48.5 / 100 GB (48%)",
-      plan: "Unlimited SpeedPass",
+      quotaUsed: "0.0 GB (Unlimited)",
+      plan: "Monthly Scholar",
       zone: "Block C",
       status: "Online"
     },
@@ -496,7 +496,6 @@ async function submitCheckout(event) {
     if (selectedCheckoutPlan.name.includes("QuickSurge")) planId = "9f2bbbf2-7cf9-40ea-bb58-1f3ea4fa70ce";
     else if (selectedCheckoutPlan.name.includes("Monthly")) planId = "05edbbd4-2cf8-4cdd-b244-54a78c3b7a3f";
     else if (selectedCheckoutPlan.name.includes("Semester")) planId = "57d736f7-36eb-4c8f-9a6e-3042aad2e2cc";
-    else if (selectedCheckoutPlan.name.includes("SpeedPass")) planId = "e677cb00-bc8c-4bd5-b929-24c720a343fa";
     else planId = "57d736f7-36eb-4c8f-9a6e-3042aad2e2cc";
   }
 
@@ -680,8 +679,8 @@ function promptRegisterDevice() {
   if (!devName) return;
 
   const state = loadState();
-  if (state.devices.length >= 3) {
-    alert("Device quota reached (3/3). Please disconnect an existing device first or upgrade to Unlimited SpeedPass.");
+  if (state.devices.length >= 2) {
+    alert("Device quota reached (2/2). Please disconnect an existing device first.");
     return;
   }
 
@@ -711,7 +710,7 @@ function renderStudentDevices() {
 
   const state = loadState();
   if (countEl) {
-    countEl.textContent = `Slot Allocation: ${state.devices.length} of 3 devices currently active`;
+    countEl.textContent = `Slot Allocation: ${state.devices.length} of 2 devices currently active`;
   }
 
   container.innerHTML = state.devices.map(d => `
