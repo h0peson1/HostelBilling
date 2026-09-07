@@ -139,11 +139,10 @@
           <span class="hidden sm:inline-block ml-2 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-bold">STUDENT PORTAL</span>
         </div>
       </a>
-      <!-- Navigation Links -->
+      <!-- Navigation Links: Connect link removed -->
       <nav class="hidden md:flex items-center gap-6">
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="index.html">Connect</a>
         <a class="text-primary font-label-md text-label-md font-bold border-b-2 border-primary pb-1" href="#plans">Plans &amp; Top-up</a>
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="#student-device-list">My Devices</a>
+        <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors duration-150" href="#my-devices">My Devices</a>
       </nav>
       <!-- Trailing Action & User Avatar -->
       <div class="flex items-center gap-3">
@@ -174,7 +173,7 @@
   <!-- Main Canvas -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-gutter-mobile md:px-gutter-desktop py-space-lg md:py-space-xl">
     
-    <!-- Hero Greeting -->
+    <!-- Hero Greeting (Router AP badge removed) -->
     <div class="mb-space-lg flex flex-col md:flex-row md:items-center md:justify-between gap-3">
       <div>
         <h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface">
@@ -183,10 +182,6 @@
         <p class="text-body-md font-body-md text-on-surface-variant mt-1">
           Your hostel internet connection is running at optimal speeds.
         </p>
-      </div>
-      <div class="flex items-center gap-2 self-start md:self-auto bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/30">
-        <span class="material-symbols-outlined text-primary text-[18px]" data-icon="router">router</span>
-        <span class="font-label-md text-label-md text-on-surface">AP: Hopeson-Hall-B3-AP04</span>
       </div>
     </div>
 
@@ -203,27 +198,9 @@
               <div class="w-3 h-3 rounded-full bg-secondary pulse-online"></div>
               <span class="font-label-lg text-label-lg text-secondary uppercase tracking-wider font-bold">Active Connection</span>
             </div>
-            <span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2.5 py-1 rounded-md font-mono">
-              DHCP Lease: Valid (10.142.28.94)
+            <span class="bg-surface-container text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-md font-bold">
+              Gigabit Campus Uplink
             </span>
-          </div>
-
-          <!-- Network Identifiers Bento Sub-row -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-            <div class="bg-surface-container-low p-3 rounded-lg">
-              <span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Assigned IP</span>
-              <span class="font-label-md text-label-md text-on-surface font-mono mt-0.5 block font-bold">10.142.28.94</span>
-            </div>
-            <div class="bg-surface-container-low p-3 rounded-lg">
-              <span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">MAC Identifier</span>
-              <span class="font-label-md text-label-md text-on-surface font-mono mt-0.5 block font-bold" id="student-mac-label">AA:BB:CC:DD:EE:77</span>
-            </div>
-            <div class="bg-surface-container-low p-3 rounded-lg col-span-2 sm:col-span-1">
-              <span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Gateway Ping</span>
-              <span class="font-label-md text-label-md text-secondary font-mono mt-0.5 block flex items-center gap-1 font-bold">
-                <span class="material-symbols-outlined text-[16px]" data-icon="bolt">bolt</span> 11 ms
-              </span>
-            </div>
           </div>
 
           <!-- Expiration Countdown & Renewal Banner -->
@@ -440,12 +417,15 @@
       </div>
     </div>
 
-    <!-- Active Registered Devices Section -->
-    <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm">
+    <!-- Dedicated My Devices Section (Requirement 3) -->
+    <section class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-lg shadow-sm mb-space-2xl" id="my-devices">
       <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
         <div>
-          <h3 class="font-title-md text-title-md text-on-surface">Registered Devices for <span id="student-devices-name">Kojo</span></h3>
-          <p class="font-body-sm text-body-sm text-on-surface-variant" id="device-count-label">Slot Allocation: 2 of 2 devices currently active</p>
+          <h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">devices</span>
+            My Devices
+          </h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant" id="device-count-label">Slot Allocation: 1 of 2 devices currently active (All plans support 2 devices)</p>
         </div>
         <button onclick="promptRegisterDevice()" class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-1 font-bold px-3 py-1.5 rounded-lg border border-primary/20 hover:bg-primary-fixed/20 transition-all">
           <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
@@ -456,7 +436,7 @@
       <div class="divide-y divide-outline-variant/20" id="student-device-list">
         <!-- Rendered by js/app.js -->
       </div>
-    </div>
+    </section>
 
   </main>
 
