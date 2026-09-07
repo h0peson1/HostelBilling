@@ -269,10 +269,11 @@ export default function CaptivePortalPage() {
           </div>
           <div className="flex items-center gap-2">
             <a
-              href="/admin-login.html"
-              className="text-xs font-semibold text-slate-500 hover:text-indigo-600 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-slate-100"
+              href="/admin"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300/80 text-slate-800 hover:text-indigo-600 font-semibold text-xs sm:text-sm transition-all shadow-xs cursor-pointer"
             >
-              Admin
+              <span className="material-symbols-outlined text-base text-indigo-600">admin_panel_settings</span>
+              <span>Admin</span>
             </a>
           </div>
         </div>
@@ -290,8 +291,15 @@ export default function CaptivePortalPage() {
       </main>
 
       {/* Page Footer */}
-      <footer className="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-        © 2026 Hopeson’s Net Management Portal. All rights reserved.
+      <footer className="bg-white border-t border-slate-200 py-4 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+          <div>© 2026 Hopeson’s Net Management Portal. All rights reserved.</div>
+          <div className="flex items-center justify-center gap-4">
+            <a href="/admin" className="text-indigo-600 hover:text-indigo-800 font-semibold hover:underline">Admin Dashboard</a>
+            <span>•</span>
+            <a href="/admin-login.html" className="text-slate-500 hover:text-slate-700 hover:underline">NetOps Login</a>
+          </div>
+        </div>
       </footer>
     </>
   );
