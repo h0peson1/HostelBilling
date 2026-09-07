@@ -272,7 +272,7 @@ export default function CaptivePortalPage() {
               href="/admin-login.html"
               className="text-xs font-semibold text-slate-500 hover:text-indigo-600 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-slate-100"
             >
-              NetOps Admin
+              Admin
             </a>
           </div>
         </div>
