@@ -104,7 +104,7 @@ function CaptivePortalForm() {
   return (
     <div className="w-full max-w-lg mx-auto">
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xl overflow-hidden transition-all duration-200">
-        
+
         {/* Card Header */}
         <div className="p-6 sm:p-8 pb-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-3">
@@ -265,7 +265,6 @@ export default function CaptivePortalPage() {
               <span className="text-lg font-bold text-indigo-900 tracking-tight block leading-tight">
                 Hopeson’s Net
               </span>
-              <span className="text-xs text-slate-500 block">Hostel AAA Network Gateway</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
